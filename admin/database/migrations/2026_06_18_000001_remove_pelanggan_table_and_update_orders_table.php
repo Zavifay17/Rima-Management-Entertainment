@@ -36,7 +36,9 @@ return new class extends Migration
 
         // 3. Drop foreign key constraint and column id_pelanggan from orders table
         Schema::table('orders', function (Blueprint $table) {
-            $table->dropForeign('orders_id_pelanggan_foreign');
+            if (DB::getDriverName() !== 'sqlite') {
+                $table->dropForeign('orders_id_pelanggan_foreign');
+            }
             $table->dropColumn('id_pelanggan');
         });
 

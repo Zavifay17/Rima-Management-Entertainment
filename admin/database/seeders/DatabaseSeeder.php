@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Superadmin;
 use App\Models\Admin;
-use App\Models\Pelanggan;
 use App\Models\Driver;
 use App\Models\LayananSewa;
 use App\Models\Order;
@@ -33,28 +32,6 @@ class DatabaseSeeder extends Seeder
             'nama' => 'Luthfi Ramadhan',
             'no_hp' => '081234567890',
             'id_superadmin' => $superadmin->id_superadmin,
-        ]);
-
-        // 3. Seed Pelanggan (Customers)
-        $pelanggan1 = Pelanggan::create([
-            'username' => 'budi_hartono',
-            'password' => Hash::make('pelanggan123'),
-            'nama' => 'Budi Hartono',
-            'no_hp' => '085298765432',
-        ]);
-
-        $pelanggan2 = Pelanggan::create([
-            'username' => 'siti_rahma',
-            'password' => Hash::make('pelanggan123'),
-            'nama' => 'Siti Rahmawati',
-            'no_hp' => '081398761234',
-        ]);
-
-        $pelanggan3 = Pelanggan::create([
-            'username' => 'dewi_sartika',
-            'password' => Hash::make('pelanggan123'),
-            'nama' => 'Dewi Sartika',
-            'no_hp' => '087711223344',
         ]);
 
         // 4. Seed Drivers
@@ -108,7 +85,9 @@ class DatabaseSeeder extends Seeder
         // 6. Seed Orders
         // Order 1 (Pelanggan Budi Hartono)
         $order1 = Order::create([
-            'id_pelanggan' => $pelanggan1->id_pelanggan,
+            'nama_pelanggan' => 'Budi Hartono',
+            'no_hp_pelanggan' => '085298765432',
+            'email_pelanggan' => 'budi_hartono',
             'id_admin' => $admin->id_admin,
             'tgl_mulai' => now()->addDays(1)->format('Y-m-d'),
             'tgl_selesai' => now()->addDays(8)->format('Y-m-d'),
@@ -132,7 +111,9 @@ class DatabaseSeeder extends Seeder
 
         // Order 2 (Pelanggan Siti Rahmawati)
         $order2 = Order::create([
-            'id_pelanggan' => $pelanggan2->id_pelanggan,
+            'nama_pelanggan' => 'Siti Rahmawati',
+            'no_hp_pelanggan' => '081398761234',
+            'email_pelanggan' => 'siti_rahma',
             'id_admin' => $admin->id_admin,
             'tgl_mulai' => now()->addDays(2)->format('Y-m-d'),
             'tgl_selesai' => now()->addDays(9)->format('Y-m-d'),
@@ -162,7 +143,9 @@ class DatabaseSeeder extends Seeder
         // Tugaskan Eko Prasetyo untuk menjemput barang lain (contoh sewa masa lalu)
         // Kita buat order selesai
         $orderSelesai = Order::create([
-            'id_pelanggan' => $pelanggan3->id_pelanggan,
+            'nama_pelanggan' => 'Dewi Sartika',
+            'no_hp_pelanggan' => '087711223344',
+            'email_pelanggan' => 'dewi_sartika',
             'id_admin' => $admin->id_admin,
             'tgl_mulai' => now()->subDays(10)->format('Y-m-d'),
             'tgl_selesai' => now()->subDays(3)->format('Y-m-d'),

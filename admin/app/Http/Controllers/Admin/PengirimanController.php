@@ -79,6 +79,26 @@ class PengirimanController extends Controller
             return $item->tgl_jadwal->format('Y-m-d');
         });
 
-        return view('admin.pengiriman.calendar', compact('groupedPengirimans', 'year', 'month'));
+        // Ambil data Order untuk ditampilkan di kalender logistik (Event Books)
+        $orders = Order::where('tgl_mulai', '<=', $endDate)
+            ->where('tgl_selesai', '>=', $startDate)
+            ->where('status_sewa', '!=', 'Batal')
+            ->where('status_sewa', '!=', 'Dibatalkan')
+            ->get();
+
+        $groupedOrders = [];
+        foreach ($orders as $order) {
+            $start = strtotime(max($order->tgl_mulai, $startDate));
+            $end = strtotime(min($order->tgl_selesai, $endDate));
+            for ($i = $start; $i <= $end; $i += 86400) {
+                $dateStr = date('Y-m-d', $i);
+                if (!isset($groupedOrders[$dateStr])) {
+                    $groupedOrders[$dateStr] = [];
+                }
+                $groupedOrders[$dateStr][] = $order;
+            }
+        }
+
+        return view('admin.pengiriman.calendar', compact('groupedPengirimans', 'groupedOrders', 'year', 'month'));
     }
 }

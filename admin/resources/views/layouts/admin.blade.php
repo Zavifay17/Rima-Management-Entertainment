@@ -13,17 +13,17 @@
     
     <style>
         :root {
-            --bg-primary: #f0f4f9; /* Clean light sky blue/gray */
-            --bg-secondary: rgba(255, 255, 255, 0.8); /* Translucent white glass */
-            --border-color: rgba(99, 102, 241, 0.08); /* Soft blue-tinted border */
-            --text-primary: #1e293b; /* Deep slate gray */
-            --text-secondary: #64748b; /* Medium slate gray */
-            --accent-primary: #3b82f6; /* Sky Blue */
-            --accent-secondary: #06b6d4; /* Vivid Cyan */
+            --bg-primary: #ffffff; /* White */
+            --bg-secondary: #f8fafc; /* Very light gray for panels */
+            --border-color: rgba(0, 0, 128, 0.08); /* Navy tint border */
+            --text-primary: #000000; /* Black */
+            --text-secondary: #334155; /* Dark gray */
+            --accent-primary: #000080; /* RME Navy Blue */
+            --accent-secondary: #ff0000; /* RME Red */
             --success: #10b981; /* Emerald Green */
             --warning: #f59e0b; /* Amber */
-            --danger: #ef4444; /* Rose Red */
-            --glass-bg: rgba(255, 255, 255, 0.65);
+            --danger: #ff0000; /* Red */
+            --glass-bg: rgba(255, 255, 255, 0.85);
             --glass-blur: blur(24px);
         }
 
@@ -41,8 +41,8 @@
             display: flex;
             overflow-x: hidden;
             background-image: 
-                radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.08) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.08) 0px, transparent 50%);
+                radial-gradient(at 0% 0%, rgba(0, 0, 128, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(255, 0, 0, 0.05) 0px, transparent 50%);
             background-attachment: fixed;
         }
 
@@ -70,37 +70,39 @@
         }
 
         .brand-logo {
-            width: 44px;
+            width: auto;
             height: 44px;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 1.35rem;
-            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
-            position: relative;
+            font-size: 1.8rem;
+            font-weight: 900;
+            font-family: 'Outfit', sans-serif;
+            font-style: italic;
+            letter-spacing: -1px;
+            background: transparent;
+            box-shadow: none;
         }
 
-        .brand-logo::after {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            border-radius: 16px;
-            z-index: -1;
-            opacity: 0.4;
-            filter: blur(4px);
-        }
+        .brand-logo span:nth-child(1) { color: var(--accent-primary); letter-spacing: -3px; } /* R */
+        .brand-logo span:nth-child(2) { color: var(--accent-primary); } /* M */
+        .brand-logo span:nth-child(3) { color: var(--accent-secondary); } /* E */
 
         .brand-name {
             font-family: 'Outfit', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(to right, #1e293b, #475569);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #000000;
+            line-height: 1.1;
+            text-transform: uppercase;
+        }
+        
+        .brand-subtitle {
+            display: block;
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #000000;
         }
 
         .nav-menu {
@@ -226,12 +228,9 @@
         .page-title h1 {
             font-size: 2.25rem;
             font-weight: 700;
-            color: var(--text-primary);
+            color: #000000;
             margin-bottom: 0.5rem;
             font-family: 'Outfit', sans-serif;
-            background: linear-gradient(to right, #1e293b, #475569);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
         .page-title p {
@@ -372,9 +371,11 @@
     <aside>
         <div class="brand">
             <div class="brand-logo">
-                <i class="fa-solid fa-truck-ramp-box"></i>
+                <span>R</span><span>M</span><span>E</span>
             </div>
-            <div class="brand-name">RME Logistics</div>
+            <div class="brand-name">
+                RME<br><span class="brand-subtitle">ENTERTAINMENT</span>
+            </div>
         </div>
 
         <ul class="nav-menu">
@@ -405,7 +406,7 @@
             <li class="nav-item {{ Request::routeIs('admin.pengiriman.calendar') ? 'active' : '' }}">
                 <a href="{{ route('admin.pengiriman.calendar') }}">
                     <i class="fa-solid fa-calendar-days"></i>
-                    <span>Kalender Logistik</span>
+                    <span>Kalender Event</span>
                 </a>
             </li>
             <li class="nav-item {{ Request::routeIs('admin.layanan.*') ? 'active' : '' }}">

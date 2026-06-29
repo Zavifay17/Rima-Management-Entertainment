@@ -19,6 +19,10 @@
     
     <!-- Stylesheet -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    
+    <!-- Flatpickr for Datepicker -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
 </head>
 <body>
 
@@ -30,9 +34,9 @@
     <!-- Header & Navigasi -->
     <header class="main-header" id="header">
         <div class="container header-container">
-            <a href="#" class="logo">
-                <span class="logo-text">RIMA</span>
-                <span class="logo-subtext">ENTERTAINMENT</span>
+            <a href="#" class="logo" style="text-decoration:none; display:flex; flex-direction:column; align-items:flex-start;">
+                <span class="logo-text" style="font-size: 2rem; font-style:italic; letter-spacing:-2px; font-weight:900; line-height:1;"><span style="color:#000080;">R</span><span style="color:#000080;">M</span><span style="color:#ff0000;">E</span></span>
+                <span class="logo-subtext" style="font-size: 0.7rem; color:#000000; font-weight:800; letter-spacing:3px;">ENTERTAINMENT</span>
             </a>
             
             <nav class="nav-menu" id="navMenu">
@@ -60,7 +64,7 @@
                 <div class="hero-content">
                     <span class="badge">PRO EVENT EQUIPMENT RENTAL</span>
                     <h1 class="hero-title">Mewujudkan Event Spektakuler Anda Menjadi <span class="gradient-text">Nyata</span></h1>
-                    <p class="hero-desc">Penyewaan sound system profesional, lighting panggung megah, LED screen ultra-jernih, dan rigging panggung modular berkelas premium untuk segala jenis event Anda.</p>
+                    <p class="hero-desc">Penyewaan sound system profesional, lighting panggung megah, dan rigging panggung modular berkelas premium untuk segala jenis event Anda.</p>
                     <div class="hero-actions">
                         <a href="#catalog" class="btn btn-primary btn-lg">Jelajahi Paket</a>
                         <a href="#rent-form-section" class="btn btn-outline btn-lg">Sewa Alat Sekarang</a>
@@ -133,7 +137,7 @@
                             <i data-lucide="lightbulb" class="category-icon"></i>
                         </div>
                         <h3>Stage & Concert Lighting</h3>
-                        <p>Kombinasi dinamis moving beam, par LED wash, lasers, follow spot, dan hazer/smoke machine untuk memukau visual mata penonton.</p>
+                        <p>Kombinasi dinamis moving beam, par LED wash, follow spot, dan hazer/smoke machine untuk memukau visual mata penonton.</p>
                     </div>
                     
                     <div class="category-card glassmorphism">
@@ -141,7 +145,7 @@
                             <i data-lucide="layers" class="category-icon"></i>
                         </div>
                         <h3>Stage & Rigging System</h3>
-                        <p>Desain panggung modular berstandar keamanan tinggi, rigging kokoh, barikade penonton, dan tenda roder berskala besar.</p>
+                        <p>Desain panggung modular berstandar keamanan tinggi dan struktur rigging kokoh untuk mendukung kesuksesan event Anda.</p>
                     </div>
                 </div>
             </div>
@@ -177,9 +181,10 @@
                             <ul class="item-features">
                                 <li><i data-lucide="check" class="feature-icon"></i> 4 Unit Speaker Huper Aktif</li>
                                 <li><i data-lucide="check" class="feature-icon"></i> 2 Unit Monitor Huper Aktif</li>
-                                <li><i data-lucide="check" class="feature-icon"></i> Mixer Digital 16 Channel</li>
-                                <li><i data-lucide="check" class="feature-icon"></i> Set Microphone Wireless Premium</li>
+                                <li><i data-lucide="check" class="feature-icon"></i> Mixer Semi digital 24 channel</li>
+                                <li><i data-lucide="check" class="feature-icon"></i> 2 Set microphone atau situasional</li>
                                 <li><i data-lucide="check" class="feature-icon"></i> Setup & Operator standby</li>
+                                <li><i data-lucide="check" class="feature-icon"></i> Crew & Sound Engineer Profesional</li>
                             </ul>
                             <div class="item-price-wrapper">
                                 <span class="price-val">Rp 2.000.000 <small>/hari</small></span>
@@ -200,8 +205,9 @@
                             <ul class="item-features">
                                 <li><i data-lucide="check" class="feature-icon"></i> FOH 12" x 4 Box</li>
                                 <li><i data-lucide="check" class="feature-icon"></i> FOH 15" x 4 Box</li>
-                                <li><i data-lucide="check" class="feature-icon"></i> Subwoofer 18" x 4 Box</li>
+                                <li><i data-lucide="check" class="feature-icon"></i> Subwoofer 18" x 2 Box</li>
                                 <li><i data-lucide="check" class="feature-icon"></i> 4 Unit Monitor Aktif</li>
+                                <li><i data-lucide="check" class="feature-icon"></i> Setup & Operator standby</li>
                                 <li><i data-lucide="check" class="feature-icon"></i> Crew & Sound Engineer Profesional</li>
                             </ul>
                             <div class="item-price-wrapper">
@@ -224,7 +230,8 @@
                                 <li><i data-lucide="check" class="feature-icon"></i> FOH 15" x 8 Box</li>
                                 <li><i data-lucide="check" class="feature-icon"></i> Subwoofer 18" x 4 Box</li>
                                 <li><i data-lucide="check" class="feature-icon"></i> Power Management System</li>
-                                <li><i data-lucide="check" class="feature-icon"></i> Sound Designer & Full Crew RME</li>
+                                <li><i data-lucide="check" class="feature-icon"></i> Setup & Operator standby</li>
+                                <li><i data-lucide="check" class="feature-icon"></i> Crew & Sound Engineer Profesional</li>
                             </ul>
                             <div class="item-price-wrapper">
                                 <span class="price-val">Rp 4.500.000 <small>/hari</small></span>
@@ -246,7 +253,7 @@
                                 <li><i data-lucide="check" class="feature-icon"></i> 2 Box Par LED (8 Unit)</li>
                                 <li><i data-lucide="check" class="feature-icon"></i> 3 Unit Lampu Fresnel</li>
                                 <li><i data-lucide="check" class="feature-icon"></i> 1 Unit Mesin Asap (Smoke Machine)</li>
-                                <li><i data-lucide="check" class="feature-icon"></i> Operator & Kabel instalasi</li>
+                                <li><i data-lucide="check" class="feature-icon"></i> Operator & Kabel instalasi (opsional bola kaca)</li>
                             </ul>
                             <div class="item-price-wrapper">
                                 <span class="price-val">Rp 2.000.000 <small>/hari</small></span>
@@ -269,7 +276,7 @@
                                 <li><i data-lucide="check" class="feature-icon"></i> 3 Box Par LED (12 Unit)</li>
                                 <li><i data-lucide="check" class="feature-icon"></i> 3 Unit Lampu Fresnel</li>
                                 <li><i data-lucide="check" class="feature-icon"></i> 1 Unit Mesin Asap & 1 Hazer</li>
-                                <li><i data-lucide="check" class="feature-icon"></i> Lighting Designer & Programmer</li>
+                                <li><i data-lucide="check" class="feature-icon"></i> Operator & Kabel instalasi (opsional bola kaca)</li>
                             </ul>
                             <div class="item-price-wrapper">
                                 <span class="price-val">Rp 3.000.000 <small>/hari</small></span>
@@ -291,12 +298,36 @@
                                 <li><i data-lucide="check" class="feature-icon"></i> 4 Box Par LED (16 Unit)</li>
                                 <li><i data-lucide="check" class="feature-icon"></i> 4 Unit Lampu Fresnel</li>
                                 <li><i data-lucide="check" class="feature-icon"></i> 2 Unit Mesin Asap</li>
-                                <li><i data-lucide="check" class="feature-icon"></i> 1 Unit Ball Mirror Klasik</li>
+                                <li><i data-lucide="check" class="feature-icon"></i> Operator & Kabel instalasi (opsional bola kaca)</li>
                             </ul>
                             <div class="item-price-wrapper">
                                 <span class="price-val">Rp 4.500.000 <small>/hari</small></span>
                             </div>
                             <button onclick="selectDirectPackage('light-mewah')" class="btn btn-outline btn-block select-pkg-btn" data-id="light-mewah">Pilih Paket</button>
+                        </div>
+                    </div>
+
+                    <!-- Item Lighting Custom -->
+                    <div class="catalog-item glassmorphism" data-category="lighting">
+                        <div class="catalog-header">
+                            <span class="item-tag tag-lighting">Lighting</span>
+                            <h3>Sewa Lighting Perunit</h3>
+                        </div>
+                        <div class="catalog-body">
+                            <p class="item-desc">Bangun tata cahaya sesuai kebutuhan spesifik acara Anda dengan menyewa secara satuan (per unit).</p>
+                            <ul class="item-features">
+                                <li><i data-lucide="check" class="feature-icon"></i> Par LED (Rp 200k/unit)</li>
+                                <li><i data-lucide="check" class="feature-icon"></i> Beam RDW 230W (Rp 450k/unit)</li>
+                                <li><i data-lucide="check" class="feature-icon"></i> Bola Kaca (Rp 150k/unit)</li>
+                                <li><i data-lucide="check" class="feature-icon"></i> Lampu Fresnel 300W (Rp 350k/unit)</li>
+                                <li><i data-lucide="check" class="feature-icon"></i> Lampu Tembak Putih 600W (Rp 150k/unit)</li>
+                                <li><i data-lucide="check" class="feature-icon"></i> Lampu Tembak Kuning 200W (Rp 150k/unit)</li>
+                                <li><i data-lucide="check" class="feature-icon"></i> SmokeGun 500W (Rp 450k/unit) & 300W (Rp 300k/unit)</li>
+                            </ul>
+                            <div class="item-price-wrapper">
+                                <span class="price-val">Hitung<small> Otomatis</small></span>
+                            </div>
+                            <button onclick="selectDirectPackage('light-custom')" class="btn btn-outline btn-block select-pkg-btn" data-id="light-custom">Pilih Paket</button>
                         </div>
                     </div>
 
@@ -356,14 +387,59 @@
                             <ul class="item-features">
                                 <li><i data-lucide="check" class="feature-icon"></i> Alas Panggung Modular 10m x 8m</li>
                                 <li><i data-lucide="check" class="feature-icon"></i> Konstruksi Heavy Duty Besi Rigging</li>
+                                <li><i data-lucide="check" class="feature-icon"></i> 10 Unit Moving Beam</li>
                                 <li><i data-lucide="check" class="feature-icon"></i> Tangga Akses & Jalur Kabel Rapi</li>
                                 <li><i data-lucide="check" class="feature-icon"></i> Karpet Premium Full Cover</li>
                                 <li><i data-lucide="check" class="feature-icon"></i> Jaminan Keamanan Standar Konser</li>
                             </ul>
                             <div class="item-price-wrapper">
-                                <span class="price-val">Rp 6.000.000 <small>/hari</small></span>
+                                <span class="price-val">Rp 6.500.000 <small>/hari</small></span>
                             </div>
                             <button onclick="selectDirectPackage('stage-10x8')" class="btn btn-outline btn-block select-pkg-btn" data-id="stage-10x8">Pilih Paket</button>
+                        </div>
+                    </div>
+
+                    <!-- Item 10: Mini Panggung / Podium -->
+                    <div class="catalog-item glassmorphism" data-category="stage">
+                        <div class="catalog-header">
+                            <span class="item-tag tag-visual">Panggung</span>
+                            <h3>Mini Panggung / Podium</h3>
+                        </div>
+                        <div class="catalog-body">
+                            <p class="item-desc">Cocok untuk acara kecil, podium pembicara, atau area pameran produk minimalis (tanpa atap).</p>
+                            <ul class="item-features">
+                                <li><i data-lucide="check" class="feature-icon"></i> Panggung Podium Modular (Tanpa Atap)</li>
+                                <li><i data-lucide="check" class="feature-icon"></i> Ukuran Custom per Meter</li>
+                                <li><i data-lucide="check" class="feature-icon"></i> Karpet Alas Halus Pilihan</li>
+                                <li><i data-lucide="check" class="feature-icon"></i> Kaki Leveling Stabil</li>
+                                <li><i data-lucide="check" class="feature-icon"></i> 1 triplek = 2.4m x 2.4m (Sistem Hitung Otomatis)</li>
+                            </ul>
+                            <div class="item-price-wrapper">
+                                <span class="price-val">Rp 70.000 <small>/m²</small></span>
+                                <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 5px;">(Minimal order Rp 300.000)</div>
+                            </div>
+                            <button onclick="selectDirectPackage('stage-mini')" class="btn btn-outline btn-block select-pkg-btn" data-id="stage-mini">Pilih Paket</button>
+                        </div>
+                    </div>
+
+                    <!-- Item 11: Sewa Balokan Rigging -->
+                    <div class="catalog-item glassmorphism" data-category="stage">
+                        <div class="catalog-header">
+                            <span class="item-tag tag-visual">Panggung</span>
+                            <h3>Sewa Balokan Panggung / Rigging</h3>
+                        </div>
+                        <div class="catalog-body">
+                            <p class="item-desc">Sewa balokan rigging terpisah untuk berbagai kebutuhan struktur custom panggung atau event Anda.</p>
+                            <ul class="item-features">
+                                <li><i data-lucide="check" class="feature-icon"></i> Ukuran Profil: 40cm x 30cm</li>
+                                <li><i data-lucide="check" class="feature-icon"></i> Panjang per Balok: 3 Meter</li>
+                                <li><i data-lucide="check" class="feature-icon"></i> Material Heavy Duty (Besi Hollow galvanis)</li>
+                                <li><i data-lucide="check" class="feature-icon"></i> Sistem Hitung Otomatis (Per Balok / Per Meter)</li>
+                            </ul>
+                            <div class="item-price-wrapper">
+                                <span class="price-val">Rp 150.000 <small>/balok</small></span>
+                            </div>
+                            <button onclick="selectDirectPackage('rigging-balokan')" class="btn btn-outline btn-block select-pkg-btn" data-id="rigging-balokan">Pilih Paket</button>
                         </div>
                     </div>
                 </div>
@@ -402,6 +478,103 @@
                         <div class="step-num">04</div>
                         <h3>Instalasi & Event</h3>
                         <p>Kru profesional kami akan mengantar, merakit, menguji, dan mengoperasikan peralatan hingga acara Anda sukses besar.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Galeri Dokumentasi -->
+        <section id="gallery" class="gallery-section">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="badge">DOKUMENTASI EVENT</span>
+                    <h2 class="section-title">Galeri Dokumentasi RME</h2>
+                    <p class="section-desc">Momen-momen terbaik dari berbagai acara yang telah didukung oleh peralatan dan kru profesional Rima Entertainment.</p>
+                </div>
+                
+                <div class="gallery-grid">
+                    <div class="gallery-item glassmorphism">
+                        <img src="{{ asset('images/gallery/media__1782726984111.jpg') }}" alt="Dokumentasi 1" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h4>Panggung Festival Malam</h4>
+                        </div>
+                    </div>
+                    <div class="gallery-item glassmorphism">
+                        <img src="{{ asset('images/gallery/media__1782726984154.jpg') }}" alt="Dokumentasi 2" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h4>Panggung Rigging & Tenda</h4>
+                        </div>
+                    </div>
+                    <div class="gallery-item glassmorphism">
+                        <img src="{{ asset('images/gallery/media__1782726984256.jpg') }}" alt="Dokumentasi 3" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h4>Instalasi Panggung Outdoor</h4>
+                        </div>
+                    </div>
+                    <div class="gallery-item glassmorphism">
+                        <img src="{{ asset('images/gallery/media__1782726984278.jpg') }}" alt="Dokumentasi 4" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h4>Panggung LED Sinar Warna</h4>
+                        </div>
+                    </div>
+                    <div class="gallery-item glassmorphism">
+                        <img src="{{ asset('images/gallery/media__1782726990134.jpg') }}" alt="Dokumentasi 5" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h4>Setup Sound System</h4>
+                        </div>
+                    </div>
+                    <div class="gallery-item glassmorphism">
+                        <img src="{{ asset('images/gallery/media__1782727183455.jpg') }}" alt="Dokumentasi 6" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h4>Panggung Seni & Budaya</h4>
+                        </div>
+                    </div>
+                    <div class="gallery-item glassmorphism">
+                        <img src="{{ asset('images/gallery/media__1782727183488.jpg') }}" alt="Dokumentasi 7" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h4>Panggung Event Outdoor</h4>
+                        </div>
+                    </div>
+                    <div class="gallery-item glassmorphism">
+                        <img src="{{ asset('images/gallery/media__1782727183611.jpg') }}" alt="Dokumentasi 8" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h4>Panggung Utama Event</h4>
+                        </div>
+                    </div>
+                    <div class="gallery-item glassmorphism">
+                        <img src="{{ asset('images/gallery/media__1782727183676.jpg') }}" alt="Dokumentasi 9" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h4>Pemasangan Rigging</h4>
+                        </div>
+                    </div>
+                    <div class="gallery-item glassmorphism">
+                        <img src="{{ asset('images/gallery/media__1782727186802.jpg') }}" alt="Dokumentasi 10" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h4>Setup Sound & Lighting</h4>
+                        </div>
+                    </div>
+                    <div class="gallery-item glassmorphism">
+                        <img src="{{ asset('images/gallery/media__1782727389161.jpg') }}" alt="Dokumentasi 11" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h4>Panggung Dance Fitness</h4>
+                        </div>
+                    </div>
+                    <div class="gallery-item glassmorphism">
+                        <img src="{{ asset('images/gallery/media__1782727389290.jpg') }}" alt="Dokumentasi 12" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h4>Panggung Gembira Malam</h4>
+                        </div>
+                    </div>
+                    <div class="gallery-item glassmorphism">
+                        <img src="{{ asset('images/gallery/media__1782727389408.jpg') }}" alt="Dokumentasi 13" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h4>Panggung Dirgahayu</h4>
+                        </div>
+                    </div>
+                    <div class="gallery-item glassmorphism">
+                        <img src="{{ asset('images/gallery/media__1782727389482.jpg') }}" alt="Dokumentasi 14" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h4>Setup Rigging & Struktur</h4>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -637,6 +810,15 @@
                                         </div>
                                     </label>
 
+                                    <label class="package-checkbox-card">
+                                        <input type="checkbox" name="selectedPackages[]" value="light-custom" data-price="0" id="pkg-light-custom">
+                                        <div class="checkbox-custom"></div>
+                                        <div class="package-checkbox-content">
+                                            <span class="pkg-title">Sewa Lighting Satuan (Custom)</span>
+                                            <span class="pkg-price">Hitung Otomatis</span>
+                                        </div>
+                                    </label>
+
                                     <!-- Stage Section -->
                                     <label class="package-checkbox-card">
                                         <input type="checkbox" name="selectedPackages[]" value="stage-6x5" data-price="3000000" id="pkg-stage-6x5">
@@ -657,14 +839,76 @@
                                     </label>
 
                                     <label class="package-checkbox-card">
-                                        <input type="checkbox" name="selectedPackages[]" value="stage-10x8" data-price="6000000" id="pkg-stage-10x8">
+                                        <input type="checkbox" name="selectedPackages[]" value="stage-10x8" data-price="6500000" id="pkg-stage-10x8">
                                         <div class="checkbox-custom"></div>
                                         <div class="package-checkbox-content">
                                             <span class="pkg-title">Panggung Modular 10x8m</span>
-                                            <span class="pkg-price">Rp 6.000.000 /hari</span>
+                                            <span class="pkg-price">Rp 6.500.000 /hari</span>
+                                        </div>
+                                    </label>
+
+                                    <label class="package-checkbox-card">
+                                        <input type="checkbox" name="selectedPackages[]" value="stage-mini" data-price="0" id="pkg-stage-mini">
+                                        <div class="checkbox-custom"></div>
+                                        <div class="package-checkbox-content">
+                                            <span class="pkg-title">Mini Panggung (Tanpa Atap)</span>
+                                            <span class="pkg-price">Mulai Rp 300.000 /hari</span>
+                                        </div>
+                                    </label>
+
+                                    <label class="package-checkbox-card">
+                                        <input type="checkbox" name="selectedPackages[]" value="rigging-balokan" data-price="0" id="pkg-rigging-balokan">
+                                        <div class="checkbox-custom"></div>
+                                        <div class="package-checkbox-content">
+                                            <span class="pkg-title">Balokan Panggung / Rigging</span>
+                                            <span class="pkg-price">Rp 150.000 /balok (3m)</span>
                                         </div>
                                     </label>
                                 </div>
+                                
+                                <div id="miniStageAreaContainer" style="display: none; margin-top: 15px;">
+                                    <label style="font-size: 0.9rem; font-weight: 500; color: #e2e8f0; display: block; margin-bottom: 8px;">Ukuran Panggung (Meter)</label>
+                                    <div style="display: flex; gap: 10px;">
+                                        <div style="flex: 1;">
+                                            <input type="number" id="panjangMiniPanggung" min="1" step="0.1" placeholder="Panjang (m)" style="width: 100%; padding: 12px 15px; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff;">
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <input type="number" id="lebarMiniPanggung" min="1" step="0.1" placeholder="Lebar (m)" style="width: 100%; padding: 12px 15px; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff;">
+                                        </div>
+                                    </div>
+                                    <input type="hidden" id="luasMiniPanggung" name="luasMiniPanggung" value="0">
+                                    <small id="kalkulasiLuasText" style="color: #94a3b8; margin-top: 5px; display: block;">Luas: 0 m² | Harga Rp 70.000 / m². (Minimal order Rp 300.000)</small>
+                                </div>
+
+                                <div id="riggingBalokanAreaContainer" style="display: none; margin-top: 15px;">
+                                    <label style="font-size: 0.9rem; font-weight: 500; color: #e2e8f0; display: block; margin-bottom: 8px;">Kebutuhan Balokan (1 Balok = 3 Meter)</label>
+                                    <div style="display: flex; gap: 10px;">
+                                        <div style="flex: 1;">
+                                            <input type="number" id="jumlahBalokanInput" min="1" step="1" placeholder="Jumlah Balok (Unit)" style="width: 100%; padding: 12px 15px; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff;">
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <input type="number" id="meterBalokanInput" min="1" step="0.1" placeholder="Atau Total Panjang (Meter)" style="width: 100%; padding: 12px 15px; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff;">
+                                        </div>
+                                    </div>
+                                    <input type="hidden" id="qtyRiggingBalokan" name="qtyRiggingBalokan" value="0">
+                                    <small id="kalkulasiBalokanText" style="color: #94a3b8; margin-top: 5px; display: block;">Sistem akan mengkonversi meter ke jumlah balokan otomatis. Harga Rp 150.000 / balok.</small>
+                                </div>
+
+                                <div id="lightCustomAreaContainer" style="display: none; margin-top: 15px;">
+                                    <label style="font-size: 0.9rem; font-weight: 500; color: #e2e8f0; display: block; margin-bottom: 8px;">Kuantitas Lighting Satuan</label>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                                        <input type="number" id="qty_light_parled" name="qty_light_parled" min="0" step="1" placeholder="Par LED (Jml)" class="custom-light-input" style="width: 100%; padding: 10px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff;">
+                                        <input type="number" id="qty_light_beam" name="qty_light_beam" min="0" step="1" placeholder="Beam RDW 230W (Jml)" class="custom-light-input" style="width: 100%; padding: 10px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff;">
+                                        <input type="number" id="qty_light_bola" name="qty_light_bola" min="0" step="1" placeholder="Bola Kaca (Jml)" class="custom-light-input" style="width: 100%; padding: 10px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff;">
+                                        <input type="number" id="qty_light_fresnel" name="qty_light_fresnel" min="0" step="1" placeholder="Fresnel 300W (Jml)" class="custom-light-input" style="width: 100%; padding: 10px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff;">
+                                        <input type="number" id="qty_light_tembakputih" name="qty_light_tembakputih" min="0" step="1" placeholder="Tbk Putih 600W (Jml)" class="custom-light-input" style="width: 100%; padding: 10px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff;">
+                                        <input type="number" id="qty_light_tembakkuning" name="qty_light_tembakkuning" min="0" step="1" placeholder="Tbk Kuning 200W (Jml)" class="custom-light-input" style="width: 100%; padding: 10px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff;">
+                                        <input type="number" id="qty_light_smoke500" name="qty_light_smoke500" min="0" step="1" placeholder="SmokeGun 500W (Jml)" class="custom-light-input" style="width: 100%; padding: 10px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff;">
+                                        <input type="number" id="qty_light_smoke300" name="qty_light_smoke300" min="0" step="1" placeholder="SmokeGun 300W (Jml)" class="custom-light-input" style="width: 100%; padding: 10px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff;">
+                                    </div>
+                                    <small id="kalkulasiLightCustomText" style="color: #94a3b8; margin-top: 5px; display: block;">Total Lighting Custom: Rp 0</small>
+                                </div>
+
                                 <span class="error-msg" id="packagesError">Harap pilih minimal satu paket penyewaan</span>
                             </div>
 
@@ -706,9 +950,9 @@
     <footer class="main-footer">
         <div class="container footer-grid">
             <div class="footer-brand">
-                <a href="#" class="logo">
-                    <span class="logo-text">RIMA</span>
-                    <span class="logo-subtext">ENTERTAINMENT</span>
+                <a href="#" class="logo" style="text-decoration:none; display:flex; flex-direction:column; align-items:flex-start; margin-bottom:1rem;">
+                    <span class="logo-text" style="font-size: 2.5rem; font-style:italic; letter-spacing:-2px; font-weight:900; line-height:1;"><span style="color:#000080;">R</span><span style="color:#000080;">M</span><span style="color:#ff0000;">E</span></span>
+                    <span class="logo-subtext" style="font-size: 0.8rem; color:#000000; font-weight:800; letter-spacing:4px;">ENTERTAINMENT</span>
                 </a>
                 <p class="footer-desc">Partner terpercaya penyedia kelengkapan panggung, tata suara, tata cahaya, dan visual berstandar tinggi di Indonesia.</p>
                 <div class="social-links">
@@ -744,19 +988,19 @@
                 <ul class="contact-list">
                     <li>
                         <i data-lucide="map-pin" class="contact-icon"></i>
-                        <span>Jl. Panggung Megah No. 88, Jakarta Selatan, Indonesia</span>
+                        <span>Jl. Kramat Sentiong V No.132 E</span>
                     </li>
                     <li>
                         <i data-lucide="phone" class="contact-icon"></i>
-                        <span>0812-3456-7890 (CS Rima)</span>
+                        <span>087885675868</span>
                     </li>
                     <li>
                         <i data-lucide="mail" class="contact-icon"></i>
-                        <span>info@rimaentertainment.com</span>
+                        <span>rimamanagemententertainment@gmail.com</span>
                     </li>
                     <li>
                         <i data-lucide="clock" class="contact-icon"></i>
-                        <span>Setiap Hari: 24 Jam Non-Stop</span>
+                        <span>Setiap Hari: 07:00 - 22:00</span>
                     </li>
                 </ul>
             </div>
@@ -824,6 +1068,25 @@
             </div>
         </div>
     </div>
+
+    <!-- Flatpickr Script -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/id.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            flatpickr("#eventDate", {
+                locale: "id",
+                minDate: "today",
+                dateFormat: "Y-m-d",
+                disableMobile: "true",
+                allowInput: false,
+                disable: @json($bookedDates ?? []),
+                onChange: function(selectedDates, dateStr, instance) {
+                    document.getElementById('eventDate').dispatchEvent(new Event('input'));
+                }
+            });
+        });
+    </script>
 
     <!-- Script file -->
     <script src="{{ asset('js/app.js') }}"></script>

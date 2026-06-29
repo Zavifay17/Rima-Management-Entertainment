@@ -13,17 +13,17 @@
 
     <style>
         :root {
-            --bg-primary: #f0f4f9; /* Clean light sky blue/gray */
-            --bg-secondary: rgba(255, 255, 255, 0.8); /* Translucent white glass */
-            --border-color: rgba(99, 102, 241, 0.08); /* Soft blue-tinted border */
-            --text-primary: #1e293b; /* Deep slate gray */
-            --text-secondary: #64748b; /* Medium slate gray */
-            --accent-primary: #3b82f6; /* Sky Blue */
-            --accent-secondary: #06b6d4; /* Vivid Cyan */
+            --bg-primary: #ffffff;
+            --bg-secondary: rgba(255, 255, 255, 0.8);
+            --border-color: rgba(0, 0, 128, 0.08);
+            --text-primary: #000000;
+            --text-secondary: #334155;
+            --accent-primary: #000080;
+            --accent-secondary: #ff0000;
             --success: #10b981;
             --warning: #fbbf24;
-            --danger: #ef4444;
-            --glass-bg: rgba(255, 255, 255, 0.65);
+            --danger: #ff0000;
+            --glass-bg: rgba(255, 255, 255, 0.85);
             --glass-blur: blur(24px);
         }
 
@@ -55,20 +55,20 @@
             border-radius: 50%;
             filter: blur(120px);
             z-index: -1;
-            opacity: 0.25;
+            opacity: 0.15;
             animation: pulse 10s infinite alternate;
         }
 
         body::before {
             top: -10%;
             left: -10%;
-            background: radial-gradient(circle, #dbeafe, transparent); /* Soft sky blue glow */
+            background: radial-gradient(circle, #000080, transparent); /* Soft navy blue glow */
         }
 
         body::after {
             bottom: -10%;
             right: -10%;
-            background: radial-gradient(circle, #ccfbf1, transparent); /* Soft cyan glow */
+            background: radial-gradient(circle, #ff0000, transparent); /* Soft red glow */
             animation-delay: 5s;
         }
 
@@ -125,39 +125,39 @@
         }
 
         .brand-logo {
-            width: 60px;
+            width: auto;
             height: 60px;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 1.75rem;
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
-            margin-bottom: 1.25rem;
-            position: relative;
+            font-size: 2.5rem;
+            font-weight: 900;
+            font-family: 'Outfit', sans-serif;
+            font-style: italic;
+            letter-spacing: -1.5px;
+            background: transparent;
+            box-shadow: none;
+            margin-bottom: 0.5rem;
         }
 
-        .brand-logo::after {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            border-radius: 20px;
-            z-index: -1;
-            opacity: 0.4;
-            filter: blur(6px);
-        }
+        .brand-logo span:nth-child(1) { color: var(--accent-primary); letter-spacing: -4px; } /* R */
+        .brand-logo span:nth-child(2) { color: var(--accent-primary); } /* M */
+        .brand-logo span:nth-child(3) { color: var(--accent-secondary); } /* E */
 
         .brand-name {
             font-family: 'Outfit', sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
-            background: linear-gradient(to right, #1e293b, #475569);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #000000;
             margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+        
+        .brand-name span {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 3px;
         }
 
         .brand-tagline {
@@ -303,10 +303,10 @@
     <div class="glass-card">
         <div class="brand-header">
             <div class="brand-logo">
-                <i class="fa-solid fa-truck-ramp-box"></i>
+                <span>R</span><span>M</span><span>E</span>
             </div>
-            <h1 class="brand-name">RME Logistics</h1>
-            <p class="brand-tagline">Sistem Manajemen Logistik & Pemesanan Alat Event</p>
+            <h1 class="brand-name">Rima Management Entertainment</h1>
+            <p class="brand-tagline">Sistem Perentalan dan Penyewaan Alat Event</p>
         </div>
 
         <!-- Feedback Alert Messages -->

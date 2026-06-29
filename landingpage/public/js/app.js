@@ -23,6 +23,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const packageCheckboxes = document.querySelectorAll('input[name="selectedPackages[]"]');
     const durationInput = document.getElementById("duration");
     const eventDateInput = document.getElementById("eventDate");
+    const panjangMiniPanggungInput = document.getElementById("panjangMiniPanggung");
+    const lebarMiniPanggungInput = document.getElementById("lebarMiniPanggung");
+    const luasMiniPanggungInput = document.getElementById("luasMiniPanggung");
+    const kalkulasiLuasText = document.getElementById("kalkulasiLuasText");
+    const miniStageAreaContainer = document.getElementById("miniStageAreaContainer");
+    
+    const jumlahBalokanInput = document.getElementById("jumlahBalokanInput");
+    const meterBalokanInput = document.getElementById("meterBalokanInput");
+    const qtyRiggingBalokan = document.getElementById("qtyRiggingBalokan");
+    const kalkulasiBalokanText = document.getElementById("kalkulasiBalokanText");
+    const riggingBalokanAreaContainer = document.getElementById("riggingBalokanAreaContainer");
+    
+    const lightCustomAreaContainer = document.getElementById("lightCustomAreaContainer");
+    const kalkulasiLightCustomText = document.getElementById("kalkulasiLightCustomText");
+    const customLightInputs = document.querySelectorAll(".custom-light-input");
     
     // Live Estimator Display Elements
     const estSubtotal = document.getElementById("estSubtotal");
@@ -150,7 +165,47 @@ document.addEventListener("DOMContentLoaded", () => {
         packageCheckboxes.forEach(checkbox => {
             const cardElement = checkbox.closest('.package-checkbox-card');
             if (checkbox.checked) {
-                subtotal += parseInt(checkbox.getAttribute("data-price"), 10);
+                if (checkbox.value === "stage-mini") {
+                    let panjang = parseFloat(panjangMiniPanggungInput ? panjangMiniPanggungInput.value : 0) || 0;
+                    let lebar = parseFloat(lebarMiniPanggungInput ? lebarMiniPanggungInput.value : 0) || 0;
+                    let luas = panjang * lebar;
+                    if (luasMiniPanggungInput) luasMiniPanggungInput.value = luas;
+                    
+                    let harga = Math.max(300000, Math.round(luas * 70000));
+                    if (kalkulasiLuasText && luas > 0) {
+                        kalkulasiLuasText.textContent = `Luas: ${luas.toFixed(2)} m² | Estimasi: Rp ` + new Intl.NumberFormat("id-ID").format(harga);
+                    } else if (kalkulasiLuasText) {
+                        kalkulasiLuasText.textContent = "Harga Rp 70.000 / m². (Minimal order Rp 300.000)";
+                    }
+                    subtotal += harga;
+                } else if (checkbox.value === "rigging-balokan") {
+                    let qty = parseInt(qtyRiggingBalokan ? qtyRiggingBalokan.value : 0, 10) || 0;
+                    subtotal += qty * 150000;
+                } else if (checkbox.value === "light-custom") {
+                    let lightCustomTotal = 0;
+                    const lightPrices = {
+                        qty_light_parled: 200000,
+                        qty_light_beam: 450000,
+                        qty_light_bola: 150000,
+                        qty_light_fresnel: 350000,
+                        qty_light_tembakputih: 150000,
+                        qty_light_tembakkuning: 150000,
+                        qty_light_smoke500: 450000,
+                        qty_light_smoke300: 300000
+                    };
+                    customLightInputs.forEach(input => {
+                        let q = parseInt(input.value, 10) || 0;
+                        if (lightPrices[input.id]) {
+                            lightCustomTotal += q * lightPrices[input.id];
+                        }
+                    });
+                    if (kalkulasiLightCustomText) {
+                        kalkulasiLightCustomText.textContent = `Total Lighting Custom: Rp ` + new Intl.NumberFormat("id-ID").format(lightCustomTotal);
+                    }
+                    subtotal += lightCustomTotal;
+                } else {
+                    subtotal += parseInt(checkbox.getAttribute("data-price"), 10);
+                }
                 selectedCount++;
                 if (cardElement) cardElement.classList.add("selected-active");
             } else {
@@ -174,16 +229,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
         estSubtotal.textContent = formatRupiah(subtotal);
         
-        // Multiplier duration discount logic (optional premium feel):
-        // 1 day = 100%, 2 days = 10% discount on second day onwards etc.
-        let discount = 1.0;
-        if (duration >= 3 && duration < 7) {
-            discount = 0.95; // 5% discount for 3+ days
-        } else if (duration >= 7) {
-            discount = 0.90; // 10% discount for 7+ days
+        // Multiplier duration logic:
+        // Hari 1: 100%, Hari 2: 50% (+0.5), Hari 3+: 25% (+0.25)
+        let multiplier = 1.0;
+        if (duration === 2) {
+            multiplier = 1.5;
+        } else if (duration >= 3) {
+            multiplier = 1.5 + ((duration - 2) * 0.25);
         }
         
-        const total = Math.round((subtotal * duration) * discount);
+        const total = Math.round(subtotal * multiplier);
         estTotal.textContent = formatRupiah(total);
 
         // Save selected values to local data for modal receipt later
@@ -212,6 +267,22 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 });
             }
+            const miniStageCheckbox = document.getElementById("pkg-stage-mini");
+            if (miniStageCheckbox && miniStageAreaContainer) {
+                miniStageAreaContainer.style.display = miniStageCheckbox.checked ? "block" : "none";
+            }
+
+            const riggingBalokanCheckbox = document.getElementById("pkg-rigging-balokan");
+            if (riggingBalokanCheckbox && riggingBalokanAreaContainer) {
+                riggingBalokanAreaContainer.style.display = riggingBalokanCheckbox.checked ? "block" : "none";
+            }
+
+            const lightCustomCheckbox = document.getElementById("pkg-light-custom");
+            if (lightCustomCheckbox && lightCustomAreaContainer) {
+                lightCustomAreaContainer.style.display = lightCustomCheckbox.checked ? "block" : "none";
+            }
+
+            // Recalculate
             calculateEstimatedPrice();
             // Remove error if package is selected
             const errorParent = document.getElementById("packagesError").parentElement;
@@ -219,7 +290,51 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    durationInput.addEventListener("input", calculateEstimatedPrice);
+    if (durationInput) {
+        durationInput.addEventListener("input", calculateEstimatedPrice);
+    }
+    
+    if (panjangMiniPanggungInput) {
+        panjangMiniPanggungInput.addEventListener("input", calculateEstimatedPrice);
+    }
+    
+    if (lebarMiniPanggungInput) {
+        lebarMiniPanggungInput.addEventListener("input", calculateEstimatedPrice);
+    }
+
+    if (jumlahBalokanInput) {
+        jumlahBalokanInput.addEventListener("input", (e) => {
+            let jml = parseInt(e.target.value, 10) || 0;
+            if (meterBalokanInput && document.activeElement === jumlahBalokanInput) {
+                meterBalokanInput.value = jml * 3;
+            }
+            if (qtyRiggingBalokan) qtyRiggingBalokan.value = jml;
+            if (kalkulasiBalokanText) {
+                kalkulasiBalokanText.textContent = `Total: ${jml} Balokan (${jml * 3} m) | Estimasi: Rp ` + new Intl.NumberFormat("id-ID").format(jml * 150000);
+            }
+            calculateEstimatedPrice();
+        });
+    }
+
+    if (meterBalokanInput) {
+        meterBalokanInput.addEventListener("input", (e) => {
+            let mtr = parseFloat(e.target.value) || 0;
+            let jml = Math.ceil(mtr / 3);
+            if (jumlahBalokanInput && document.activeElement === meterBalokanInput) {
+                jumlahBalokanInput.value = jml;
+            }
+            if (qtyRiggingBalokan) qtyRiggingBalokan.value = jml;
+            if (kalkulasiBalokanText) {
+                kalkulasiBalokanText.textContent = `Total: ${jml} Balokan (${jml * 3} m) | Estimasi: Rp ` + new Intl.NumberFormat("id-ID").format(jml * 150000);
+            }
+            calculateEstimatedPrice();
+        });
+    }
+
+    customLightInputs.forEach(input => {
+        input.addEventListener("input", calculateEstimatedPrice);
+    });
+
     durationInput.addEventListener("change", calculateEstimatedPrice);
 
     // Initial calculation
@@ -235,9 +350,12 @@ document.addEventListener("DOMContentLoaded", () => {
             'light-hemat': 'pkg-light-hemat',
             'light-menengah': 'pkg-light-menengah',
             'light-mewah': 'pkg-light-mewah',
+            'light-custom': 'pkg-light-custom',
             'stage-6x5': 'pkg-stage-6x5',
             'stage-8x6': 'pkg-stage-8x6',
             'stage-10x8': 'pkg-stage-10x8',
+            'stage-mini': 'pkg-stage-mini',
+            'rigging-balokan': 'pkg-rigging-balokan',
             'concert-mega': ['pkg-sound-20000w', 'pkg-light-mewah', 'pkg-stage-10x8'] // Hero combo across different categories!
         };
 
@@ -249,11 +367,17 @@ document.addEventListener("DOMContentLoaded", () => {
         if (Array.isArray(target)) {
             target.forEach(id => {
                 const cb = document.getElementById(id);
-                if (cb) cb.checked = true;
+                if (cb) {
+                    cb.checked = true;
+                    cb.dispatchEvent(new Event('change'));
+                }
             });
         } else if (target) {
             const cb = document.getElementById(target);
-            if (cb) cb.checked = true;
+            if (cb) {
+                cb.checked = true;
+                cb.dispatchEvent(new Event('change'));
+            }
         }
 
         // Recalculate cost
@@ -489,7 +613,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 receiptTotal.textContent = formatRupiah(order.total_harga);
 
                 // WhatsApp message config
-                const waAdminNum = "6281234567890";
+                const waAdminNum = "6287818807770";
                 
                 let waText = `Halo Rima Entertainment! Saya baru saja melakukan pemesanan sewa alat event via Website:\n\n`;
                 waText += `*Order ID:* ORD-${order.id_order}\n`;

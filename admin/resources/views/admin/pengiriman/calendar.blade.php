@@ -153,8 +153,8 @@
 
 <div class="page-header">
     <div class="page-title">
-        <h1>Kalender Logistik & Pengiriman</h1>
-        <p>Pantau sebaran jadwal tugas antar dan jemput driver secara visual.</p>
+        <h1>Kalender Event - Pengantaran dan Penjemputan</h1>
+        <p>Pantau Kalender event yang di pesan oleh pelanggan dan Kalender pengantaran dan penjemputan driver.</p>
     </div>
 </div>
 
@@ -196,11 +196,19 @@
             @php
                 $currentDateStr = sprintf('%04d-%02d-%02d', $year, $month, $day);
                 $dayTasks = $groupedPengirimans->get($currentDateStr, collect());
+                $dayOrders = $groupedOrders[$currentDateStr] ?? [];
                 $isToday = $currentDateStr === date('Y-m-d');
             @endphp
             <div class="calendar-day {{ $isToday ? 'today' : '' }}">
                 <div class="day-number">{{ $day }}</div>
                 <div class="day-tasks">
+                    @foreach($dayOrders as $order)
+                        <a href="{{ route('admin.order.show', $order->id_order) }}" style="text-decoration: none;">
+                            <div class="task-pill" style="background: rgba(239, 68, 68, 0.1); color: #ef4444; border-color: rgba(239, 68, 68, 0.2);" title="Pelanggan: {{ $order->nama_pelanggan }}&#10;Status: {{ $order->status_sewa }}">
+                                <i class="fa-solid fa-bookmark" style="margin-right:3px;"></i> <strong>#{{ $order->id_order }}</strong> - BOOKED
+                            </div>
+                        </a>
+                    @endforeach
                     @foreach($dayTasks as $task)
                         <a href="{{ route('admin.order.show', $task->order->id_order) }}" style="text-decoration: none;">
                             <div class="task-pill {{ $task->tipe_tugas === 'Antar' ? 'task-antar' : 'task-jemput' }}" title="Driver: {{ $task->driver->nama }}&#10;Tugas: {{ $task->tipe_tugas }}&#10;Catatan: {{ $task->catatan_kondisi_alat ?? '-' }}">
