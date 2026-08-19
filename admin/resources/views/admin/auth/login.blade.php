@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - RME Logistics</title>
+    <title>Login - RME Admin Panel</title>
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
     
     <!-- Google Fonts & FontAwesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -140,10 +141,6 @@
             margin-bottom: 0.5rem;
         }
 
-        .brand-logo span:nth-child(1) { color: var(--accent-primary); letter-spacing: -4px; } /* R */
-        .brand-logo span:nth-child(2) { color: var(--accent-primary); } /* M */
-        .brand-logo span:nth-child(3) { color: var(--accent-secondary); } /* E */
-
         .brand-name {
             font-family: 'Outfit', sans-serif;
             font-size: 1.5rem;
@@ -179,6 +176,10 @@
             margin-bottom: 0.5rem;
             padding-left: 0.25rem;
         }
+
+        .brand-logo span:nth-child(1) { color: var(--accent-primary); letter-spacing: -4px; } /* R */
+        .brand-logo span:nth-child(2) { color: var(--accent-primary); } /* M */
+        .brand-logo span:nth-child(3) { color: var(--accent-secondary); } /* E */
 
         .input-wrapper {
             position: relative;
@@ -303,7 +304,7 @@
     <div class="glass-card">
         <div class="brand-header">
             <div class="brand-logo">
-                <span>R</span><span>M</span><span>E</span>
+                <span class="logo-text"><span>R</span><span>M</span><span>E</span></span>
             </div>
             <h1 class="brand-name">Rima Management Entertainment</h1>
             <p class="brand-tagline">Sistem Perentalan dan Penyewaan Alat Event</p>

@@ -1,2 +1,0 @@
-# rme
-penyewaan alat event

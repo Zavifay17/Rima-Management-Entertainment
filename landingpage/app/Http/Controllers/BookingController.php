@@ -24,6 +24,8 @@ class BookingController extends Controller
             'eventDate' => 'required|date|after:today',
             'duration' => 'required|integer|min:1|max:30',
             'locationAddress' => 'required|string|max:500',
+            'lokasi_lat' => 'nullable|numeric',
+            'lokasi_lng' => 'nullable|numeric',
             'selectedPackages' => 'required|array|min:1',
             'selectedPackages.*' => 'required|string|in:sound-5000w,sound-10000w,sound-20000w,light-hemat,light-menengah,light-mewah,stage-6x5,stage-8x6,stage-10x8,stage-mini,rigging-balokan,light-custom',
             'luasMiniPanggung' => 'nullable|numeric|min:1',
@@ -81,6 +83,8 @@ class BookingController extends Controller
         $eventDate = $request->input('eventDate');
         $duration = (int) $request->input('duration');
         $lokasiAlamat = $request->input('locationAddress');
+        $lokasiLat = $request->input('lokasi_lat');
+        $lokasiLng = $request->input('lokasi_lng');
         $specialRequests = $request->input('specialRequests');
         $selectedPackages = $request->input('selectedPackages');
         $luasMiniPanggung = (float) $request->input('luasMiniPanggung', 0);
@@ -148,7 +152,7 @@ class BookingController extends Controller
 
         // 3. Database Operations under a transaction to guarantee consistency
         try {
-            $result = DB::transaction(function () use ($fullName, $whatsapp, $email, $tglMulai, $tglSelesai, $totalPrice, $selectedPackages, $prices, $duration, $multiplier, $luasMiniPanggung, $qtyRiggingBalokan, $lightCustomData, $lokasiAlamat) {
+            $result = DB::transaction(function () use ($fullName, $whatsapp, $email, $tglMulai, $tglSelesai, $totalPrice, $selectedPackages, $prices, $duration, $multiplier, $luasMiniPanggung, $qtyRiggingBalokan, $lightCustomData, $lokasiAlamat, $lokasiLat, $lokasiLng) {
                 // Create Order in 'orders' table
                 $idOrder = DB::table('orders')->insertGetId([
                     'nama_pelanggan' => $fullName,
@@ -158,6 +162,8 @@ class BookingController extends Controller
                     'tgl_mulai' => $tglMulai,
                     'tgl_selesai' => $tglSelesai,
                     'lokasi_alamat' => $lokasiAlamat,
+                    'lokasi_lat' => $lokasiLat,
+                    'lokasi_lng' => $lokasiLng,
                     'total_harga' => $totalPrice,
                     'status_sewa' => 'Pending', // Default rental status
                     'created_at' => now(),
@@ -236,6 +242,8 @@ class BookingController extends Controller
                         'tgl_mulai' => $tglMulai,
                         'tgl_selesai' => $tglSelesai,
                         'lokasi_alamat' => $lokasiAlamat,
+                        'lokasi_lat' => $lokasiLat,
+                        'lokasi_lng' => $lokasiLng,
                         'total_harga' => $totalPrice,
                         'status_sewa' => 'Pending',
                     ],
@@ -262,6 +270,8 @@ class BookingController extends Controller
                         'tgl_mulai' => $result['order']['tgl_mulai'],
                         'tgl_selesai' => $result['order']['tgl_selesai'],
                         'lokasi_alamat' => $result['order']['lokasi_alamat'],
+                        'lokasi_lat' => $result['order']['lokasi_lat'],
+                        'lokasi_lng' => $result['order']['lokasi_lng'],
                         'total_harga' => $result['order']['total_harga'],
                         'status_sewa' => $result['order']['status_sewa'],
                         'catatan' => $specialRequests

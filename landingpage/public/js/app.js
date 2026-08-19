@@ -623,9 +623,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 receiptTotal.textContent = formatRupiah(order.total_harga);
 
                 // WhatsApp message config
-                const waAdminNum = "6287818807770";
+                const waAdminNum = "6287885675868";
                 
-                let waText = `Halo Rima Entertainment! Saya baru saja melakukan pemesanan sewa alat event via Website:\n\n`;
+                let waText = `Halo CS Suyanto! Saya baru saja melakukan pemesanan sewa alat event via Website:\n\n`;
                 waText += `*Order ID:* ORD-${order.id_order}\n`;
                 waText += `*Nama Pelanggan:* ${customer.nama}\n`;
                 waText += `*WhatsApp:* ${customer.no_hp}\n`;
@@ -635,7 +635,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (specialRequests) {
                     waText += `*Catatan Khusus:* ${specialRequests}\n`;
                 }
-                waText += `\n*Total Biaya:* ${formatRupiah(order.total_harga)}`;
+                waText += `\n*Total Biaya:* ${formatRupiah(order.total_harga)}\n`;
+                waText += `\n_Catatan:_ DP dan Pelunasan dapat ditransfer via rekening bank BCA atau secara Tunai (Cash). Mohon konfirmasi rekening tujuan kepada kami.`;
                 
                 const encodedWaText = encodeURIComponent(waText);
                 const waLink = `https://api.whatsapp.com/send?phone=${waAdminNum}&text=${encodedWaText}`;

@@ -8,6 +8,7 @@
     <meta name="author" content="Rima Entertainment">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Rima Entertainment | Premium Event Equipment Rental</title>
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
     
     <!-- Google Fonts: Outfit (Heading) & Inter (Body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,9 +21,57 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     
-    <!-- Flatpickr for Datepicker -->
+    <!-- Flatpickr CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
+    
+    <!-- Leaflet.js Map (Free - OpenStreetMap) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    
+    <style>
+        /* Map Styles */
+        .map-container {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(0,0,0,0.2);
+            margin-top: 10px;
+        }
+        .map-container #bookingMap {
+            height: 250px;
+            width: 100%;
+            z-index: 1;
+        }
+        .map-overlay-btn {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            z-index: 1000;
+            background: #fff;
+            color: #0f172a;
+            border: none;
+            border-radius: 50px;
+            padding: 8px 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: all 0.2s ease;
+        }
+        .map-overlay-btn:hover {
+            background: #f8fafc;
+            transform: translateY(-2px);
+        }
+        .map-helper-text {
+            display: block;
+            margin-top: 6px;
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+    </style>
 </head>
 <body>
 
@@ -755,6 +804,17 @@
                                     <i data-lucide="map-pin" class="input-icon"></i>
                                     <input type="text" id="locationAddress" name="locationAddress" placeholder="Contoh: Gedung Serbaguna XYZ, Jl. Merdeka No.1" required>
                                 </div>
+                                <span class="map-helper-text">Cari alamat di atas, atau geser pin pada peta di bawah untuk menentukan titik persis.</span>
+                                
+                                <div class="map-container">
+                                    <div id="bookingMap"></div>
+                                    <button type="button" class="map-overlay-btn" id="geolocateBtn">
+                                        <i data-lucide="navigation" style="width:16px; height:16px;"></i> Gunakan Lokasi Saya
+                                    </button>
+                                </div>
+                                <input type="hidden" name="lokasi_lat" id="lokasi_lat" value="">
+                                <input type="hidden" name="lokasi_lng" id="lokasi_lng" value="">
+
                                 <span class="error-msg" id="locationAddressError">Alamat lokasi acara wajib diisi</span>
                             </div>
 
@@ -1001,7 +1061,7 @@
                     </li>
                     <li>
                         <i data-lucide="phone" class="contact-icon"></i>
-                        <span>087885675868</span>
+                        <a href="https://wa.me/6287885675868" target="_blank" style="color: inherit; text-decoration: none;"><span>+62 878-8567-5868 (CS Suyanto)</span></a>
                     </li>
                     <li>
                         <i data-lucide="mail" class="contact-icon"></i>
@@ -1067,12 +1127,12 @@
                 </div>
             </div>
 
-            <p class="modal-note"><i data-lucide="info" class="note-icon"></i> Pesanan Anda telah tersimpan secara resmi di tabel Orders database Supabase Rima Entertainment. Tim sales kami akan segera menghubungi Anda dalam waktu 15 menit.</p>
+            <p class="modal-note"><i data-lucide="info" class="note-icon"></i> Pesanan Anda telah tersimpan secara resmi di database Rima Entertainment. Tim sales kami akan segera menghubungi Anda dalam waktu 15 menit. <br><br><strong>Metode Pembayaran:</strong> DP dan Pelunasan dapat ditransfer via Rekening Bank BCA atau secara Tunai (Cash).</p>
 
             <div class="modal-actions">
                 <button class="btn btn-secondary btn-block" id="closeModalBtn">Kembali</button>
                 <a href="#" target="_blank" class="btn btn-whatsapp btn-block" id="whatsappDirectBtn">
-                    <i data-lucide="message-square" class="btn-icon"></i> Hubungi CS via WhatsApp
+                    <i data-lucide="message-square" class="btn-icon"></i> Hubungi CS Suyanto via WhatsApp
                 </a>
             </div>
         </div>
@@ -1095,6 +1155,147 @@
                 }
             });
         });
+    </script>
+
+    <!-- Leaflet.js Map Script (Free - OpenStreetMap) -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize Map — centered on Jakarta
+        const map = L.map('bookingMap', {
+            scrollWheelZoom: true,
+            zoomControl: true,
+        }).setView([-6.2088, 106.8456], 11);
+
+        // OpenStreetMap Tile Layer (Free)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            maxZoom: 19,
+        }).addTo(map);
+
+        // Custom marker icon
+        const markerIcon = L.icon({
+            iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+            iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+            shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        });
+
+        let currentMarker = null;
+
+        const latInput = document.getElementById('lokasi_lat');
+        const lngInput = document.getElementById('lokasi_lng');
+        const addressInput = document.getElementById('locationAddress');
+        const geolocateBtn = document.getElementById('geolocateBtn');
+
+        function setMarker(lat, lng, flyTo = true) {
+            if (currentMarker) {
+                map.removeLayer(currentMarker);
+            }
+            currentMarker = L.marker([lat, lng], { icon: markerIcon, draggable: true }).addTo(map);
+            if (flyTo) {
+                map.flyTo([lat, lng], 16, { duration: 1.2 });
+            }
+
+            latInput.value = lat.toFixed(7);
+            lngInput.value = lng.toFixed(7);
+
+            // Reverse Geocode
+            reverseGeocode(lat, lng);
+
+            // Handle marker drag
+            currentMarker.on('dragend', function(event) {
+                const marker = event.target;
+                const position = marker.getLatLng();
+                latInput.value = position.lat.toFixed(7);
+                lngInput.value = position.lng.toFixed(7);
+                map.panTo(position);
+                reverseGeocode(position.lat, position.lng);
+            });
+        }
+
+        function reverseGeocode(lat, lng) {
+            fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.display_name) {
+                        addressInput.value = data.display_name;
+                    }
+                })
+                .catch(error => console.error('Error reverse geocoding:', error));
+        }
+
+        // Click on map to set marker
+        map.on('click', function(e) {
+            setMarker(e.latlng.lat, e.latlng.lng, false);
+        });
+
+        // Typing in address input to forward geocode
+        let typingTimer;
+        addressInput.addEventListener('input', function() {
+            clearTimeout(typingTimer);
+            if (this.value.trim().length > 3) {
+                typingTimer = setTimeout(() => {
+                    const query = encodeURIComponent(this.value.trim());
+                    fetch(`https://nominatim.openstreetmap.org/search?format=jsonv2&q=${query}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data && data.length > 0) {
+                                const lat = parseFloat(data[0].lat);
+                                const lng = parseFloat(data[0].lon);
+                                if (currentMarker) map.removeLayer(currentMarker);
+                                currentMarker = L.marker([lat, lng], { icon: markerIcon, draggable: true }).addTo(map);
+                                map.flyTo([lat, lng], 16, { duration: 1.2 });
+                                latInput.value = lat.toFixed(7);
+                                lngInput.value = lng.toFixed(7);
+
+                                currentMarker.on('dragend', function(event) {
+                                    const position = event.target.getLatLng();
+                                    latInput.value = position.lat.toFixed(7);
+                                    lngInput.value = position.lng.toFixed(7);
+                                    map.panTo(position);
+                                    reverseGeocode(position.lat, position.lng);
+                                });
+                            }
+                        })
+                        .catch(error => console.error('Error forward geocoding:', error));
+                }, 1000);
+            }
+        });
+
+        // Geolocate button
+        geolocateBtn.addEventListener('click', function() {
+            const originalIcon = this.innerHTML;
+            this.innerHTML = '<i data-lucide="loader-2" class="lucide-spin" style="width:16px;height:16px;"></i> Mencari...';
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+
+            if ("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        setMarker(position.coords.latitude, position.coords.longitude);
+                        geolocateBtn.innerHTML = originalIcon;
+                        if (typeof lucide !== 'undefined') lucide.createIcons();
+                    },
+                    function(error) {
+                        alert("Gagal mendapatkan lokasi. Pastikan izin lokasi diaktifkan pada browser Anda.");
+                        geolocateBtn.innerHTML = originalIcon;
+                        if (typeof lucide !== 'undefined') lucide.createIcons();
+                    },
+                    { enableHighAccuracy: true, timeout: 10000 }
+                );
+            } else {
+                alert("Browser Anda tidak mendukung fitur lokasi.");
+                geolocateBtn.innerHTML = originalIcon;
+                if (typeof lucide !== 'undefined') lucide.createIcons();
+            }
+        });
+        
+        // Ensure map resizes correctly when the view changes
+        setTimeout(() => { map.invalidateSize(); }, 500);
+    });
     </script>
 
     <!-- Script file -->

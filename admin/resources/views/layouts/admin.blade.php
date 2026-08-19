@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'RME Dashboard') - Admin Panel</title>
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
     
     <!-- Google Fonts & FontAwesome Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -105,7 +106,7 @@
             background: transparent;
             box-shadow: none;
         }
-
+        
         .brand-logo span:nth-child(1) { color: var(--accent-primary); letter-spacing: -3px; } /* R */
         .brand-logo span:nth-child(2) { color: var(--accent-primary); } /* M */
         .brand-logo span:nth-child(3) { color: var(--accent-secondary); } /* E */
@@ -585,7 +586,7 @@
                 <span>R</span><span>M</span><span>E</span>
             </div>
             <div class="brand-name">
-                RME<br><span class="brand-subtitle">ENTERTAINMENT</span>
+                RME
             </div>
         </div>
 
