@@ -574,10 +574,79 @@
         ::-webkit-scrollbar-thumb:hover {
             background: rgba(59, 130, 246, 0.3);
         }
+        @media (max-width: 768px) {
+            aside {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            aside.open {
+                transform: translateX(0) !important;
+                box-shadow: 10px 0 30px rgba(0,0,0,0.1);
+            }
+            main {
+                margin-left: 0 !important;
+                padding: 5rem 1rem 2rem 1rem !important;
+            }
+            .mobile-header {
+                display: flex !important;
+            }
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            .page-title h1 {
+                font-size: 1.5rem;
+            }
+            .glass-card {
+                padding: 1.2rem;
+            }
+        }
+        
+        .mobile-header {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 99;
+            align-items: center;
+            padding: 0 1rem;
+            justify-content: space-between;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .mobile-header-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
     </style>
     @yield('styles')
 </head>
 <body>
+
+    <div class="mobile-header">
+        <div class="brand-logo" style="height:30px; font-size:1.2rem;">
+            <span>R</span><span>M</span><span>E</span>
+        </div>
+        <button class="mobile-header-btn" id="mobileMenuToggle">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </div>
 
     <!-- Sidebar Navigation -->
     <aside>
@@ -688,6 +757,29 @@
     @yield('scripts')
 
     <script>
+    // ===== Mobile Sidebar Toggle =====
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const sidebar = document.querySelector('aside');
+    
+    if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        });
+    }
+
+    // Auto-wrap tables for mobile responsiveness
+    document.addEventListener("DOMContentLoaded", function() {
+        const tables = document.querySelectorAll("table");
+        tables.forEach(table => {
+            if (!table.parentElement.classList.contains("table-responsive")) {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'table-responsive';
+                table.parentNode.insertBefore(wrapper, table);
+                wrapper.appendChild(table);
+            }
+        });
+    });
+
     // ===== Ripple effect on nav links =====
     document.querySelectorAll('.nav-item a').forEach(link => {
         link.addEventListener('mousemove', (e) => {
