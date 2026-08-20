@@ -12,7 +12,7 @@
     <!-- Open Graph / WhatsApp Preview -->
     <meta property="og:title" content="Rima Entertainment | Premium Event Equipment Rental">
     <meta property="og:description" content="Penyewaan sound system profesional, lighting panggung megah, dan rigging panggung modular berkelas premium untuk segala jenis event Anda.">
-    <meta property="og:image" content="{{ asset('favicon.png?v=4') }}">
+    <meta property="og:image" content="{{ asset('whatsapp-preview.png') }}">
     <meta property="og:type" content="website">
 
     <link rel="icon" type="image/png" href="{{ asset('favicon.png?v=4') }}">
