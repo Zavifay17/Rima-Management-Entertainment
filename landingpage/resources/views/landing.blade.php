@@ -8,7 +8,7 @@
     <meta name="author" content="Rima Entertainment">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Rima Entertainment | Premium Event Equipment Rental</title>
-    <link rel="icon" type="image/png" href="{{ asset('favicon.png?v=2') }}">
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png?v=3') }}">
     
     <!-- Google Fonts: Outfit (Heading) & Inter (Body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
