@@ -213,9 +213,16 @@ body.dark-mode .tilt-card:hover {
 
 /* --- Base & Reset Rules --- */
 *, *::before, *::after {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    cursor: none; /* Use custom cursor on desktop */
+}
+
+/* Fallback for mobile (cursor auto) */
+@media (max-width: 991px) {
+    * { cursor: auto; }
+    .btn, a, button { cursor: pointer !important; }
 }
 
 html {
@@ -360,15 +367,22 @@ p {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 12px 28px;
+    padding: 12px 30px;
     font-size: 0.95rem;
     font-weight: 600;
-    border-radius: var(--border-radius-md);
-    cursor: pointer;
+    border-radius: var(--border-radius-full);
+    cursor: none; /* Hide default cursor on buttons to use custom cursor */
     transition: var(--transition-smooth);
     text-decoration: none;
     font-family: var(--font-heading);
     border: none;
+}
+
+/* --- Magnetic Button Base --- */
+.magnetic-btn {
+    display: inline-block;
+    transition: transform 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
 }
 
 .btn-lg {
@@ -2471,7 +2485,49 @@ body.dark-mode .stat-num {
     -webkit-text-fill-color: transparent !important;
 }
 
-/* --- Dark Mode Custom Scrollbar --- */
+/* --- Custom Cursor --- */
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background-color: var(--color-accent);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    mix-blend-mode: exclusion;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease;
+}
+.custom-cursor-follower {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--color-primary);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, top 0.1s ease-out, left 0.1s ease-out;
+}
+.custom-cursor.hover {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(56, 189, 248, 0.2);
+    backdrop-filter: blur(2px);
+    mix-blend-mode: normal;
+}
+.custom-cursor-follower.hover {
+    opacity: 0;
+}
+@media (max-width: 991px) {
+    .custom-cursor, .custom-cursor-follower { display: none !important; }
+}
+
+/* --- Dark Mode Custom Scrollbar overrides --- */
 body.dark-mode::-webkit-scrollbar-track {
     background: var(--bg-dark-base) !important;
 }

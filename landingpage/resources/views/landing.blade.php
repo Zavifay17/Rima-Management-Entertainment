@@ -99,6 +99,10 @@
 </head>
 <body data-spy="scroll" data-target=".nav-menu" data-offset="100">
 
+    <!-- Ultra Premium Custom Cursor -->
+    <div class="custom-cursor"></div>
+    <div class="custom-cursor-follower"></div>
+
     <!-- ==========================================
          PREMIUM PRELOADER
     ========================================== -->
@@ -215,8 +219,8 @@
                     <h1 class="hero-title" data-aos="fade-up" data-aos-delay="400">Mewujudkan Event Spektakuler Anda Menjadi <span class="gradient-text"><span class="typewriter-text"></span><span class="cursor">|</span></span></h1>
                     <p class="hero-desc" data-aos="fade-up" data-aos-delay="500">Penyewaan sound system profesional, lighting panggung megah, dan rigging panggung modular berkelas premium untuk segala jenis event Anda.</p>
                     <div class="hero-actions" data-aos="fade-up" data-aos-delay="600">
-                        <a href="#catalog" class="btn btn-primary btn-lg">Jelajahi Paket</a>
-                        <a href="#rent-form-section" class="btn btn-outline btn-lg">Sewa Alat Sekarang</a>
+                        <a href="#catalog" class="btn btn-primary btn-lg magnetic-btn">Jelajahi Paket</a>
+                        <a href="#rent-form-section" class="btn btn-outline btn-lg magnetic-btn">Sewa Alat Sekarang</a>
                     </div>
                     
                     <div class="hero-stats" data-aos="fade-up" data-aos-delay="700">
