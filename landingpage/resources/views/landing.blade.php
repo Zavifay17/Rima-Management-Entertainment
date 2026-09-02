@@ -1928,25 +1928,45 @@
         });
 
         // =====================================================
-        // 7. Hero Mouse Parallax (Phase 6)
+        // 7. Hero Mouse Parallax & Magnetic Orbs (Phase 7)
         // =====================================================
         if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
             const parallaxOrbs = document.querySelectorAll('.orb');
             const heroVisual = document.querySelector('.hero-visual');
             
+            let targetX = window.innerWidth / 2;
+            let targetY = window.innerHeight / 2;
+            let currentX = window.innerWidth / 2;
+            let currentY = window.innerHeight / 2;
+            
             window.addEventListener('mousemove', e => {
-                const x = (e.clientX - window.innerWidth / 2) / 50;
-                const y = (e.clientY - window.innerHeight / 2) / 50;
+                targetX = e.clientX;
+                targetY = e.clientY;
                 
-                parallaxOrbs.forEach((orb, index) => {
-                    const speed = (index === 0) ? 2 : -3;
-                    orb.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
-                });
-                
+                // Instant micro-parallax for the hero visual image
+                const px = (targetX - window.innerWidth / 2) / 50;
+                const py = (targetY - window.innerHeight / 2) / 50;
                 if(heroVisual) {
-                    heroVisual.style.transform = `translate(${x * -0.5}px, ${y * -0.5}px)`;
+                    heroVisual.style.transform = `translate(${px * -0.5}px, ${py * -0.5}px)`;
                 }
             });
+            
+            // Buttery smooth lerp for magnetic orbs
+            function animateMagneticOrbs() {
+                currentX += (targetX - currentX) * 0.04;
+                currentY += (targetY - currentY) * 0.04;
+                
+                const offsetX = (currentX - window.innerWidth / 2);
+                const offsetY = (currentY - window.innerHeight / 2);
+                
+                parallaxOrbs.forEach((orb, index) => {
+                    const pullStrength = (index === 0) ? 0.15 : -0.12; 
+                    orb.style.transform = `translate(${offsetX * pullStrength}px, ${offsetY * pullStrength}px)`;
+                });
+                
+                requestAnimationFrame(animateMagneticOrbs);
+            }
+            animateMagneticOrbs();
         }
 
     })();

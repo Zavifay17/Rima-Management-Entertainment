@@ -548,23 +548,27 @@ section {
     padding: 8px 4px;
     white-space: nowrap;
 }
-.nav-link:hover, .nav-link.active {
-    color: var(--text-primary);
-}
 .nav-link::after {
     content: '';
     position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 3px;
-    border-radius: 3px 3px 0 0;
-    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-    transition: var(--transition-smooth);
+    bottom: -2px;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-primary), var(--color-accent), transparent);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+    box-shadow: 0 0 10px rgba(var(--color-primary-rgb), 0);
+}
+.nav-link:hover, .nav-link.active {
+    color: var(--text-primary);
+    text-shadow: 0 0 15px rgba(var(--color-primary-rgb), 0.4);
 }
 .nav-link:hover::after, .nav-link.active::after {
-    width: 80%;
+    transform: scaleX(1);
+    box-shadow: 0 0 12px rgba(var(--color-primary-rgb), 0.6);
 }
 
 /* --- Dropdown Menu (Mega Menu Style) --- */
@@ -2762,21 +2766,35 @@ body.dark-mode .click-shockwave {
     100% { transform: translate(-50%, -50%) scale(12); opacity: 0; border-width: 0px; }
 }
 
-/* --- Film Noise Texture (Subtle) --- */
+/* --- Film Noise Texture (Cinematic Animated - Phase 7) --- */
 .noise-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    top: -50%;
+    left: -50%;
+    width: 200vw;
+    height: 200vh;
     pointer-events: none;
     z-index: 99998;
     opacity: 0.04;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     mix-blend-mode: overlay;
+    animation: cinematicJitter 0.2s steps(2) infinite;
 }
 body.dark-mode .noise-overlay {
-    opacity: 0.03;
+    opacity: 0.035;
+}
+@keyframes cinematicJitter {
+    0% { transform: translate(0, 0); }
+    10% { transform: translate(-2%, -2%); }
+    20% { transform: translate(-4%, 2%); }
+    30% { transform: translate(2%, -4%); }
+    40% { transform: translate(-2%, 6%); }
+    50% { transform: translate(-4%, 2%); }
+    60% { transform: translate(6%, 0); }
+    70% { transform: translate(0, 4%); }
+    80% { transform: translate(-6%, 0); }
+    90% { transform: translate(4%, 2%); }
+    100% { transform: translate(2%, 0); }
 }
 
 /* --- Dimming Hover Effect on Gallery --- */
