@@ -2007,6 +2007,12 @@ input:focus, textarea:focus {
         visibility: visible;
         margin-top: 10px;
     }
+    
+    body.dark-mode .dropdown-menu {
+        background: transparent !important;
+        box-shadow: none !important;
+        border: none !important;
+    }
     .nav-dropdown.active .dropdown-menu {
         display: block;
     }
@@ -2228,10 +2234,20 @@ body.dark-mode .pop-card,
 body.dark-mode .step-card,
 body.dark-mode .testimonial-card,
 body.dark-mode .card,
-body.dark-mode .form-container {
+body.dark-mode .form-container,
+body.dark-mode .dropdown-menu {
     background-color: var(--bg-dark-card) !important;
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+}
+
+body.dark-mode .dropdown-item {
+    color: var(--text-secondary) !important;
+}
+
+body.dark-mode .dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary) !important;
 }
 
 body.dark-mode .category-card:hover,
