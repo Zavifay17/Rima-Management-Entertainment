@@ -341,6 +341,7 @@ section {
     transition: var(--transition-smooth);
     position: relative;
     padding: 4px 0;
+    white-space: nowrap;
 }
 .nav-link:hover, .nav-link.active {
     color: var(--text-primary);
@@ -1950,13 +1951,33 @@ body.dark-mode .glassmorphism {
     border-color: rgba(255, 255, 255, 0.08) !important;
 }
 
-body.dark-mode .header {
-    background: var(--bg-dark-nav) !important;
+/* --- Layout & Sections Dark Mode Fixes --- */
+body.dark-mode,
+body.dark-mode main,
+body.dark-mode section,
+body.dark-mode .hero-section,
+body.dark-mode .how-it-works-section,
+body.dark-mode .categories-section,
+body.dark-mode .catalog-section,
+body.dark-mode .rent-section {
+    background-color: var(--bg-dark-base) !important;
+}
+
+body.dark-mode .main-header {
+    background-color: var(--bg-dark-nav) !important;
     border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-body.dark-mode .nav-menu {
-    background: var(--bg-dark-base);
+body.dark-mode .hero-title,
+body.dark-mode .hero-desc,
+body.dark-mode .section-title,
+body.dark-mode .section-desc {
+    color: var(--text-primary) !important;
+}
+
+body.dark-mode .hero-desc,
+body.dark-mode .section-desc {
+    color: var(--text-secondary) !important;
 }
 
 body.dark-mode .category-card,
