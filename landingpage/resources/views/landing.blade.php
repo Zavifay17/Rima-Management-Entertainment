@@ -98,8 +98,8 @@
     <header class="main-header" id="header">
         <div class="container header-container">
             <a href="#" class="logo" style="text-decoration:none; display:flex; flex-direction:column; align-items:flex-start;">
-                <span class="logo-text" style="font-size: 2rem; font-style:italic; letter-spacing:-2px; font-weight:900; line-height:1;"><span style="color:#000080;">R</span><span style="color:#000080;">M</span><span style="color:#ff0000;">E</span></span>
-                <span class="logo-subtext" style="font-size: 0.7rem; color:#000000; font-weight:800; letter-spacing:3px;">ENTERTAINMENT</span>
+                <span class="logo-text" style="font-size: 2rem; font-style:italic; letter-spacing:-2px; font-weight:900; line-height:1;"><span class="logo-r">R</span><span class="logo-m">M</span><span class="logo-e">E</span></span>
+                <span class="logo-subtext" style="font-size: 0.7rem; font-weight:800; letter-spacing:3px;">ENTERTAINMENT</span>
             </a>
             
             <nav class="nav-menu" id="navMenu">
@@ -130,23 +130,23 @@
             <div class="container hero-container">
                 <div class="hero-content" data-aos="fade-right" data-aos-duration="1000">
                     <div class="hero-quick-links" style="display: flex; gap: 1.5rem; margin-bottom: 1.5rem; flex-wrap: wrap;" data-aos="fade-down" data-aos-delay="200">
-                        <a href="#catalog" onclick="setTimeout(() => document.querySelector('.tab-btn[data-tab=\'stage\']').click(), 100)" style="display: flex; flex-direction: column; align-items: center; text-decoration: none; color: #0f172a;">
+                        <a href="#catalog" class="quick-link-item" onclick="setTimeout(() => document.querySelector('.tab-btn[data-tab=\'stage\']').click(), 100)" style="display: flex; flex-direction: column; align-items: center; text-decoration: none;">
                             <div style="background: rgba(56, 189, 248, 0.1); padding: 12px; border-radius: 50%; border: 1px solid rgba(56, 189, 248, 0.2); backdrop-filter: blur(5px); display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; transition: all 0.3s ease;">
                                 <i data-lucide="layers" style="width: 24px; height: 24px; color: #38bdf8;"></i>
                             </div>
-                            <span style="font-size: 0.8rem; margin-top: 8px; font-weight: 500;">Panggung</span>
+                            <span class="quick-link-text" style="font-size: 0.8rem; margin-top: 8px; font-weight: 500;">Panggung</span>
                         </a>
-                        <a href="#catalog" onclick="setTimeout(() => document.querySelector('.tab-btn[data-tab=\'sound\']').click(), 100)" style="display: flex; flex-direction: column; align-items: center; text-decoration: none; color: #0f172a;">
+                        <a href="#catalog" class="quick-link-item" onclick="setTimeout(() => document.querySelector('.tab-btn[data-tab=\'sound\']').click(), 100)" style="display: flex; flex-direction: column; align-items: center; text-decoration: none;">
                             <div style="background: rgba(167, 139, 250, 0.1); padding: 12px; border-radius: 50%; border: 1px solid rgba(167, 139, 250, 0.2); backdrop-filter: blur(5px); display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; transition: all 0.3s ease;">
                                 <i data-lucide="volume-2" style="width: 24px; height: 24px; color: #a78bfa;"></i>
                             </div>
-                            <span style="font-size: 0.8rem; margin-top: 8px; font-weight: 500;">Sound System</span>
+                            <span class="quick-link-text" style="font-size: 0.8rem; margin-top: 8px; font-weight: 500;">Sound System</span>
                         </a>
-                        <a href="#catalog" onclick="setTimeout(() => document.querySelector('.tab-btn[data-tab=\'lighting\']').click(), 100)" style="display: flex; flex-direction: column; align-items: center; text-decoration: none; color: #0f172a;">
+                        <a href="#catalog" class="quick-link-item" onclick="setTimeout(() => document.querySelector('.tab-btn[data-tab=\'lighting\']').click(), 100)" style="display: flex; flex-direction: column; align-items: center; text-decoration: none;">
                             <div style="background: rgba(244, 114, 182, 0.1); padding: 12px; border-radius: 50%; border: 1px solid rgba(244, 114, 182, 0.2); backdrop-filter: blur(5px); display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; transition: all 0.3s ease;">
                                 <i data-lucide="lightbulb" style="width: 24px; height: 24px; color: #f472b6;"></i>
                             </div>
-                            <span style="font-size: 0.8rem; margin-top: 8px; font-weight: 500;">Lighting</span>
+                            <span class="quick-link-text" style="font-size: 0.8rem; margin-top: 8px; font-weight: 500;">Lighting</span>
                         </a>
                     </div>
                     <span class="badge" data-aos="fade-up" data-aos-delay="300">PRO EVENT EQUIPMENT RENTAL</span>
@@ -1071,8 +1071,8 @@
         <div class="container footer-grid">
             <div class="footer-brand">
                 <a href="#" class="logo" style="text-decoration:none; display:flex; flex-direction:column; align-items:flex-start; margin-bottom:1rem;">
-                    <span class="logo-text" style="font-size: 2.5rem; font-style:italic; letter-spacing:-2px; font-weight:900; line-height:1;"><span style="color:#000080;">R</span><span style="color:#000080;">M</span><span style="color:#ff0000;">E</span></span>
-                    <span class="logo-subtext" style="font-size: 0.8rem; color:#000000; font-weight:800; letter-spacing:4px;">ENTERTAINMENT</span>
+                    <span class="logo-text" style="font-size: 2.5rem; font-style:italic; letter-spacing:-2px; font-weight:900; line-height:1;"><span class="logo-r">R</span><span class="logo-m">M</span><span class="logo-e">E</span></span>
+                    <span class="logo-subtext" style="font-size: 0.8rem; font-weight:800; letter-spacing:4px;">ENTERTAINMENT</span>
                 </a>
                 <p class="footer-desc">Partner terpercaya penyedia kelengkapan panggung, tata suara, tata cahaya, dan visual berstandar tinggi di Indonesia.</p>
                 <div class="social-links">

@@ -1960,7 +1960,8 @@ body.dark-mode .nav-menu {
 }
 
 body.dark-mode .category-card,
-body.dark-mode .catalog-card,
+body.dark-mode .catalog-item,
+body.dark-mode .pop-card,
 body.dark-mode .step-card,
 body.dark-mode .testimonial-card,
 body.dark-mode .card,
@@ -1970,7 +1971,8 @@ body.dark-mode .form-container {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
 }
 
-body.dark-mode .catalog-card:hover {
+body.dark-mode .catalog-item:hover,
+body.dark-mode .pop-card:hover {
     box-shadow: 0 15px 40px rgba(99, 102, 241, 0.15) !important;
 }
 
@@ -2018,5 +2020,68 @@ body.dark-mode .hero-visual::before {
 
 body.dark-mode .mobile-toggle {
     color: var(--text-primary);
+}
+
+/* --- Dynamic Text Colors (Light/Dark Mode) --- */
+.logo-r, .logo-m { color: #000080; transition: color 0.3s ease; }
+.logo-e { color: #ff0000; transition: color 0.3s ease; }
+.logo-subtext { color: #000000; transition: color 0.3s ease; }
+.quick-link-item { color: #0f172a; transition: color 0.3s ease; }
+
+body.dark-mode .logo-r, 
+body.dark-mode .logo-m { color: #60a5fa; } /* Bright Blue */
+body.dark-mode .logo-e { color: #fb7185; } /* Soft Red */
+body.dark-mode .logo-subtext { color: #f8fafc; } /* Light Slate */
+body.dark-mode .quick-link-item { color: #cbd5e1; } /* Slate 300 */
+
+/* --- Footer Dark Mode Fixes --- */
+body.dark-mode .main-footer {
+    background-color: #020617 !important; /* Slate 950 (Very Dark) */
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+body.dark-mode .main-footer h4,
+body.dark-mode .main-footer p,
+body.dark-mode .main-footer a,
+body.dark-mode .main-footer span,
+body.dark-mode .main-footer li {
+    color: #cbd5e1 !important; /* Slate 300 */
+}
+
+body.dark-mode .main-footer a:hover {
+    color: #38bdf8 !important;
+}
+
+body.dark-mode .contact-icon {
+    color: #38bdf8 !important;
+}
+
+/* --- Card Text Color Fixes --- */
+body.dark-mode .pop-title,
+body.dark-mode .pop-desc,
+body.dark-mode .pop-features li,
+body.dark-mode .pop-price,
+body.dark-mode .item-desc,
+body.dark-mode .item-features li,
+body.dark-mode .catalog-header h3,
+body.dark-mode .visual-body p,
+body.dark-mode .visual-body h3,
+body.dark-mode .spec-item,
+body.dark-mode .category-card h3,
+body.dark-mode .category-card p,
+body.dark-mode .step-card h3,
+body.dark-mode .step-card p {
+    color: var(--text-primary) !important;
+}
+
+body.dark-mode .pop-desc,
+body.dark-mode .item-desc,
+body.dark-mode .pop-features li,
+body.dark-mode .item-features li,
+body.dark-mode .visual-body p,
+body.dark-mode .spec-item,
+body.dark-mode .category-card p,
+body.dark-mode .step-card p {
+    color: var(--text-secondary) !important;
 }
 
