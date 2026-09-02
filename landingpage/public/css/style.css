@@ -1954,36 +1954,7 @@ input:focus, textarea:focus {
 
 /* --- Mobile Responsive Fixes --- */
 @media (max-width: 768px) {
-    .nav-menu {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(15, 23, 42, 0.95);
-        backdrop-filter: blur(25px);
-        -webkit-backdrop-filter: blur(25px);
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 40px;
-        z-index: 998;
-        opacity: 0;
-        visibility: hidden;
-        transform: scale(1.05);
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .nav-menu.open {
-        opacity: 1;
-        visibility: visible;
-        transform: scale(1);
-    }
-    .nav-menu .nav-link {
-        font-size: 1.8rem;
-        font-weight: 700;
-        color: #f8fafc !important;
-        letter-spacing: 0.05em;
-    }
+/* Removed conflicting .nav-menu overlay styles. Original side drawer from line 1678 will be used. */
     .nav-dropdown {
         width: 100%;
         display: block;
@@ -2209,11 +2180,17 @@ body.dark-mode::after {
     background: var(--color-accent);
 }
 
-body.dark-mode .main-header {
+body.dark-mode .main-header,
+body.dark-mode .nav-menu {
     background: var(--bg-dark-nav) !important;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+}
+body.dark-mode .main-header {
     border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+body.dark-mode .nav-menu {
+    border-left: 1px solid rgba(255,255,255,0.05) !important;
 }
 
 body.dark-mode .hero-title,

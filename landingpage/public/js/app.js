@@ -108,8 +108,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // Close menu when nav link is clicked (Mobile), except dropdown toggles
     navLinks.forEach(link => {
         link.addEventListener("click", (e) => {
-            if (link.classList.contains('dropdown-toggle') && window.innerWidth <= 768) {
+            if (link.classList.contains('dropdown-toggle') && window.innerWidth <= 992) {
                 // Let the specific dropdown script handle it
+                e.preventDefault();
                 return;
             }
             if (navMenu.classList.contains("open")) {
@@ -136,8 +137,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
     dropdownToggles.forEach(toggle => {
         toggle.addEventListener('click', function(e) {
-            if (window.innerWidth <= 768) {
+            if (window.innerWidth <= 992) {
                 e.preventDefault();
+                e.stopPropagation(); // Prevent bubbling up which might close menu
                 const parent = this.parentElement;
                 
                 // Close other open dropdowns
