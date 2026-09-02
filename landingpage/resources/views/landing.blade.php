@@ -1077,9 +1077,9 @@
                 <p class="footer-desc">Partner terpercaya penyedia kelengkapan panggung, tata suara, tata cahaya, dan visual berstandar tinggi di Indonesia.</p>
                 <div class="social-links sponsor-logos">
                     <a href="#" aria-label="Sponsor 1"><img src="{{ asset('images/sponsors/sponsor1.png') }}" alt="Sponsor 1" title="Dinas Kebudayaan"></a>
-                    <a href="#" aria-label="Sponsor 2"><img src="{{ asset('images/sponsors/sponsor2.png') }}" alt="Sponsor 2" title="Festival Budaya"></a>
+                    <a href="#" aria-label="Sponsor 2"><img src="{{ asset('images/sponsors/sponsor2.png') }}" alt="Sponsor 2" title="Enjoy Jakarta" class="logo-enjoy"></a>
                     <a href="#" aria-label="Sponsor 3"><img src="{{ asset('images/sponsors/sponsor3.png') }}" alt="Sponsor 3" title="IPSI"></a>
-                    <a href="#" aria-label="Sponsor 4"><img src="{{ asset('images/sponsors/sponsor4.png') }}" alt="Sponsor 4" title="Enjoy Jakarta"></a>
+                    <a href="#" aria-label="Sponsor 4"><img src="{{ asset('images/sponsors/sponsor4.png') }}" alt="Sponsor 4" title="Festival Budaya" class="logo-festival"></a>
                 </div>
             </div>
             

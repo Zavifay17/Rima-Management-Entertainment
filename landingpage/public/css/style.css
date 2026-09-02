@@ -1323,6 +1323,12 @@ input:focus, textarea:focus {
     object-fit: contain;
     border-radius: 0;
 }
+.sponsor-logos a img.logo-enjoy {
+    transform: scale(1.4);
+}
+.sponsor-logos a img.logo-festival {
+    transform: translateY(2px) scale(1.2);
+}
 .sponsor-logos a:hover {
     transform: translateY(-5px) scale(1.05);
     box-shadow: 0 8px 20px rgba(56, 189, 248, 0.4);
