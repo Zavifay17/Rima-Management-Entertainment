@@ -105,9 +105,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Close menu when nav link is clicked (Mobile)
+    // Close menu when nav link is clicked (Mobile), except dropdown toggles
     navLinks.forEach(link => {
-        link.addEventListener("click", () => {
+        link.addEventListener("click", (e) => {
+            if (link.classList.contains('dropdown-toggle') && window.innerWidth <= 768) {
+                // Let the specific dropdown script handle it
+                return;
+            }
             if (navMenu.classList.contains("open")) {
                 navMenu.classList.remove("open");
                 menuIcon.setAttribute("data-lucide", "menu");
@@ -127,6 +131,43 @@ document.addEventListener("DOMContentLoaded", () => {
     tomorrow.setDate(tomorrow.getDate() + 1);
     const minDateStr = tomorrow.toISOString().split("T")[0];
     eventDateInput.setAttribute("min", minDateStr);
+
+    // Mobile Dropdown Accordion Toggle
+    const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+    dropdownToggles.forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                const parent = this.parentElement;
+                
+                // Close other open dropdowns
+                document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+                    if (dropdown !== parent) {
+                        dropdown.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current dropdown
+                parent.classList.toggle('active');
+            }
+        });
+    });
+
+    // Close menu when a dropdown item is clicked (Mobile)
+    const dropdownItems = document.querySelectorAll('.dropdown-item');
+    dropdownItems.forEach(item => {
+        item.addEventListener('click', () => {
+            if (navMenu.classList.contains("open") && window.innerWidth <= 768) {
+                navMenu.classList.remove("open");
+                menuIcon.setAttribute("data-lucide", "menu");
+                if (typeof lucide !== "undefined") {
+                    lucide.createIcons({
+                        attrs: { id: "menuIcon" }
+                    });
+                }
+            }
+        });
+    });
 
     // 5. Catalog Category Tab Filter
     tabBtns.forEach(btn => {

@@ -103,13 +103,38 @@
             </a>
             
             <nav class="nav-menu" id="navMenu">
-                <a href="#hero" class="nav-link active">Home</a>
-                <a href="#categories" class="nav-link">Layanan</a>
-                <a href="#catalog" class="nav-link">Katalog Paket</a>
-                <a href="#how-it-works" class="nav-link">Cara Sewa</a>
-                <a href="#gallery" class="nav-link">Dokumentasi RME</a>
-                <a href="#testimonials" class="nav-link">Ulasan</a>
-                <a href="#rent-form-section" class="nav-link">Formulir Penyewaan</a>
+                <div class="nav-dropdown">
+                    <a href="#" class="nav-link dropdown-toggle">Navigasi <i data-lucide="chevron-down" class="dropdown-icon"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="#hero" class="dropdown-item">Beranda</a>
+                        <a href="#categories" class="dropdown-item">Layanan Kami</a>
+                        <a href="#catalog" class="dropdown-item">Katalog Paket</a>
+                        <a href="#how-it-works" class="dropdown-item">Cara Sewa</a>
+                        <a href="#gallery" class="dropdown-item">Dokumentasi RME</a>
+                        <a href="#testimonials" class="dropdown-item">Ulasan Klien</a>
+                    </div>
+                </div>
+
+                <div class="nav-dropdown">
+                    <a href="#" class="nav-link dropdown-toggle">Kategori Alat <i data-lucide="chevron-down" class="dropdown-icon"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="#categories" class="dropdown-item" onclick="const btn = document.querySelector('.tab-btn[data-tab=\'sound\']'); if(btn) btn.click();">Sound System</a>
+                        <a href="#categories" class="dropdown-item" onclick="const btn = document.querySelector('.tab-btn[data-tab=\'lighting\']'); if(btn) btn.click();">Stage Lighting</a>
+                        <a href="#categories" class="dropdown-item" onclick="const btn = document.querySelector('.tab-btn[data-tab=\'stage\']'); if(btn) btn.click();">Panggung Modular</a>
+                    </div>
+                </div>
+
+                <div class="nav-dropdown">
+                    <a href="#" class="nav-link dropdown-toggle">Hubungi Kami <i data-lucide="chevron-down" class="dropdown-icon"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item"><i data-lucide="map-pin" class="dropdown-icon-left"></i> Jl. Kramat Sentiong V No.132 E</a>
+                        <a href="https://wa.me/6287885675868" target="_blank" class="dropdown-item"><i data-lucide="phone" class="dropdown-icon-left"></i> WA: +62 878-8567-5868</a>
+                        <a href="mailto:rimamanagemententertainment@gmail.com" class="dropdown-item"><i data-lucide="mail" class="dropdown-icon-left"></i> Gmail</a>
+                        <a href="#" class="dropdown-item"><i data-lucide="clock" class="dropdown-icon-left"></i> Jam: 07:00 - 22:00</a>
+                    </div>
+                </div>
+
+                <a href="#booking" class="nav-link highlight">Formulir Penyewaan</a>
             </nav>
             
             <div class="header-actions" style="display: flex; align-items: center; gap: 1rem;">
