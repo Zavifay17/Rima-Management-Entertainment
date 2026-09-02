@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <!-- Anti-FOUC: Apply theme IMMEDIATELY to prevent flash -->
+    <!-- Anti-FOUC: Apply theme IMMEDIATELY to prevent flash of wrong theme -->
     <script>
         (function(){
             const t = localStorage.getItem('rme_theme');
-            if (t === 'dark') document.documentElement.classList.add('dark-mode');
+            // Apply to BOTH html and body so CSS variables from both selectors work
+            if (t === 'dark') {
+                document.documentElement.classList.add('dark-mode');
+                document.addEventListener('DOMContentLoaded', function() {
+                    document.body.classList.add('dark-mode');
+                });
+            }
         })();
     </script>
     <meta charset="UTF-8">
@@ -1512,6 +1518,13 @@
                 themeToggleBtn.addEventListener('click', () => {
                     document.body.classList.toggle('dark-mode');
                     const isDark = document.body.classList.contains('dark-mode');
+                    
+                    // Sync html element class to match body (keeps CSS vars in sync)
+                    if (isDark) {
+                        document.documentElement.classList.add('dark-mode');
+                    } else {
+                        document.documentElement.classList.remove('dark-mode');
+                    }
                     
                     // Save to local storage
                     localStorage.setItem('rme_theme', isDark ? 'dark' : 'light');
