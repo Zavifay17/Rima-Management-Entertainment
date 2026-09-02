@@ -34,6 +34,20 @@
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* --- Dark Mode Variables --- */
+body.dark-mode {
+    --bg-dark-base: #0f172a; /* Slate 900 */
+    --bg-dark-card: #1e293b; /* Slate 800 */
+    --bg-dark-nav: rgba(15, 23, 42, 0.85);
+    
+    --text-primary: #f8fafc; /* Slate 50 */
+    --text-secondary: #cbd5e1; /* Slate 300 */
+    --text-muted: #94a3b8; /* Slate 400 */
+    
+    --color-primary: #3b82f6; /* Blue 500 */
+    --color-primary-rgb: 59, 130, 246;
+}
+
 /* --- Base & Reset Rules --- */
 *, *::before, *::after {
     box-sizing: border-box;
@@ -1926,3 +1940,83 @@ input:focus + .input-icon {
     color: var(--color-primary);
     font-weight: 600;
 }
+
+/* ========================================================= */
+/* --- DARK MODE OVERRIDES --- */
+/* ========================================================= */
+
+body.dark-mode .glassmorphism {
+    background: rgba(30, 41, 59, 0.75) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+body.dark-mode .header {
+    background: var(--bg-dark-nav) !important;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+body.dark-mode .nav-menu {
+    background: var(--bg-dark-base);
+}
+
+body.dark-mode .category-card,
+body.dark-mode .catalog-card,
+body.dark-mode .step-card,
+body.dark-mode .testimonial-card,
+body.dark-mode .card,
+body.dark-mode .form-container {
+    background-color: var(--bg-dark-card) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+}
+
+body.dark-mode .catalog-card:hover {
+    box-shadow: 0 15px 40px rgba(99, 102, 241, 0.15) !important;
+}
+
+body.dark-mode .badge {
+    background: rgba(99, 102, 241, 0.15) !important;
+}
+
+body.dark-mode .form-control,
+body.dark-mode .floating-group .form-control {
+    background: rgba(15, 23, 42, 0.8) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    color: var(--text-primary) !important;
+}
+
+body.dark-mode .floating-group .form-control:focus {
+    background: rgba(15, 23, 42, 1) !important;
+}
+
+body.dark-mode .stat-num {
+    background: linear-gradient(135deg, #ffffff, #94a3b8) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+body.dark-mode .btn-secondary,
+body.dark-mode .btn-outline {
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: var(--text-primary) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+body.dark-mode .btn-secondary:hover,
+body.dark-mode .btn-outline:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+body.dark-mode .back-to-top {
+    background: var(--bg-dark-card) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+body.dark-mode .hero-visual::before {
+    background: radial-gradient(circle, rgba(99,102,241,0.2) 0%, rgba(99,102,241,0) 70%) !important;
+}
+
+body.dark-mode .mobile-toggle {
+    color: var(--text-primary);
+}
+

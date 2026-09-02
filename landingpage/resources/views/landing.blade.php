@@ -112,7 +112,10 @@
                 <a href="#rent-form-section" class="nav-link">Formulir Penyewaan</a>
             </nav>
             
-            <div class="header-actions">
+            <div class="header-actions" style="display: flex; align-items: center; gap: 1rem;">
+                <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle Dark Mode" style="background: none; border: none; cursor: pointer; color: var(--text-primary); display: flex; align-items: center; justify-content: center; padding: 8px; border-radius: 50%; transition: background 0.3s;">
+                    <i data-lucide="moon" id="themeIcon"></i>
+                </button>
                 <a href="#rent-form-section" class="btn btn-primary nav-btn-desktop">Sewa Sekarang</a>
                 <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu">
                     <i data-lucide="more-vertical" id="menuIcon"></i>
@@ -1436,6 +1439,39 @@
                 backToTopBtn.addEventListener('click', () => {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 });
+            }
+
+            // --- Theme Toggle Logic ---
+            const themeToggleBtn = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            
+            // Check for saved theme
+            const savedTheme = localStorage.getItem('rme_theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                updateThemeIcon(true);
+            }
+            
+            if(themeToggleBtn) {
+                themeToggleBtn.addEventListener('click', () => {
+                    document.body.classList.toggle('dark-mode');
+                    const isDark = document.body.classList.contains('dark-mode');
+                    
+                    // Save to local storage
+                    localStorage.setItem('rme_theme', isDark ? 'dark' : 'light');
+                    
+                    // Update icon
+                    updateThemeIcon(isDark);
+                });
+            }
+
+            function updateThemeIcon(isDark) {
+                if(isDark) {
+                    themeIcon.setAttribute('data-lucide', 'sun');
+                } else {
+                    themeIcon.setAttribute('data-lucide', 'moon');
+                }
+                lucide.createIcons();
             }
         });
     </script>
