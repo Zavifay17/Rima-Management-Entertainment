@@ -120,19 +120,19 @@
             <div class="container hero-container">
                 <div class="hero-content">
                     <div class="hero-quick-links" style="display: flex; gap: 1.5rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
-                        <a href="#catalog" onclick="setTimeout(() => document.querySelector('.tab-btn[data-tab=\'stage\']').click(), 100)" style="display: flex; flex-direction: column; align-items: center; text-decoration: none; color: white;">
+                        <a href="#catalog" onclick="setTimeout(() => document.querySelector('.tab-btn[data-tab=\'stage\']').click(), 100)" style="display: flex; flex-direction: column; align-items: center; text-decoration: none; color: #0f172a;">
                             <div style="background: rgba(56, 189, 248, 0.1); padding: 12px; border-radius: 50%; border: 1px solid rgba(56, 189, 248, 0.2); backdrop-filter: blur(5px); display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; transition: all 0.3s ease;">
                                 <i data-lucide="layers" style="width: 24px; height: 24px; color: #38bdf8;"></i>
                             </div>
                             <span style="font-size: 0.8rem; margin-top: 8px; font-weight: 500;">Panggung</span>
                         </a>
-                        <a href="#catalog" onclick="setTimeout(() => document.querySelector('.tab-btn[data-tab=\'sound\']').click(), 100)" style="display: flex; flex-direction: column; align-items: center; text-decoration: none; color: white;">
+                        <a href="#catalog" onclick="setTimeout(() => document.querySelector('.tab-btn[data-tab=\'sound\']').click(), 100)" style="display: flex; flex-direction: column; align-items: center; text-decoration: none; color: #0f172a;">
                             <div style="background: rgba(167, 139, 250, 0.1); padding: 12px; border-radius: 50%; border: 1px solid rgba(167, 139, 250, 0.2); backdrop-filter: blur(5px); display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; transition: all 0.3s ease;">
                                 <i data-lucide="volume-2" style="width: 24px; height: 24px; color: #a78bfa;"></i>
                             </div>
                             <span style="font-size: 0.8rem; margin-top: 8px; font-weight: 500;">Sound System</span>
                         </a>
-                        <a href="#catalog" onclick="setTimeout(() => document.querySelector('.tab-btn[data-tab=\'lighting\']').click(), 100)" style="display: flex; flex-direction: column; align-items: center; text-decoration: none; color: white;">
+                        <a href="#catalog" onclick="setTimeout(() => document.querySelector('.tab-btn[data-tab=\'lighting\']').click(), 100)" style="display: flex; flex-direction: column; align-items: center; text-decoration: none; color: #0f172a;">
                             <div style="background: rgba(244, 114, 182, 0.1); padding: 12px; border-radius: 50%; border: 1px solid rgba(244, 114, 182, 0.2); backdrop-filter: blur(5px); display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; transition: all 0.3s ease;">
                                 <i data-lucide="lightbulb" style="width: 24px; height: 24px; color: #f472b6;"></i>
                             </div>
@@ -163,28 +163,31 @@
                     </div>
                 </div>
                 
-                <div class="hero-visual" style="align-items: flex-start; max-height: 600px; overflow-y: auto; padding-right: 15px; scrollbar-width: none; -ms-overflow-style: none;">
+                <div class="hero-visual" style="display: flex; flex-direction: column; align-items: stretch; max-height: 600px; overflow-y: auto; padding: 15px 15px 15px 5px; scrollbar-width: none; -ms-overflow-style: none;">
                     <style>
                         .hero-visual::-webkit-scrollbar { display: none; }
-                        .pop-card { margin-bottom: 1.5rem; position: relative; border-radius: 20px; padding: 1.5rem; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); }
+                        .pop-card { margin-bottom: 1.5rem; position: relative; border-radius: 20px; padding: 1.5rem; background: #ffffff; border: 1px solid #e2e8f0; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s ease; }
+                        .pop-card:hover { transform: translateY(-5px); }
                         .pop-badge { position: absolute; top: -12px; right: 15px; background: #ef4444; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4); }
                         .pop-tag { display: inline-block; padding: 4px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 600; margin-bottom: 12px; }
-                        .pop-tag.sound { background: rgba(167, 139, 250, 0.15); color: #a78bfa; }
-                        .pop-tag.light { background: rgba(244, 114, 182, 0.15); color: #f472b6; }
-                        .pop-tag.stage { background: rgba(56, 189, 248, 0.15); color: #38bdf8; }
+                        .pop-tag.sound { background: rgba(167, 139, 250, 0.15); color: #8b5cf6; }
+                        .pop-tag.light { background: rgba(244, 114, 182, 0.15); color: #ec4899; }
+                        .pop-tag.stage { background: rgba(56, 189, 248, 0.15); color: #0ea5e9; }
                         .pop-features { list-style: none; padding: 0; margin: 15px 0; }
-                        .pop-features li { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; font-size: 0.85rem; color: #cbd5e1; }
-                        .pop-features li i { color: #ef4444; flex-shrink: 0; margin-top: 2px; }
-                        .pop-price { font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 15px; }
+                        .pop-features li { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; font-size: 0.85rem; color: #64748b; }
+                        .pop-features li i { color: #10b981; flex-shrink: 0; margin-top: 2px; }
+                        .pop-price { font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 15px; }
                         .pop-price small { font-size: 0.85rem; font-weight: 400; color: #94a3b8; }
+                        .pop-title { font-size: 1.25rem; font-weight: 700; color: #0f172a; margin-bottom: 10px; }
+                        .pop-desc { font-size: 0.9rem; color: #64748b; line-height: 1.5; }
                     </style>
 
                     <!-- Paling Populer Sound System -->
                     <div class="pop-card">
                         <div class="pop-badge">PALING POPULER</div>
                         <span class="pop-tag sound">Sound</span>
-                        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 10px;">Sound System Paket 10000W</h3>
-                        <p style="font-size: 0.9rem; color: #94a3b8; line-height: 1.5;">Paket profesional untuk mini konser, festival musik sekolah, gathering besar, dan gathering outdoor skala menengah.</p>
+                        <h3 class="pop-title">Sound System Paket 10000W</h3>
+                        <p class="pop-desc">Paket profesional untuk mini konser, festival musik sekolah, gathering besar, dan gathering outdoor skala menengah.</p>
                         <ul class="pop-features">
                             <li><i data-lucide="check" style="width:16px;height:16px;"></i> FOH 12" x 4 Box</li>
                             <li><i data-lucide="check" style="width:16px;height:16px;"></i> FOH 15" x 4 Box</li>
@@ -201,8 +204,8 @@
                     <div class="pop-card">
                         <div class="pop-badge">PALING POPULER</div>
                         <span class="pop-tag stage">Panggung</span>
-                        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 10px;">Panggung Modular 8x6m</h3>
-                        <p style="font-size: 0.9rem; color: #94a3b8; line-height: 1.5;">Standar panggung sedang untuk pentas seni sekolah, pesta pernikahan, dan corporate gathering outdoor.</p>
+                        <h3 class="pop-title">Panggung Modular 8x6m</h3>
+                        <p class="pop-desc">Standar panggung sedang untuk pentas seni sekolah, pesta pernikahan, dan corporate gathering outdoor.</p>
                         <ul class="pop-features">
                             <li><i data-lucide="check" style="width:16px;height:16px;"></i> Alas Panggung Modular 8m x 6m</li>
                             <li><i data-lucide="check" style="width:16px;height:16px;"></i> Leveling Karpet Halus Pilihan</li>
@@ -218,8 +221,8 @@
                     <div class="pop-card">
                         <div class="pop-badge">PALING POPULER</div>
                         <span class="pop-tag light">Lighting</span>
-                        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 10px;">Lighting Paket Menengah</h3>
-                        <p style="font-size: 0.9rem; color: #94a3b8; line-height: 1.5;">Kombinasi optimal untuk panggung gathering megah, konser musik mini, dan dekorasi lampu dinamis.</p>
+                        <h3 class="pop-title">Lighting Paket Menengah</h3>
+                        <p class="pop-desc">Kombinasi optimal untuk panggung gathering megah, konser musik mini, dan dekorasi lampu dinamis.</p>
                         <ul class="pop-features">
                             <li><i data-lucide="check" style="width:16px;height:16px;"></i> 7 Unit Moving Beam</li>
                             <li><i data-lucide="check" style="width:16px;height:16px;"></i> 3 Box Par LED (12 Unit)</li>
