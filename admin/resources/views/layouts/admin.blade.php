@@ -670,13 +670,13 @@
     @yield('styles')
 </head>
 <body>
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeAdminSidebar()"></div>
 
     <div class="mobile-header">
         <div class="brand-logo" style="height:30px; font-size:1.2rem;">
             <span>R</span><span>M</span><span>E</span>
         </div>
-        <button class="mobile-header-btn" id="mobileMenuToggle">
+        <button class="mobile-header-btn" id="mobileMenuToggle" onclick="openAdminSidebar()">
             <i class="fa-solid fa-bars"></i>
         </button>
     </div>
@@ -689,7 +689,7 @@
                     <span>R</span><span>M</span><span>E</span>
                 </div>
             </div>
-            <button type="button" class="mobile-close-btn" id="closeSidebarBtn">
+            <button type="button" class="mobile-close-btn" id="closeSidebarBtn" onclick="closeAdminSidebar()">
                 <i class="fa-solid fa-xmark"></i>
             </button>
         </div>
@@ -793,33 +793,20 @@
 
     <script>
     // ===== Mobile Sidebar Toggle =====
-    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-    const closeSidebarBtn = document.getElementById('closeSidebarBtn');
-    const sidebarOverlay = document.getElementById('sidebarOverlay');
-    const sidebar = document.querySelector('aside');
-    
-    function openSidebar(e) {
-        if (e) e.preventDefault();
-        sidebar.classList.add('open');
-        sidebarOverlay.classList.add('show');
+    function openAdminSidebar() {
+        const sidebar = document.querySelector('aside');
+        const overlay = document.getElementById('sidebarOverlay');
+        if(sidebar) sidebar.classList.add('open');
+        if(overlay) overlay.classList.add('show');
         document.body.style.overflow = 'hidden';
     }
 
-    function closeSidebar(e) {
-        if (e) e.preventDefault();
-        sidebar.classList.remove('open');
-        sidebarOverlay.classList.remove('show');
+    function closeAdminSidebar() {
+        const sidebar = document.querySelector('aside');
+        const overlay = document.getElementById('sidebarOverlay');
+        if(sidebar) sidebar.classList.remove('open');
+        if(overlay) overlay.classList.remove('show');
         document.body.style.overflow = '';
-    }
-
-    if (mobileMenuToggle) {
-        mobileMenuToggle.addEventListener('click', openSidebar);
-    }
-    if (closeSidebarBtn) {
-        closeSidebarBtn.addEventListener('click', closeSidebar);
-    }
-    if (sidebarOverlay) {
-        sidebarOverlay.addEventListener('click', closeSidebar);
     }
 
     // Auto-wrap tables for mobile responsiveness
