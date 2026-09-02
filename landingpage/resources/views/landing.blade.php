@@ -118,23 +118,23 @@
                 <div class="nav-dropdown">
                     <a href="#" class="nav-link dropdown-toggle">Kategori Alat <i data-lucide="chevron-down" class="dropdown-icon"></i></a>
                     <div class="dropdown-menu">
-                        <a href="#categories" class="dropdown-item" onclick="const btn = document.querySelector('.tab-btn[data-tab=\'sound\']'); if(btn) btn.click();">Sound System</a>
-                        <a href="#categories" class="dropdown-item" onclick="const btn = document.querySelector('.tab-btn[data-tab=\'lighting\']'); if(btn) btn.click();">Stage Lighting</a>
-                        <a href="#categories" class="dropdown-item" onclick="const btn = document.querySelector('.tab-btn[data-tab=\'stage\']'); if(btn) btn.click();">Panggung Modular</a>
+                        <a href="#catalog" class="dropdown-item" onclick="const btn = document.querySelector('.tab-btn[data-tab=\'sound\']'); if(btn) btn.click();">Sound System</a>
+                        <a href="#catalog" class="dropdown-item" onclick="const btn = document.querySelector('.tab-btn[data-tab=\'lighting\']'); if(btn) btn.click();">Stage Lighting</a>
+                        <a href="#catalog" class="dropdown-item" onclick="const btn = document.querySelector('.tab-btn[data-tab=\'stage\']'); if(btn) btn.click();">Panggung Modular</a>
                     </div>
                 </div>
 
                 <div class="nav-dropdown">
                     <a href="#" class="nav-link dropdown-toggle">Hubungi Kami <i data-lucide="chevron-down" class="dropdown-icon"></i></a>
                     <div class="dropdown-menu">
-                        <a href="#" class="dropdown-item"><i data-lucide="map-pin" class="dropdown-icon-left"></i> Jl. Kramat Sentiong V No.132 E</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Jl.+Kramat+Sentiong+V+No.132+E" target="_blank" class="dropdown-item"><i data-lucide="map-pin" class="dropdown-icon-left"></i> Jl. Kramat Sentiong V No.132 E</a>
                         <a href="https://wa.me/6287885675868" target="_blank" class="dropdown-item"><i data-lucide="phone" class="dropdown-icon-left"></i> WA: +62 878-8567-5868</a>
-                        <a href="mailto:rimamanagemententertainment@gmail.com" class="dropdown-item"><i data-lucide="mail" class="dropdown-icon-left"></i> Gmail</a>
+                        <a href="mailto:rimamanagemententertainment@gmail.com" class="dropdown-item"><i data-lucide="mail" class="dropdown-icon-left"></i> gmail RME rimamanagemententertainment@gmail.com</a>
                         <a href="#" class="dropdown-item"><i data-lucide="clock" class="dropdown-icon-left"></i> Jam: 07:00 - 22:00</a>
                     </div>
                 </div>
 
-                <a href="#booking" class="nav-link highlight">Formulir Penyewaan</a>
+                <a href="#rent-form-section" class="nav-link highlight">Formulir Penyewaan</a>
             </nav>
             
             <div class="header-actions" style="display: flex; align-items: center; gap: 1rem;">
