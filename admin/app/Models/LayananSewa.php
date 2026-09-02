@@ -27,6 +27,22 @@ class LayananSewa extends Model
         'harga' => 'decimal:2',
     ];
 
+    protected $appends = ['is_available'];
+
+    public function getIsAvailableAttribute()
+    {
+        $today = now()->toDateString();
+        
+        $isRented = \App\Models\OrderDetail::where('id_layanan', $this->id)
+            ->whereHas('order', function($query) use ($today) {
+                $query->whereNotIn('status_sewa', ['Batal', 'Dibatalkan', 'Selesai', 'Dikembalikan'])
+                      ->whereDate('tgl_mulai', '<=', $today)
+                      ->whereDate('tgl_selesai', '>=', $today);
+            })->exists();
+
+        return !$isRented;
+    }
+
     public function superadmin()
     {
         return $this->belongsTo(Superadmin::class, 'id_superadmin', 'id_superadmin');
