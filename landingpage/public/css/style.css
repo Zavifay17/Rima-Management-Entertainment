@@ -1083,13 +1083,21 @@ textarea {
 input:focus, textarea:focus {
     background: var(--bg-dark-card);
     border-color: var(--color-primary);
-    box-shadow: 0 0 15px rgba(99, 102, 241, 0.1);
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.15);
 }
 
-input:focus + .input-icon {
+.input-wrapper:focus-within .input-icon {
     color: var(--color-primary);
 }
 
+.form-group label {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s ease;
+    display: inline-block;
+}
+.form-group:focus-within label {
+    color: var(--color-primary) !important;
+    transform: translateY(-3px);
+}
 /* Input validation error styling */
 .form-group.has-error input,
 .form-group.has-error textarea,
@@ -1840,6 +1848,41 @@ input:focus + .input-icon {
 
 /* --- Mobile Responsive Fixes --- */
 @media (max-width: 768px) {
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(15, 23, 42, 0.95);
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        z-index: 998;
+        opacity: 0;
+        visibility: hidden;
+        transform: scale(1.05);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .nav-menu.active {
+        opacity: 1;
+        visibility: visible;
+        transform: scale(1);
+    }
+    .nav-menu .nav-link {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #f8fafc !important;
+        letter-spacing: 0.05em;
+    }
+    .mobile-toggle {
+        display: block;
+        z-index: 999;
+    }
+
     .floating-whatsapp {
         width: 50px;
         height: 50px;
@@ -2068,6 +2111,18 @@ body.dark-mode .stat-num {
     background: linear-gradient(135deg, #ffffff, #94a3b8) !important;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
+}
+
+/* --- Dark Mode Custom Scrollbar --- */
+body.dark-mode::-webkit-scrollbar-track {
+    background: var(--bg-dark-base) !important;
+}
+body.dark-mode::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-color: var(--bg-dark-base) !important;
+}
+body.dark-mode::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4) !important;
 }
 
 body.dark-mode .btn-secondary,

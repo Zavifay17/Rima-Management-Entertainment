@@ -305,7 +305,7 @@
                 <!-- Catalog Grid -->
                 <div class="catalog-grid" id="catalogGrid">
                     <!-- Item 1: Sound 5000W -->
-                    <div class="catalog-item glassmorphism" data-category="sound">
+                    <div class="catalog-item glassmorphism" data-aos="fade-up" data-aos-duration="600" data-category="sound">
                         <div class="catalog-header">
                             <span class="item-tag tag-sound">Sound</span>
                             <h3>Sound System Paket 5000W</h3>
@@ -352,7 +352,7 @@
                     </div>
 
                     <!-- Item 3: Sound 20000W -->
-                    <div class="catalog-item glassmorphism" data-category="sound">
+                    <div class="catalog-item glassmorphism" data-aos="fade-up" data-aos-duration="600" data-category="sound">
                         <div class="catalog-header">
                             <span class="item-tag tag-sound">Sound</span>
                             <h3>Sound System Paket 20000W</h3>
@@ -375,7 +375,7 @@
                     </div>
 
                     <!-- Item 4: Lighting Hemat -->
-                    <div class="catalog-item glassmorphism" data-category="lighting">
+                    <div class="catalog-item glassmorphism" data-aos="fade-up" data-aos-duration="600" data-category="lighting">
                         <div class="catalog-header">
                             <span class="item-tag tag-lighting">Lighting</span>
                             <h3>Lighting Paket Hemat</h3>
@@ -420,7 +420,7 @@
                     </div>
 
                     <!-- Item 6: Lighting Mewah -->
-                    <div class="catalog-item glassmorphism" data-category="lighting">
+                    <div class="catalog-item glassmorphism" data-aos="fade-up" data-aos-duration="600" data-category="lighting">
                         <div class="catalog-header">
                             <span class="item-tag tag-lighting">Lighting</span>
                             <h3>Lighting Paket Mewah</h3>
@@ -442,7 +442,7 @@
                     </div>
 
                     <!-- Item Lighting Custom -->
-                    <div class="catalog-item glassmorphism" data-category="lighting">
+                    <div class="catalog-item glassmorphism" data-aos="fade-up" data-aos-duration="600" data-category="lighting">
                         <div class="catalog-header">
                             <span class="item-tag tag-lighting">Lighting</span>
                             <h3>Sewa Lighting Perunit</h3>
@@ -466,7 +466,7 @@
                     </div>
 
                     <!-- Item 7: Panggung 6x5 -->
-                    <div class="catalog-item glassmorphism" data-category="stage">
+                    <div class="catalog-item glassmorphism" data-aos="fade-up" data-aos-duration="600" data-category="stage">
                         <div class="catalog-header">
                             <span class="item-tag tag-visual">Panggung</span>
                             <h3>Panggung Modular 6x5m</h3>
@@ -511,7 +511,7 @@
                     </div>
 
                     <!-- Item 9: Panggung 10x8 -->
-                    <div class="catalog-item glassmorphism" data-category="stage">
+                    <div class="catalog-item glassmorphism" data-aos="fade-up" data-aos-duration="600" data-category="stage">
                         <div class="catalog-header">
                             <span class="item-tag tag-visual">Panggung</span>
                             <h3>Panggung Modular 10x8m</h3>
@@ -534,7 +534,7 @@
                     </div>
 
                     <!-- Item 10: Mini Panggung / Podium -->
-                    <div class="catalog-item glassmorphism" data-category="stage">
+                    <div class="catalog-item glassmorphism" data-aos="fade-up" data-aos-duration="600" data-category="stage">
                         <div class="catalog-header">
                             <span class="item-tag tag-visual">Panggung</span>
                             <h3>Mini Panggung / Podium</h3>
@@ -557,7 +557,7 @@
                     </div>
 
                     <!-- Item 11: Sewa Balokan Rigging -->
-                    <div class="catalog-item glassmorphism" data-category="stage">
+                    <div class="catalog-item glassmorphism" data-aos="fade-up" data-aos-duration="600" data-category="stage">
                         <div class="catalog-header">
                             <span class="item-tag tag-visual">Panggung</span>
                             <h3>Sewa Balokan Panggung / Rigging</h3>
