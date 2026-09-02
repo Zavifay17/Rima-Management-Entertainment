@@ -1662,7 +1662,7 @@
             resizeCanvas();
             window.addEventListener('resize', resizeCanvas);
 
-            const PARTICLE_COUNT = window.innerWidth < 768 ? 50 : 90;
+            const PARTICLE_COUNT = window.innerWidth < 768 ? 70 : 150; // Increased for denser luxury feel
 
             function getParticleColor() {
                 const isDark = document.body.classList.contains('dark-mode');
@@ -1690,8 +1690,8 @@
             function getParticleAlpha() {
                 const isDark = document.body.classList.contains('dark-mode');
                 return isDark
-                    ? (Math.random() * 0.45 + 0.15)
-                    : (Math.random() * 0.35 + 0.25);
+                    ? (Math.random() * 0.5 + 0.3) // Brighter for dark mode
+                    : (Math.random() * 0.6 + 0.4); // Much brighter for light mode
             }
 
             function createParticle() {
@@ -1732,8 +1732,8 @@
 
                         if (distance < connectDistance) {
                             ctx.beginPath();
-                            ctx.strokeStyle = `rgba(${lineColor}, ${0.15 - (distance / connectDistance) * 0.15})`;
-                            ctx.lineWidth = 0.8;
+                            ctx.strokeStyle = `rgba(${lineColor}, ${0.35 - (distance / connectDistance) * 0.35})`; // Increased line opacity
+                            ctx.lineWidth = 1.0;
                             ctx.moveTo(particles[i].x, particles[i].y);
                             ctx.lineTo(particles[j].x, particles[j].y);
                             ctx.stroke();

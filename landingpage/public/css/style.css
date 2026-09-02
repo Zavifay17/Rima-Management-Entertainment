@@ -2094,7 +2094,9 @@ input:focus, textarea:focus {
 
 /* --- Premium Dark Footer --- */
 .footer-section {
-    background: #0f172a !important; /* Deep premium navy/black */
+    background: rgba(15, 23, 42, 0.8) !important; /* Semi-transparent navy/black so particles show through */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     color: #e2e8f0 !important;
     padding: 80px 0 40px 0;
     position: relative;
@@ -2133,6 +2135,11 @@ input:focus, textarea:focus {
     background: var(--color-primary);
     border-color: var(--color-primary);
     color: white;
+}
+
+/* --- Mobile Sticky CTA Default (Hidden on Desktop) --- */
+.mobile-sticky-cta {
+    display: none !important;
 }
 
 /* --- Mobile Responsive Fixes --- */
@@ -2521,7 +2528,9 @@ body.dark-mode .quick-link-item { color: #cbd5e1 !important; } /* Slate 300 */
 
 /* --- Footer Dark Mode Fixes --- */
 body.dark-mode .main-footer {
-    background-color: #020617 !important; /* Slate 950 (Very Dark) */
+    background-color: rgba(2, 6, 23, 0.8) !important; /* Semi-transparent Slate 950 */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border-top: 1px solid rgba(255,255,255,0.05);
 }
 
