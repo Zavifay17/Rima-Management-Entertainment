@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'RME Dashboard') - Admin Panel</title>
-    <link rel="icon" type="image/png" href="{{ asset('favicon.png?v=6') }}">
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png?v=7') }}">
     
     <!-- Google Fonts & FontAwesome Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
