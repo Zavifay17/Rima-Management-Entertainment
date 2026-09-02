@@ -1695,16 +1695,18 @@
             }
 
             function createParticle() {
-                const baseSpeed = 0.5;
+                const isMobile = window.innerWidth < 768;
                 return {
                     x:    Math.random() * W,
                     y:    Math.random() * H,
-                    r:    Math.random() * 2.5 + 1,
-                    dx:   (Math.random() - 0.5) * baseSpeed,
-                    dy:   (Math.random() - 0.5) * baseSpeed,
-                    origDx: 0, origDy: 0, // will be set below
+                    r:    (Math.random() * 2.5 + 1.2) * (isMobile ? 0.8 : 1.2), // Slightly larger/smaller based on screen
+                    dx:   (Math.random() - 0.5) * 0.4, // Gentle horizontal wobble
+                    dy:   -(Math.random() * 0.6 + 0.2), // Slow upward drift (champagne/ember effect)
+                    origDx: 0, origDy: 0,
                     alpha: getParticleAlpha(),
-                    color: getParticleColor()
+                    color: getParticleColor(),
+                    pulsePhase: Math.random() * Math.PI * 2,
+                    pulseSpeed: Math.random() * 0.03 + 0.01
                 };
             }
 
@@ -1760,14 +1762,18 @@
                         }
                     }
 
+                    // Pulse logic for luxurious glow
+                    p.pulsePhase += p.pulseSpeed;
+                    const currentRadius = p.r + Math.sin(p.pulsePhase) * (p.r * 0.3); // pulse 30% of size
+
                     // Draw glowing particle (double-layered for elegance)
                     ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.r * 2.5, 0, Math.PI * 2);
-                    ctx.fillStyle = p.color + (p.alpha * 0.12) + ')';
+                    ctx.arc(p.x, p.y, currentRadius * 3.5, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color + (p.alpha * 0.15) + ')';
                     ctx.fill();
 
                     ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.arc(p.x, p.y, currentRadius, 0, Math.PI * 2);
                     ctx.fillStyle = p.color + p.alpha + ')';
                     ctx.fill();
 
@@ -1778,7 +1784,7 @@
                     // Wrap edges
                     if (p.x < 0)  p.x = W;
                     if (p.x > W)  p.x = 0;
-                    if (p.y < 0)  p.y = H;
+                    if (p.y < 0)  { p.y = H; p.x = Math.random() * W; } // Reset to bottom at random X
                     if (p.y > H)  p.y = 0;
                 });
                 requestAnimationFrame(drawParticles);
