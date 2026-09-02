@@ -331,7 +331,7 @@ section {
 .nav-menu {
     display: flex;
     align-items: center;
-    gap: 32px;
+    gap: 36px;
 }
 .nav-link {
     color: var(--text-secondary);
@@ -340,7 +340,7 @@ section {
     font-weight: 500;
     transition: var(--transition-smooth);
     position: relative;
-    padding: 4px 0;
+    padding: 8px 4px;
     white-space: nowrap;
 }
 .nav-link:hover, .nav-link.active {
@@ -1960,11 +1960,11 @@ body.dark-mode .how-it-works-section,
 body.dark-mode .categories-section,
 body.dark-mode .catalog-section,
 body.dark-mode .rent-section {
-    background-color: var(--bg-dark-base) !important;
+    background: var(--bg-dark-base) !important;
 }
 
 body.dark-mode .main-header {
-    background-color: var(--bg-dark-nav) !important;
+    background: var(--bg-dark-nav) !important;
     border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
