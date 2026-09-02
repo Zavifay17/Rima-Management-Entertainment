@@ -1632,13 +1632,28 @@
         }
 
         // =====================================================
-        // 3. AMBIENT FLOATING PARTICLES
+        // 3. AMBIENT FLOATING PARTICLES — with Mouse Repel
         // =====================================================
         const canvas = document.getElementById('particle-canvas');
         if (canvas) {
             const ctx = canvas.getContext('2d');
             let particles = [];
             let W, H;
+            // Track mouse position (only on desktop)
+            let mouseX = -9999, mouseY = -9999;
+            const REPEL_RADIUS  = 120;  // px distance to start repelling
+            const REPEL_FORCE   = 3.5;  // push strength
+            const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+            if (isDesktop) {
+                window.addEventListener('mousemove', (e) => {
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                });
+                window.addEventListener('mouseleave', () => {
+                    mouseX = -9999; mouseY = -9999;
+                });
+            }
 
             function resizeCanvas() {
                 W = canvas.width  = window.innerWidth;
@@ -1652,7 +1667,6 @@
             function getParticleColor() {
                 const isDark = document.body.classList.contains('dark-mode');
                 if (isDark) {
-                    // Vivid neon colors for dark mode
                     const colors = [
                         'rgba(56,189,248,',   // sky blue
                         'rgba(99,102,241,',   // indigo
@@ -1662,7 +1676,6 @@
                     ];
                     return colors[Math.floor(Math.random() * colors.length)];
                 } else {
-                    // Bold brand colors for light mode (visible on white bg)
                     const colors = [
                         'rgba(0,0,128,',      // RME navy blue
                         'rgba(37,99,235,',    // bright blue
@@ -1676,53 +1689,85 @@
 
             function getParticleAlpha() {
                 const isDark = document.body.classList.contains('dark-mode');
-                // In light mode use higher alpha so particles are clearly visible
                 return isDark
                     ? (Math.random() * 0.45 + 0.15)
                     : (Math.random() * 0.35 + 0.25);
             }
 
             function createParticle() {
+                const baseSpeed = 0.5;
                 return {
-                    x: Math.random() * W,
-                    y: Math.random() * H,
-                    r: Math.random() * 2.5 + 1,   // larger: 1–3.5px
-                    dx: (Math.random() - 0.5) * 0.5,
-                    dy: (Math.random() - 0.5) * 0.5,
+                    x:    Math.random() * W,
+                    y:    Math.random() * H,
+                    r:    Math.random() * 2.5 + 1,
+                    dx:   (Math.random() - 0.5) * baseSpeed,
+                    dy:   (Math.random() - 0.5) * baseSpeed,
+                    origDx: 0, origDy: 0, // will be set below
                     alpha: getParticleAlpha(),
                     color: getParticleColor()
                 };
             }
 
             for (let i = 0; i < PARTICLE_COUNT; i++) {
-                particles.push(createParticle());
+                const p = createParticle();
+                p.origDx = p.dx;
+                p.origDy = p.dy;
+                particles.push(p);
             }
 
             function drawParticles() {
                 ctx.clearRect(0, 0, W, H);
+
                 particles.forEach(p => {
+                    // --- Mouse Repel Physics ---
+                    if (isDesktop) {
+                        const distX = p.x - mouseX;
+                        const distY = p.y - mouseY;
+                        const dist  = Math.sqrt(distX * distX + distY * distY);
+
+                        if (dist < REPEL_RADIUS && dist > 0) {
+                            // Force inversely proportional to distance (stronger when closer)
+                            const force    = (REPEL_RADIUS - dist) / REPEL_RADIUS;
+                            const pushX    = (distX / dist) * force * REPEL_FORCE;
+                            const pushY    = (distY / dist) * force * REPEL_FORCE;
+                            p.dx += (pushX - p.dx) * 0.15;
+                            p.dy += (pushY - p.dy) * 0.15;
+                        } else {
+                            // Gently restore to original drift velocity
+                            p.dx += (p.origDx - p.dx) * 0.03;
+                            p.dy += (p.origDy - p.dy) * 0.03;
+                        }
+                    }
+
+                    // Draw glowing particle (double-layered for elegance)
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r * 2.5, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color + (p.alpha * 0.12) + ')';
+                    ctx.fill();
+
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
                     ctx.fillStyle = p.color + p.alpha + ')';
                     ctx.fill();
 
+                    // Move
                     p.x += p.dx;
                     p.y += p.dy;
 
-                    if (p.x < 0) p.x = W;
-                    if (p.x > W) p.x = 0;
-                    if (p.y < 0) p.y = H;
-                    if (p.y > H) p.y = 0;
+                    // Wrap edges
+                    if (p.x < 0)  p.x = W;
+                    if (p.x > W)  p.x = 0;
+                    if (p.y < 0)  p.y = H;
+                    if (p.y > H)  p.y = 0;
                 });
                 requestAnimationFrame(drawParticles);
             }
             drawParticles();
 
-            // Update particle colours AND alpha when theme toggles
+            // Update colours AND alpha when theme toggles
             const themeToggleBtn = document.getElementById('themeToggle');
             if (themeToggleBtn) {
                 themeToggleBtn.addEventListener('click', () => {
-                    // Small delay to let dark-mode class get applied first
                     setTimeout(() => {
                         particles.forEach(p => {
                             p.color = getParticleColor();

@@ -2152,15 +2152,39 @@ input:focus, textarea:focus {
     .nav-dropdown.active .dropdown-icon {
         transform: rotate(180deg);
     }
+    /* Light mode mobile: dark text on white drawer */
     .dropdown-item {
         padding: 10px 12px;
-        font-size: 1.2rem;
-        color: rgba(255, 255, 255, 0.7) !important;
+        font-size: 1rem;
+        color: var(--text-secondary) !important;
+        border-left: 2px solid transparent;
+        transition: all 0.2s ease;
     }
     .dropdown-item:hover {
-        background: transparent;
-        color: #ffffff !important;
+        background: rgba(0, 0, 128, 0.05);
+        color: var(--color-primary) !important;
+        border-left-color: var(--color-primary);
         transform: translateX(5px);
+    }
+    /* Dark mode mobile: white text */
+    body.dark-mode .dropdown-item {
+        color: rgba(255, 255, 255, 0.7) !important;
+    }
+    body.dark-mode .dropdown-item:hover {
+        background: rgba(255, 255, 255, 0.05) !important;
+        color: #ffffff !important;
+        border-left-color: #38bdf8;
+    }
+    /* Mobile nav-link color fix */
+    .nav-menu .nav-link,
+    .nav-menu .dropdown-toggle {
+        color: var(--text-primary) !important;
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+    body.dark-mode .nav-menu .nav-link,
+    body.dark-mode .nav-menu .dropdown-toggle {
+        color: #f8fafc !important;
     }
     .mobile-toggle {
         display: block;
