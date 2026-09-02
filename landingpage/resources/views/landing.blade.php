@@ -103,6 +103,12 @@
     <div class="custom-cursor"></div>
     <div class="custom-cursor-follower"></div>
 
+    <!-- Dynamic Orb Glow (Phase 3) -->
+    <div class="orb-container">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
     <!-- ==========================================
          PREMIUM PRELOADER
     ========================================== -->
