@@ -127,9 +127,9 @@
                 <div class="nav-dropdown">
                     <a href="#" class="nav-link dropdown-toggle">Hubungi Kami <i data-lucide="chevron-down" class="dropdown-icon"></i></a>
                     <div class="dropdown-menu">
-                        <a href="https://www.google.com/maps/search/?api=1&query=Jl.+Kramat+Sentiong+V+No.132+E" target="_blank" class="dropdown-item"><i data-lucide="map-pin" class="dropdown-icon-left"></i> Jl. Kramat Sentiong V No.132 E</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Jl.+Kramat+Sentiong+5+Rt12%2FRW06+No132+E%2C+Salon+Atun+2" target="_blank" class="dropdown-item"><i data-lucide="map-pin" class="dropdown-icon-left"></i> Jl. Kramat Sentiong 5, RT.12/RW.06 No.132 E (Salon Atun 2)</a>
                         <a href="https://wa.me/6287885675868" target="_blank" class="dropdown-item"><i data-lucide="phone" class="dropdown-icon-left"></i> WA: +62 878-8567-5868</a>
-                        <a href="mailto:rimamanagemententertainment@gmail.com" class="dropdown-item"><i data-lucide="mail" class="dropdown-icon-left"></i> gmail RME rimamanagemententertainment@gmail.com</a>
+                        <a href="mailto:rimamanagemententertainment@gmail.com?subject=Tanya%20Sewa%20Alat%20Event" class="dropdown-item"><i data-lucide="mail" class="dropdown-icon-left"></i> rimamanagemententertainment@gmail.com</a>
                         <a href="#" class="dropdown-item"><i data-lucide="clock" class="dropdown-icon-left"></i> Jam: 07:00 - 22:00</a>
                     </div>
                 </div>
