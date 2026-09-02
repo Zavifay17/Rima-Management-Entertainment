@@ -109,6 +109,12 @@
         <div class="orb orb-2"></div>
     </div>
 
+    <!-- Ultra Premium Phase 4: Noise & Progress -->
+    <div class="noise-overlay"></div>
+    <div class="scroll-progress-container">
+        <div class="scroll-progress-bar" id="scrollBar"></div>
+    </div>
+
     <!-- ==========================================
          PREMIUM PRELOADER
     ========================================== -->
@@ -1261,6 +1267,11 @@
         </div>
     </div>
 
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top magnetic-btn" id="backToTop" title="Kembali ke atas">
+        <i data-lucide="arrow-up"></i>
+    </a>
+
     <!-- Flatpickr Script -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://npmcdn.com/flatpickr/dist/l10n/id.js"></script>
@@ -1421,18 +1432,13 @@
     });
     </script>
 
-    <!-- Back to Top Button -->
-    <button id="back-to-top" class="back-to-top" aria-label="Kembali ke atas">
-        <i data-lucide="chevron-up"></i>
-    </button>
-
     <!-- Floating WhatsApp -->
-    <a href="https://wa.me/6287885675868?text=Halo%20CS%20RME%20Entertainment,%20Saya%20tertarik%20untuk%20menyewa%20alat%20event%20(Sound%20System/Lighting/Panggung).%20Mohon%20informasi%20lebih%20lanjut%20mengenai%20ketersediaan%20dan%20harganya.%20Terima%20kasih." target="_blank" class="floating-whatsapp" aria-label="Chat WhatsApp">
+    <a href="https://wa.me/6287885675868?text=Halo%20CS%20RME%20Entertainment,%20Saya%20tertarik%20untuk%20menyewa%20alat%20event%20(Sound%20System/Lighting/Panggung).%20Mohon%20informasi%20lebih%20lanjut%20mengenai%20ketersediaan%20dan%20harganya.%20Terima%20kasih." target="_blank" class="floating-whatsapp magnetic-btn" aria-label="Chat WhatsApp">
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
     <!-- Sticky Mobile CTA -->
-    <a href="#booking-section" class="mobile-sticky-cta d-md-none" onclick="document.getElementById('bookingForm').scrollIntoView({behavior: 'smooth'})">
+    <a href="#rent-form-section" class="mobile-sticky-cta d-md-none" onclick="document.getElementById('bookingForm').scrollIntoView({behavior: 'smooth'})">
         <i class="fa-solid fa-bolt"></i> Sewa Sekarang
     </a>
 
@@ -1486,31 +1492,6 @@
             
             if(document.querySelector('.typewriter-text')){
                 typingEffect();
-            }
-
-            // Scroll Progress & Back to Top
-            const scrollProgress = document.getElementById('scroll-progress');
-            const backToTopBtn = document.getElementById('back-to-top');
-            
-            window.addEventListener('scroll', () => {
-                const scrollPx = document.documentElement.scrollTop;
-                const winHeightPx = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                const scrolled = `${scrollPx / winHeightPx * 100}%`;
-                if(scrollProgress) scrollProgress.style.width = scrolled;
-
-                if (backToTopBtn) {
-                    if (scrollPx > 300) {
-                        backToTopBtn.classList.add('show');
-                    } else {
-                        backToTopBtn.classList.remove('show');
-                    }
-                }
-            });
-
-            if(backToTopBtn){
-                backToTopBtn.addEventListener('click', () => {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
             }
 
             // --- Theme Toggle Logic ---
@@ -1841,10 +1822,48 @@
 
                 card.addEventListener('mouseleave', () => {
                     card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+                    card.style.transition = 'transform 0.5s ease';
+                });
+                card.addEventListener('mouseenter', () => {
+                    card.style.transition = 'none'; // Remove transition for smooth tracking
                 });
             });
         }
 
+        // =====================================================
+        // 5. Scroll Progress & Back-to-Top (Phase 4)
+        // =====================================================
+        const scrollBar = document.getElementById('scrollBar');
+        const backToTopBtn = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            // Scroll Progress
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercentage = (scrollTop / scrollHeight) * 100;
+            if(scrollBar) {
+                scrollBar.style.width = scrollPercentage + '%';
+            }
+
+            // Back to Top Button Visibility
+            if(backToTopBtn) {
+                if (scrollTop > 500) {
+                    backToTopBtn.classList.add('visible');
+                } else {
+                    backToTopBtn.classList.remove('visible');
+                }
+            }
+        });
+
+        if(backToTopBtn) {
+            backToTopBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
     })();
     </script>
 </body>
