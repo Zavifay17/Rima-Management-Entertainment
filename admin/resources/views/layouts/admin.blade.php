@@ -601,6 +601,38 @@
             .glass-card {
                 padding: 1.2rem;
             }
+            .mobile-close-btn {
+                display: block !important;
+            }
+            .brand {
+                justify-content: space-between;
+                width: 100%;
+                padding-right: 0.5rem;
+            }
+        }
+        
+        .mobile-close-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.25rem;
+        }
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 99;
+            backdrop-filter: blur(2px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .sidebar-overlay.show {
+            display: block;
+            opacity: 1;
         }
         
         .mobile-header {
@@ -638,6 +670,7 @@
     @yield('styles')
 </head>
 <body>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <div class="mobile-header">
         <div class="brand-logo" style="height:30px; font-size:1.2rem;">
@@ -651,12 +684,17 @@
     <!-- Sidebar Navigation -->
     <aside>
         <div class="brand">
-            <div class="brand-logo">
-                <span>R</span><span>M</span><span>E</span>
+            <div style="display: flex; align-items: center; gap: 0.85rem;">
+                <div class="brand-logo">
+                    <span>R</span><span>M</span><span>E</span>
+                </div>
+                <div class="brand-name">
+                    RME
+                </div>
             </div>
-            <div class="brand-name">
-                RME
-            </div>
+            <button class="mobile-close-btn" id="closeSidebarBtn">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
         </div>
 
         <ul class="nav-menu">
@@ -759,12 +797,29 @@
     <script>
     // ===== Mobile Sidebar Toggle =====
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const closeSidebarBtn = document.getElementById('closeSidebarBtn');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
     const sidebar = document.querySelector('aside');
     
+    function toggleSidebar() {
+        sidebar.classList.toggle('open');
+        if (sidebar.classList.contains('open')) {
+            sidebarOverlay.classList.add('show');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        } else {
+            sidebarOverlay.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+    }
+
     if (mobileMenuToggle) {
-        mobileMenuToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('open');
-        });
+        mobileMenuToggle.addEventListener('click', toggleSidebar);
+    }
+    if (closeSidebarBtn) {
+        closeSidebarBtn.addEventListener('click', toggleSidebar);
+    }
+    if (sidebarOverlay) {
+        sidebarOverlay.addEventListener('click', toggleSidebar);
     }
 
     // Auto-wrap tables for mobile responsiveness
