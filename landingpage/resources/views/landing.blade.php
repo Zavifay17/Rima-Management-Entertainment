@@ -25,6 +25,9 @@
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
+    <!-- FontAwesome CDN for Brand Icons (WhatsApp) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <!-- Stylesheet -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
@@ -1340,7 +1343,11 @@
     });
     </script>
 
-    <!-- Script file -->
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/6288908866762?text=Halo%20RME%20Entertainment,%20saya%20tertarik%20dengan%20layanan%20event%20Anda." target="_blank" class="floating-whatsapp" aria-label="Chat WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
