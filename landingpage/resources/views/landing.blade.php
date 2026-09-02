@@ -1455,7 +1455,12 @@
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
-    <!-- Sticky Mobile CTA -->
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top magnetic-btn" id="backToTop" title="Kembali ke atas">
+        <i data-lucide="arrow-up"></i>
+    </a>
+
+    <!-- Mobile Sticky CTA -->
     <a href="#rent-form-section" class="mobile-sticky-cta d-md-none" onclick="document.getElementById('bookingForm').scrollIntoView({behavior: 'smooth'})">
         <i class="fa-solid fa-bolt"></i> Sewa Sekarang
     </a>
