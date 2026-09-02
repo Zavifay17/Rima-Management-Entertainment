@@ -1075,11 +1075,11 @@
                     <span class="logo-subtext" style="font-size: 0.8rem; font-weight:800; letter-spacing:4px;">ENTERTAINMENT</span>
                 </a>
                 <p class="footer-desc">Partner terpercaya penyedia kelengkapan panggung, tata suara, tata cahaya, dan visual berstandar tinggi di Indonesia.</p>
-                <div class="social-links">
-                    <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
-                    <a href="#" aria-label="YouTube"><i data-lucide="youtube"></i></a>
-                    <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
-                    <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+                <div class="social-links sponsor-logos">
+                    <a href="#" aria-label="Sponsor 1"><img src="{{ asset('images/sponsors/sponsor1.jpg') }}" alt="Sponsor 1" title="Dinas Kebudayaan"></a>
+                    <a href="#" aria-label="Sponsor 2"><img src="{{ asset('images/sponsors/sponsor2.jpg') }}" alt="Sponsor 2" title="Festival Budaya"></a>
+                    <a href="#" aria-label="Sponsor 3"><img src="{{ asset('images/sponsors/sponsor3.png') }}" alt="Sponsor 3" title="IPSI"></a>
+                    <a href="#" aria-label="Sponsor 4"><img src="{{ asset('images/sponsors/sponsor4.png') }}" alt="Sponsor 4" title="Enjoy Jakarta"></a>
                 </div>
             </div>
             
