@@ -1748,3 +1748,15 @@ input:focus + .input-icon {
     border-color: var(--color-primary);
     color: white;
 }
+
+/* --- Mobile Responsive Fixes --- */
+@media (max-width: 768px) {
+    .floating-whatsapp {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+        font-size: 28px;
+        z-index: 9999;
+    }
+}
