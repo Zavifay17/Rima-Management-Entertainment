@@ -688,11 +688,8 @@
                 <div class="brand-logo">
                     <span>R</span><span>M</span><span>E</span>
                 </div>
-                <div class="brand-name">
-                    RME
-                </div>
             </div>
-            <button class="mobile-close-btn" id="closeSidebarBtn">
+            <button type="button" class="mobile-close-btn" id="closeSidebarBtn">
                 <i class="fa-solid fa-xmark"></i>
             </button>
         </div>
@@ -801,25 +798,28 @@
     const sidebarOverlay = document.getElementById('sidebarOverlay');
     const sidebar = document.querySelector('aside');
     
-    function toggleSidebar() {
-        sidebar.classList.toggle('open');
-        if (sidebar.classList.contains('open')) {
-            sidebarOverlay.classList.add('show');
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
-        } else {
-            sidebarOverlay.classList.remove('show');
-            document.body.style.overflow = '';
-        }
+    function openSidebar(e) {
+        if (e) e.preventDefault();
+        sidebar.classList.add('open');
+        sidebarOverlay.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeSidebar(e) {
+        if (e) e.preventDefault();
+        sidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('show');
+        document.body.style.overflow = '';
     }
 
     if (mobileMenuToggle) {
-        mobileMenuToggle.addEventListener('click', toggleSidebar);
+        mobileMenuToggle.addEventListener('click', openSidebar);
     }
     if (closeSidebarBtn) {
-        closeSidebarBtn.addEventListener('click', toggleSidebar);
+        closeSidebarBtn.addEventListener('click', closeSidebar);
     }
     if (sidebarOverlay) {
-        sidebarOverlay.addEventListener('click', toggleSidebar);
+        sidebarOverlay.addEventListener('click', closeSidebar);
     }
 
     // Auto-wrap tables for mobile responsiveness
