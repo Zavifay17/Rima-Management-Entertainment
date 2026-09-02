@@ -18,12 +18,15 @@ Route::get('/', function () {
         }
     }
     
-    $ulasan = DB::table('reviews')
-        ->join('orders', 'reviews.id_order', '=', 'orders.id_order')
-        ->where('reviews.is_published', 1)
-        ->orderByDesc('reviews.created_at')
-        ->limit(10)
-        ->get(['reviews.*', 'orders.nama_pelanggan', 'orders.email_pelanggan', 'orders.tgl_mulai', 'orders.tgl_selesai', 'orders.lokasi_alamat']);
+    $ulasan = [];
+    if (Illuminate\Support\Facades\Schema::hasTable('reviews')) {
+        $ulasan = DB::table('reviews')
+            ->join('orders', 'reviews.id_order', '=', 'orders.id_order')
+            ->where('reviews.is_published', 1)
+            ->orderByDesc('reviews.created_at')
+            ->limit(10)
+            ->get(['reviews.*', 'orders.nama_pelanggan', 'orders.email_pelanggan', 'orders.tgl_mulai', 'orders.tgl_selesai', 'orders.lokasi_alamat']);
+    }
 
     return view('landing', [
         'bookedDates' => array_unique($bookedDates),
@@ -34,6 +37,10 @@ Route::get('/', function () {
 Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
 
 Route::get('/ulasan/{id}', function ($id) {
+    if (!Illuminate\Support\Facades\Schema::hasTable('reviews')) {
+        return redirect('/')->with('error', 'Sistem ulasan sedang dalam pemeliharaan (Deploy Database).');
+    }
+
     $order = DB::table('orders')->where('id_order', $id)->first();
     if (!$order || $order->status_sewa != 'Selesai') {
         return redirect('/')->with('error', 'Pesanan tidak ditemukan atau belum berstatus Selesai.');
@@ -48,6 +55,10 @@ Route::get('/ulasan/{id}', function ($id) {
 });
 
 Route::post('/ulasan/{id}', function (Illuminate\Http\Request $request, $id) {
+    if (!Illuminate\Support\Facades\Schema::hasTable('reviews')) {
+        return redirect('/')->with('error', 'Sistem ulasan sedang dalam pemeliharaan.');
+    }
+
     $order = DB::table('orders')->where('id_order', $id)->first();
     if (!$order || $order->status_sewa != 'Selesai') {
         return redirect('/')->with('error', 'Pesanan tidak valid.');
