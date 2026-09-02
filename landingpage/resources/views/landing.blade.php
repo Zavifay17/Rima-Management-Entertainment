@@ -26,6 +26,7 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     
     <!-- Stylesheet -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     
     <!-- Flatpickr CSS -->
@@ -239,7 +240,7 @@
         </section>
 
         <!-- Kategori Layanan -->
-        <section id="categories" class="categories-section">
+        <section id="categories" class="categories-section" data-aos="fade-up">
             <div class="container">
                 <div class="section-header text-center">
                     <span class="badge">LAYANAN KAMI</span>
@@ -276,7 +277,7 @@
         </section>
 
         <!-- Katalog & Paket Populer -->
-        <section id="catalog" class="catalog-section">
+        <section id="catalog" class="catalog-section" data-aos="fade-up">
             <div class="container">
                 <div class="section-header text-center">
                     <span class="badge">KATALOG PAKET</span>
@@ -571,7 +572,7 @@
         </section>
 
         <!-- Bagaimana Kami Bekerja -->
-        <section id="how-it-works" class="how-it-works-section">
+        <section id="how-it-works" class="how-it-works-section" data-aos="fade-up">
             <div class="container">
                 <div class="section-header text-center">
                     <span class="badge">ALUR PENYEWAAN</span>
@@ -607,7 +608,7 @@
             </div>
         </section>
         <!-- Galeri Dokumentasi -->
-        <section id="gallery" class="gallery-section">
+        <section id="gallery" class="gallery-section" data-aos="fade-up">
             <div class="container">
                 <div class="section-header text-center">
                     <span class="badge">DOKUMENTASI EVENT</span>
@@ -705,7 +706,7 @@
         </section>
 
         <!-- Testimoni Klien -->
-        <section id="testimonials" class="testimonials-section">
+        <section id="testimonials" class="testimonials-section" data-aos="fade-up">
             <div class="container">
                 <div class="section-header text-center">
                     <span class="badge">TESTIMONIAL</span>
@@ -781,7 +782,7 @@
         </section>
 
         <!-- Formulir Penyewaan -->
-        <section id="rent-form-section" class="rent-form-section">
+        <section id="rent-form-section" class="rent-form-section" data-aos="fade-up">
             <div class="container">
                 <div class="rent-grid">
                     <div class="rent-info-content">
@@ -1374,6 +1375,16 @@
     </script>
 
     <!-- Script file -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                once: true,
+                offset: 100
+            });
+        });
+    </script>
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
