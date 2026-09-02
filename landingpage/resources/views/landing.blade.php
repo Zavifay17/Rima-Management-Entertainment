@@ -1833,6 +1833,10 @@
                     const x = e.clientX - rect.left;
                     const y = e.clientY - rect.top;
                     
+                    // Set CSS variables for realtime gradient spotlight
+                    card.style.setProperty('--mouse-x', `${x}px`);
+                    card.style.setProperty('--mouse-y', `${y}px`);
+                    
                     const centerX = rect.width / 2;
                     const centerY = rect.height / 2;
                     
