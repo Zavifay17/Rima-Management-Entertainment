@@ -245,14 +245,14 @@
         <!-- Kategori Layanan -->
         <section id="categories" class="categories-section" data-aos="fade-up">
             <div class="container">
-                <div class="section-header text-center">
+                <div class="section-header text-center" data-aos="fade-up" data-aos-duration="800">
                     <span class="badge">LAYANAN KAMI</span>
                     <h2 class="section-title">Pilihan Alat Event Terlengkap</h2>
                     <p class="section-desc">Rima Entertainment menyediakan armada peralatan terlengkap dengan standar industri hiburan profesional.</p>
                 </div>
                 
                 <div class="categories-grid">
-                    <div class="category-card glassmorphism">
+                    <div class="category-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
                         <div class="category-icon-wrapper sound">
                             <i data-lucide="volume-2" class="category-icon"></i>
                         </div>
@@ -260,7 +260,7 @@
                         <p>Line Array speaker berteknologi tinggi, digital audio mixer, dan wireless microphone premium untuk kejernihan suara tanpa batas.</p>
                     </div>
                     
-                    <div class="category-card glassmorphism">
+                    <div class="category-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
                         <div class="category-icon-wrapper light">
                             <i data-lucide="lightbulb" class="category-icon"></i>
                         </div>
@@ -268,7 +268,7 @@
                         <p>Kombinasi dinamis moving beam, par LED wash, follow spot, dan hazer/smoke machine untuk memukau visual mata penonton.</p>
                     </div>
                     
-                    <div class="category-card glassmorphism">
+                    <div class="category-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
                         <div class="category-icon-wrapper stage">
                             <i data-lucide="layers" class="category-icon"></i>
                         </div>
@@ -322,8 +322,8 @@
                     </div>
                     
                     <!-- Item 2: Sound 10000W -->
-                    <div class="catalog-item glassmorphism highlighted" data-category="sound">
-                        <div class="item-popular-badge">Paling Populer</div>
+                    <div class="catalog-item highlighted glassmorphism" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200" data-category="sound">
+                        <div class="item-popular-badge">PALING DIMINATI</div>
                         <div class="catalog-header">
                             <span class="item-tag tag-sound">Sound</span>
                             <h3>Sound System Paket 10000W</h3>
@@ -584,25 +584,25 @@
                 </div>
                 
                 <div class="steps-grid">
-                    <div class="step-card">
+                    <div class="step-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
                         <div class="step-num">01</div>
                         <h3>Pilih Paket & Alat</h3>
                         <p>Pilih paket event yang tersedia di atas atau pilih alat secara custom sesuai kebutuhan teknis acara Anda.</p>
                     </div>
                     
-                    <div class="step-card">
+                    <div class="step-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
                         <div class="step-num">02</div>
                         <h3>Isi Formulir Sewa</h3>
                         <p>Lengkapi formulir di bawah secara detail dengan menyertakan tanggal acara, paket pilihan, serta informasi kontak Anda.</p>
                     </div>
                     
-                    <div class="step-card">
+                    <div class="step-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
                         <div class="step-num">03</div>
                         <h3>Konfirmasi & DP</h3>
                         <p>Tim RME akan menghubungi Anda melalui WhatsApp untuk mendiskusikan teknis lapangan dan memproses tanda jadi (DP).</p>
                     </div>
                     
-                    <div class="step-card">
+                    <div class="step-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
                         <div class="step-num">04</div>
                         <h3>Instalasi & Event</h3>
                         <p>Kru profesional kami akan mengantar, merakit, menguji, dan mengoperasikan peralatan hingga acara Anda sukses besar.</p>
@@ -786,7 +786,7 @@
                         </div>
                     </div>
                     
-                    <div class="rent-form-card glassmorphism">
+                    <div class="rent-form-card glassmorphism" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
                         <div class="form-header">
                             <h3>Formulir Penyewaan</h3>
                             <p>Silakan isi informasi penyewaan secara lengkap.</p>
