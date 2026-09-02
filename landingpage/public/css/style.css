@@ -2050,9 +2050,15 @@ body.dark-mode .mobile-toggle {
 .quick-link-item { color: #0f172a; transition: color 0.3s ease; }
 
 body.dark-mode .logo-r, 
-body.dark-mode .logo-m { color: #38bdf8 !important; } /* Vibrant Sky Blue */
-body.dark-mode .logo-e { color: #f87171 !important; } /* Vibrant Light Red */
-body.dark-mode .logo-subtext { color: #ffffff !important; } /* Pure White */
+body.dark-mode .logo-m,
+body.dark-mode .main-footer .logo-r,
+body.dark-mode .main-footer .logo-m { color: #38bdf8 !important; } /* Vibrant Sky Blue */
+
+body.dark-mode .logo-e,
+body.dark-mode .main-footer .logo-e { color: #f87171 !important; } /* Vibrant Light Red */
+
+body.dark-mode .logo-subtext,
+body.dark-mode .main-footer .logo-subtext { color: #ffffff !important; } /* Pure White */
 body.dark-mode .quick-link-item { color: #cbd5e1 !important; } /* Slate 300 */
 
 /* --- Footer Dark Mode Fixes --- */
