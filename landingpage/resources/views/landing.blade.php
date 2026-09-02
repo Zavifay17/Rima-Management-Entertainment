@@ -104,8 +104,8 @@
     ========================================== -->
     <div id="rme-preloader">
         <div class="preloader-inner">
-            <div class="preloader-logo">
-                <span class="logo-r">R</span><span class="logo-m">M</span><span class="logo-e">E</span>
+            <div class="preloader-logo-img">
+                <img src="{{ asset('logo.png') }}" alt="RME Entertainment" style="width: 220px; height: auto; animation: preloader-pulse 1.5s ease-in-out infinite;">
             </div>
             <div class="preloader-subtext">ENTERTAINMENT</div>
             <div class="preloader-bar"><div class="preloader-fill"></div></div>
@@ -165,7 +165,7 @@
                     <a href="#" class="nav-link dropdown-toggle">Hubungi Kami <i data-lucide="chevron-down" class="dropdown-icon"></i></a>
                     <div class="dropdown-menu">
                         <a href="https://www.google.com/maps/search/?api=1&query=Jl.+Kramat+Sentiong+5+Rt12%2FRW06+No132+E%2C+Salon+Atun+2" target="_blank" class="dropdown-item"><i data-lucide="map-pin" class="dropdown-icon-left"></i> Jl. Kramat Sentiong 5, RT.12/RW.06 No.132 E (Salon Atun 2)</a>
-                        <a href="https://wa.me/6287885675868" target="_blank" class="dropdown-item"><i data-lucide="phone" class="dropdown-icon-left"></i> WA: +62 878-8567-5868</a>
+                        <a href="https://wa.me/6287885675868?text=Halo%20CS%20RME%20Entertainment,%20Saya%20tertarik%20untuk%20menyewa%20alat%20event%20(Sound%20System/Lighting/Panggung).%20Mohon%20informasi%20lebih%20lanjut%20mengenai%20ketersediaan%20dan%20harganya.%20Terima%20kasih." target="_blank" class="dropdown-item"><i data-lucide="phone" class="dropdown-icon-left"></i> WA: +62 878-8567-5868</a>
                         <a href="mailto:rimamanagemententertainment@gmail.com?subject=Pengajuan%20Sewa%20Alat%20Event%20-%20RME%20Entertainment&body=Halo%20Tim%20RME%20Entertainment,%0A%0ASaya%20tertarik%20untuk%20berdiskusi%20lebih%20lanjut%20mengenai%20kebutuhan%20penyewaan%20alat%20event.%20Mohon%20informasi%20selengkapnya.%0A%0ATerima%20kasih." class="dropdown-item"><i data-lucide="mail" class="dropdown-icon-left"></i> rimamanagemententertainment@gmail.com</a>
                         <a href="#" class="dropdown-item"><i data-lucide="clock" class="dropdown-icon-left"></i> Jam: 07:00 - 22:00</a>
                     </div>
@@ -1174,7 +1174,7 @@
                     </li>
                     <li>
                         <i data-lucide="phone" class="contact-icon"></i>
-                        <a href="https://wa.me/6287885675868" target="_blank" style="color: inherit; text-decoration: none;"><span>+62 878-8567-5868 (CS Suyanto)</span></a>
+                        <a href="https://wa.me/6287885675868?text=Halo%20CS%20RME%20Entertainment,%20Saya%20tertarik%20untuk%20menyewa%20alat%20event%20(Sound%20System/Lighting/Panggung).%20Mohon%20informasi%20lebih%20lanjut%20mengenai%20ketersediaan%20dan%20harganya.%20Terima%20kasih." target="_blank" style="color: inherit; text-decoration: none;"><span>+62 878-8567-5868 (CS Suyanto)</span></a>
                     </li>
                     <li>
                         <i data-lucide="mail" class="contact-icon"></i>
@@ -1417,7 +1417,7 @@
     </button>
 
     <!-- Floating WhatsApp -->
-    <a href="https://wa.me/6287885675868?text=Halo%20RME%20Entertainment,%20saya%20tertarik%20dengan%20layanan%20event%20Anda." target="_blank" class="floating-whatsapp" aria-label="Chat WhatsApp">
+    <a href="https://wa.me/6287885675868?text=Halo%20CS%20RME%20Entertainment,%20Saya%20tertarik%20untuk%20menyewa%20alat%20event%20(Sound%20System/Lighting/Panggung).%20Mohon%20informasi%20lebih%20lanjut%20mengenai%20ketersediaan%20dan%20harganya.%20Terima%20kasih." target="_blank" class="floating-whatsapp" aria-label="Chat WhatsApp">
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
@@ -1677,11 +1677,11 @@
                     return colors[Math.floor(Math.random() * colors.length)];
                 } else {
                     const colors = [
-                        'rgba(0,0,128,',      // RME navy blue
+                        'rgba(10,37,64,',     // Dark slate
                         'rgba(37,99,235,',    // bright blue
                         'rgba(220,38,38,',    // RME red
-                        'rgba(124,58,237,',   // purple
-                        'rgba(5,150,105,'     // emerald accent
+                        'rgba(99,102,241,',   // indigo
+                        'rgba(15,23,42,'      // Slate 900
                     ];
                     return colors[Math.floor(Math.random() * colors.length)];
                 }
@@ -1717,6 +1717,27 @@
 
             function drawParticles() {
                 ctx.clearRect(0, 0, W, H);
+
+                const isDark = document.body.classList.contains('dark-mode');
+                const lineColor = isDark ? '255, 255, 255' : '10, 37, 64';
+                const connectDistance = window.innerWidth < 768 ? 90 : 150;
+
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < connectDistance) {
+                            ctx.beginPath();
+                            ctx.strokeStyle = `rgba(${lineColor}, ${0.15 - (distance / connectDistance) * 0.15})`;
+                            ctx.lineWidth = 0.8;
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
 
                 particles.forEach(p => {
                     // --- Mouse Repel Physics ---
