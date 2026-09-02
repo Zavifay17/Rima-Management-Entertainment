@@ -238,6 +238,7 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     position: relative;
+    z-index: 0;
 }
 
 /* --- Custom Scrollbar --- */
@@ -479,7 +480,7 @@ section {
     color: var(--text-secondary);
 }
 
-/* Light mode: solid white header from top */
+/* --- Main Header --- */
 .main-header {
     position: fixed;
     top: 0;
@@ -657,8 +658,14 @@ section {
 }
 
 /* --- Hero Section --- */
+main {
+    position: relative;
+    z-index: 10;
+}
 .hero-section {
     padding: 180px 0 100px 0;
+    position: relative;
+    z-index: 10;
 }
 .hero-container {
     display: grid;
