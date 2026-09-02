@@ -98,16 +98,17 @@
             <nav class="nav-menu" id="navMenu">
                 <a href="#hero" class="nav-link active">Home</a>
                 <a href="#categories" class="nav-link">Layanan</a>
-                <a href="#catalog" class="nav-link">Katalog & Paket</a>
+                <a href="#catalog" class="nav-link">Katalog Paket</a>
                 <a href="#how-it-works" class="nav-link">Cara Sewa</a>
+                <a href="#gallery" class="nav-link">Dokumentasi RME</a>
                 <a href="#testimonials" class="nav-link">Ulasan</a>
-                <a href="#rent-form-section" class="btn btn-secondary nav-btn-mobile">Sewa Sekarang</a>
+                <a href="#rent-form-section" class="nav-link">Formulir Penyewaan</a>
             </nav>
             
             <div class="header-actions">
                 <a href="#rent-form-section" class="btn btn-primary nav-btn-desktop">Sewa Sekarang</a>
                 <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu">
-                    <i data-lucide="menu" id="menuIcon"></i>
+                    <i data-lucide="more-vertical" id="menuIcon"></i>
                 </button>
             </div>
         </div>
@@ -118,6 +119,26 @@
         <section id="hero" class="hero-section">
             <div class="container hero-container">
                 <div class="hero-content">
+                    <div class="hero-quick-links" style="display: flex; gap: 1.5rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+                        <a href="#catalog" onclick="setTimeout(() => document.querySelector('.tab-btn[data-tab=\'stage\']').click(), 100)" style="display: flex; flex-direction: column; align-items: center; text-decoration: none; color: white;">
+                            <div style="background: rgba(56, 189, 248, 0.1); padding: 12px; border-radius: 50%; border: 1px solid rgba(56, 189, 248, 0.2); backdrop-filter: blur(5px); display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; transition: all 0.3s ease;">
+                                <i data-lucide="layers" style="width: 24px; height: 24px; color: #38bdf8;"></i>
+                            </div>
+                            <span style="font-size: 0.8rem; margin-top: 8px; font-weight: 500;">Panggung</span>
+                        </a>
+                        <a href="#catalog" onclick="setTimeout(() => document.querySelector('.tab-btn[data-tab=\'sound\']').click(), 100)" style="display: flex; flex-direction: column; align-items: center; text-decoration: none; color: white;">
+                            <div style="background: rgba(167, 139, 250, 0.1); padding: 12px; border-radius: 50%; border: 1px solid rgba(167, 139, 250, 0.2); backdrop-filter: blur(5px); display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; transition: all 0.3s ease;">
+                                <i data-lucide="volume-2" style="width: 24px; height: 24px; color: #a78bfa;"></i>
+                            </div>
+                            <span style="font-size: 0.8rem; margin-top: 8px; font-weight: 500;">Sound System</span>
+                        </a>
+                        <a href="#catalog" onclick="setTimeout(() => document.querySelector('.tab-btn[data-tab=\'lighting\']').click(), 100)" style="display: flex; flex-direction: column; align-items: center; text-decoration: none; color: white;">
+                            <div style="background: rgba(244, 114, 182, 0.1); padding: 12px; border-radius: 50%; border: 1px solid rgba(244, 114, 182, 0.2); backdrop-filter: blur(5px); display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; transition: all 0.3s ease;">
+                                <i data-lucide="lightbulb" style="width: 24px; height: 24px; color: #f472b6;"></i>
+                            </div>
+                            <span style="font-size: 0.8rem; margin-top: 8px; font-weight: 500;">Lighting</span>
+                        </a>
+                    </div>
                     <span class="badge">PRO EVENT EQUIPMENT RENTAL</span>
                     <h1 class="hero-title">Mewujudkan Event Spektakuler Anda Menjadi <span class="gradient-text">Nyata</span></h1>
                     <p class="hero-desc">Penyewaan sound system profesional, lighting panggung megah, dan rigging panggung modular berkelas premium untuk segala jenis event Anda.</p>
@@ -142,30 +163,74 @@
                     </div>
                 </div>
                 
-                <div class="hero-visual">
-                    <div class="visual-card glassmorphism">
-                        <div class="card-glow"></div>
-                        <div class="visual-header">
-                            <div class="window-dots">
-                                <span></span><span></span><span></span>
-                            </div>
-                            <span class="visual-tag"><i data-lucide="zap" class="tag-icon"></i> Live Status</span>
-                        </div>
-                        <div class="visual-body">
-                            <h3>RME Concert Rig</h3>
-                            <p>Premium Stage Lighting & Sound System</p>
-                            <div class="spec-list">
-                                <div class="spec-item"><i data-lucide="check-circle" class="spec-icon"></i> Sound System Paket 20000W</div>
-                                <div class="spec-item"><i data-lucide="check-circle" class="spec-icon"></i> Lighting Panggung Paket Mewah</div>
-                                <div class="spec-item"><i data-lucide="check-circle" class="spec-icon"></i> Panggung Modular 10x8m</div>
-                            </div>
-                            <div class="visual-price">
-                                <span class="price-label">Mulai dari</span>
-                                <span class="price-val">Rp 15.000.000 <small>/hari</small></span>
-                            </div>
-                            <button onclick="selectDirectPackage('concert-mega')" class="btn btn-primary btn-block">Pilih Paket Ini</button>
-                        </div>
+                <div class="hero-visual" style="align-items: flex-start; max-height: 600px; overflow-y: auto; padding-right: 15px; scrollbar-width: none; -ms-overflow-style: none;">
+                    <style>
+                        .hero-visual::-webkit-scrollbar { display: none; }
+                        .pop-card { margin-bottom: 1.5rem; position: relative; border-radius: 20px; padding: 1.5rem; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); }
+                        .pop-badge { position: absolute; top: -12px; right: 15px; background: #ef4444; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4); }
+                        .pop-tag { display: inline-block; padding: 4px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 600; margin-bottom: 12px; }
+                        .pop-tag.sound { background: rgba(167, 139, 250, 0.15); color: #a78bfa; }
+                        .pop-tag.light { background: rgba(244, 114, 182, 0.15); color: #f472b6; }
+                        .pop-tag.stage { background: rgba(56, 189, 248, 0.15); color: #38bdf8; }
+                        .pop-features { list-style: none; padding: 0; margin: 15px 0; }
+                        .pop-features li { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; font-size: 0.85rem; color: #cbd5e1; }
+                        .pop-features li i { color: #ef4444; flex-shrink: 0; margin-top: 2px; }
+                        .pop-price { font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 15px; }
+                        .pop-price small { font-size: 0.85rem; font-weight: 400; color: #94a3b8; }
+                    </style>
+
+                    <!-- Paling Populer Sound System -->
+                    <div class="pop-card">
+                        <div class="pop-badge">PALING POPULER</div>
+                        <span class="pop-tag sound">Sound</span>
+                        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 10px;">Sound System Paket 10000W</h3>
+                        <p style="font-size: 0.9rem; color: #94a3b8; line-height: 1.5;">Paket profesional untuk mini konser, festival musik sekolah, gathering besar, dan gathering outdoor skala menengah.</p>
+                        <ul class="pop-features">
+                            <li><i data-lucide="check" style="width:16px;height:16px;"></i> FOH 12" x 4 Box</li>
+                            <li><i data-lucide="check" style="width:16px;height:16px;"></i> FOH 15" x 4 Box</li>
+                            <li><i data-lucide="check" style="width:16px;height:16px;"></i> Subwoofer 18" x 2 Box</li>
+                            <li><i data-lucide="check" style="width:16px;height:16px;"></i> 4 Unit Monitor Aktif</li>
+                            <li><i data-lucide="check" style="width:16px;height:16px;"></i> Setup & Operator standby</li>
+                            <li><i data-lucide="check" style="width:16px;height:16px;"></i> Crew & Sound Engineer Profesional</li>
+                        </ul>
+                        <div class="pop-price">Rp 3.000.000 <small>/hari</small></div>
+                        <button onclick="selectDirectPackage('sound-10000w')" class="btn btn-primary btn-block">Pilih Paket Ini</button>
                     </div>
+
+                    <!-- Paling Populer Panggung -->
+                    <div class="pop-card">
+                        <div class="pop-badge">PALING POPULER</div>
+                        <span class="pop-tag stage">Panggung</span>
+                        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 10px;">Panggung Modular 8x6m</h3>
+                        <p style="font-size: 0.9rem; color: #94a3b8; line-height: 1.5;">Standar panggung sedang untuk pentas seni sekolah, pesta pernikahan, dan corporate gathering outdoor.</p>
+                        <ul class="pop-features">
+                            <li><i data-lucide="check" style="width:16px;height:16px;"></i> Alas Panggung Modular 8m x 6m</li>
+                            <li><i data-lucide="check" style="width:16px;height:16px;"></i> Leveling Karpet Halus Pilihan</li>
+                            <li><i data-lucide="check" style="width:16px;height:16px;"></i> Tangga Akses & Guardrail Samping</li>
+                            <li><i data-lucide="check" style="width:16px;height:16px;"></i> Konstruksi Kerangka Besi Kokoh</li>
+                            <li><i data-lucide="check" style="width:16px;height:16px;"></i> Termasuk Biaya Kirim & Setup Cepat</li>
+                        </ul>
+                        <div class="pop-price">Rp 4.500.000 <small>/hari</small></div>
+                        <button onclick="selectDirectPackage('stage-8x6')" class="btn btn-primary btn-block">Pilih Paket Ini</button>
+                    </div>
+
+                    <!-- Paling Populer Lighting -->
+                    <div class="pop-card">
+                        <div class="pop-badge">PALING POPULER</div>
+                        <span class="pop-tag light">Lighting</span>
+                        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 10px;">Lighting Paket Menengah</h3>
+                        <p style="font-size: 0.9rem; color: #94a3b8; line-height: 1.5;">Kombinasi optimal untuk panggung gathering megah, konser musik mini, dan dekorasi lampu dinamis.</p>
+                        <ul class="pop-features">
+                            <li><i data-lucide="check" style="width:16px;height:16px;"></i> 7 Unit Moving Beam</li>
+                            <li><i data-lucide="check" style="width:16px;height:16px;"></i> 3 Box Par LED (12 Unit)</li>
+                            <li><i data-lucide="check" style="width:16px;height:16px;"></i> 3 Unit Lampu Fresnel</li>
+                            <li><i data-lucide="check" style="width:16px;height:16px;"></i> 1 Unit Mesin Asap & 1 Hazer</li>
+                            <li><i data-lucide="check" style="width:16px;height:16px;"></i> Operator & Kabel instalasi</li>
+                        </ul>
+                        <div class="pop-price">Rp 3.000.000 <small>/hari</small></div>
+                        <button onclick="selectDirectPackage('light-menengah')" class="btn btn-primary btn-block">Pilih Paket Ini</button>
+                    </div>
+
                 </div>
             </div>
         </section>
