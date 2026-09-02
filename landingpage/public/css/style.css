@@ -35,6 +35,7 @@
 }
 
 /* --- Dark Mode Variables --- */
+html.dark-mode,
 body.dark-mode {
     --bg-dark-base: #0f172a; /* Slate 900 */
     --bg-dark-card: #1e293b; /* Slate 800 */
@@ -46,6 +47,155 @@ body.dark-mode {
     
     --color-primary: #3b82f6; /* Blue 500 */
     --color-primary-rgb: 59, 130, 246;
+}
+
+/* =============================================================
+   PREMIUM FEATURES CSS
+   ============================================================= */
+
+/* ---- 1. PREMIUM PRELOADER ---- */
+#rme-preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: var(--bg-dark-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+#rme-preloader.hide {
+    opacity: 0;
+    visibility: hidden;
+}
+.preloader-inner {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+.preloader-logo {
+    font-family: var(--font-heading);
+    font-size: clamp(3rem, 10vw, 5rem);
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    animation: preloader-pulse 1.5s ease-in-out infinite;
+}
+.preloader-logo .logo-r { color: #000080; }
+.preloader-logo .logo-m { color: #000080; }
+.preloader-logo .logo-e { color: #ff0000; }
+body.dark-mode .preloader-logo .logo-r { color: #38bdf8; }
+body.dark-mode .preloader-logo .logo-m { color: #38bdf8; }
+body.dark-mode .preloader-logo .logo-e { color: #f87171; }
+.preloader-subtext {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+.preloader-bar {
+    width: 180px;
+    height: 3px;
+    background: rgba(0,0,0,0.1);
+    border-radius: 99px;
+    overflow: hidden;
+    margin-top: 8px;
+}
+body.dark-mode .preloader-bar {
+    background: rgba(255,255,255,0.1);
+}
+.preloader-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #000080, #3b82f6, #ff0000);
+    border-radius: 99px;
+    animation: preloader-fill 1.8s ease-in-out forwards;
+}
+body.dark-mode .preloader-fill {
+    background: linear-gradient(90deg, #38bdf8, #6366f1, #f87171);
+}
+@keyframes preloader-pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.85; }
+}
+@keyframes preloader-fill {
+    0% { width: 0%; }
+    60% { width: 85%; }
+    100% { width: 100%; }
+}
+
+/* ---- 2. CUSTOM CURSOR (Desktop) ---- */
+#cursor-dot {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99998;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s ease, height 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+    will-change: transform;
+}
+#cursor-ring {
+    position: fixed;
+    width: 36px;
+    height: 36px;
+    border: 2px solid rgba(var(--color-primary-rgb), 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99997;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                opacity 0.3s ease,
+                border-color 0.3s ease;
+    will-change: transform;
+}
+/* Expanded cursor on hoverable elements */
+body.cursor-hover #cursor-dot {
+    width: 12px;
+    height: 12px;
+    background: var(--color-accent);
+}
+body.cursor-hover #cursor-ring {
+    width: 56px;
+    height: 56px;
+    border-color: rgba(var(--color-primary-rgb), 0.3);
+}
+/* Hide custom cursor on mobile/touch */
+@media (hover: none), (pointer: coarse) {
+    #cursor-dot, #cursor-ring { display: none !important; }
+}
+
+/* ---- 3. AMBIENT PARTICLE CANVAS ---- */
+#particle-canvas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+}
+body.dark-mode #particle-canvas {
+    opacity: 0.7;
+}
+
+/* ---- 4. 3D TILT CARD EFFECT ---- */
+.tilt-card {
+    transform-style: preserve-3d;
+    will-change: transform;
+    transition: transform 0.1s ease, box-shadow 0.3s ease;
+}
+.tilt-card:hover {
+    box-shadow: 0 30px 60px rgba(0, 0, 128, 0.12) !important;
+}
+body.dark-mode .tilt-card:hover {
+    box-shadow: 0 30px 60px rgba(59, 130, 246, 0.18) !important;
+}
+@media (hover: none), (pointer: coarse) {
+    .tilt-card { transform: none !important; }
 }
 
 /* --- Base & Reset Rules --- */

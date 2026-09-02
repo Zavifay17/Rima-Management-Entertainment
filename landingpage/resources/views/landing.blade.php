@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    <!-- Anti-FOUC: Apply theme IMMEDIATELY to prevent flash -->
+    <script>
+        (function(){
+            const t = localStorage.getItem('rme_theme');
+            if (t === 'dark') document.documentElement.classList.add('dark-mode');
+        })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Rima Entertainment (RME) - Jasa penyewaan alat event premium terlengkap di Indonesia. Sound system konser, lighting panggung, LED videotron, & rigging berkualitas tinggi untuk event spektakuler Anda.">
@@ -85,6 +92,30 @@
     </style>
 </head>
 <body data-spy="scroll" data-target=".nav-menu" data-offset="100">
+
+    <!-- ==========================================
+         PREMIUM PRELOADER
+    ========================================== -->
+    <div id="rme-preloader">
+        <div class="preloader-inner">
+            <div class="preloader-logo">
+                <span class="logo-r">R</span><span class="logo-m">M</span><span class="logo-e">E</span>
+            </div>
+            <div class="preloader-subtext">ENTERTAINMENT</div>
+            <div class="preloader-bar"><div class="preloader-fill"></div></div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         CUSTOM CURSOR (Desktop only)
+    ========================================== -->
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
+
+    <!-- ==========================================
+         AMBIENT PARTICLE CANVAS
+    ========================================== -->
+    <canvas id="particle-canvas"></canvas>
 
     <!-- Scroll Progress Bar -->
     <div id="scroll-progress"></div>
@@ -1501,5 +1532,191 @@
         });
     </script>
     <script src="{{ asset('js/app.js') }}"></script>
+
+    <!-- =====================================================
+         PREMIUM FEATURES JAVASCRIPT
+         ===================================================== -->
+    <script>
+    (function() {
+        'use strict';
+
+        // =====================================================
+        // 1. PREMIUM PRELOADER
+        // =====================================================
+        const preloader = document.getElementById('rme-preloader');
+        if (preloader) {
+            // Apply dark mode to preloader immediately from localStorage
+            const savedTheme = localStorage.getItem('rme_theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+            }
+
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    preloader.classList.add('hide');
+                    // Remove from DOM after fade out
+                    setTimeout(() => { preloader.remove(); }, 700);
+                }, 1200);
+            });
+            // Fallback: remove after 3.5s even if load hasn't fired
+            setTimeout(() => {
+                if (preloader && !preloader.classList.contains('hide')) {
+                    preloader.classList.add('hide');
+                    setTimeout(() => { preloader.remove(); }, 700);
+                }
+            }, 3500);
+        }
+
+        // =====================================================
+        // 2. CUSTOM CURSOR (Desktop only)
+        // =====================================================
+        const cursorDot  = document.getElementById('cursor-dot');
+        const cursorRing = document.getElementById('cursor-ring');
+
+        if (cursorDot && cursorRing && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+            let dotX = 0, dotY = 0, ringX = 0, ringY = 0;
+            let rafId;
+
+            const hoverTargets = 'a, button, .nav-link, .catalog-item, .pop-card, .category-card, .tab-btn, .step-card, .testimonial-card, input, textarea, select, label';
+
+            // Hide default cursor
+            document.documentElement.style.cursor = 'none';
+
+            document.addEventListener('mousemove', (e) => {
+                dotX  = e.clientX;
+                dotY  = e.clientY;
+
+                // Dot follows instantly via JS
+                cursorDot.style.left  = dotX + 'px';
+                cursorDot.style.top   = dotY  + 'px';
+            });
+
+            // Ring uses smooth lerp
+            function animateRing() {
+                ringX += (dotX - ringX) * 0.12;
+                ringY += (dotY - ringY) * 0.12;
+                cursorRing.style.left = ringX + 'px';
+                cursorRing.style.top  = ringY + 'px';
+                rafId = requestAnimationFrame(animateRing);
+            }
+            animateRing();
+
+            // Hover magnify effect
+            document.querySelectorAll(hoverTargets).forEach(el => {
+                el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+                el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+            });
+
+            // Hide cursor when leaving window
+            document.addEventListener('mouseleave', () => {
+                cursorDot.style.opacity  = '0';
+                cursorRing.style.opacity = '0';
+            });
+            document.addEventListener('mouseenter', () => {
+                cursorDot.style.opacity  = '1';
+                cursorRing.style.opacity = '1';
+            });
+        }
+
+        // =====================================================
+        // 3. AMBIENT FLOATING PARTICLES
+        // =====================================================
+        const canvas = document.getElementById('particle-canvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let W, H;
+
+            function resizeCanvas() {
+                W = canvas.width  = window.innerWidth;
+                H = canvas.height = window.innerHeight;
+            }
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            const PARTICLE_COUNT = window.innerWidth < 768 ? 30 : 60;
+
+            function getParticleColor() {
+                const isDark = document.body.classList.contains('dark-mode');
+                if (isDark) {
+                    const colors = ['rgba(56,189,248,', 'rgba(99,102,241,', 'rgba(248,113,113,', 'rgba(255,255,255,'];
+                    return colors[Math.floor(Math.random() * colors.length)];
+                } else {
+                    const colors = ['rgba(0,0,128,', 'rgba(59,130,246,', 'rgba(255,0,0,', 'rgba(0,0,0,'];
+                    return colors[Math.floor(Math.random() * colors.length)];
+                }
+            }
+
+            function createParticle() {
+                return {
+                    x: Math.random() * W,
+                    y: Math.random() * H,
+                    r: Math.random() * 2 + 0.5,
+                    dx: (Math.random() - 0.5) * 0.4,
+                    dy: (Math.random() - 0.5) * 0.4,
+                    alpha: Math.random() * 0.4 + 0.1,
+                    color: getParticleColor()
+                };
+            }
+
+            for (let i = 0; i < PARTICLE_COUNT; i++) {
+                particles.push(createParticle());
+            }
+
+            function drawParticles() {
+                ctx.clearRect(0, 0, W, H);
+                particles.forEach(p => {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color + p.alpha + ')';
+                    ctx.fill();
+
+                    p.x += p.dx;
+                    p.y += p.dy;
+
+                    if (p.x < 0) p.x = W;
+                    if (p.x > W) p.x = 0;
+                    if (p.y < 0) p.y = H;
+                    if (p.y > H) p.y = 0;
+                });
+                requestAnimationFrame(drawParticles);
+            }
+            drawParticles();
+
+            // Update particle colours when theme toggles
+            const themeToggleBtn = document.getElementById('themeToggle');
+            if (themeToggleBtn) {
+                themeToggleBtn.addEventListener('click', () => {
+                    particles.forEach(p => { p.color = getParticleColor(); });
+                });
+            }
+        }
+
+        // =====================================================
+        // 4. 3D TILT EFFECT on Cards (Desktop)
+        // =====================================================
+        if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+            document.querySelectorAll('.catalog-item, .pop-card, .category-card').forEach(card => {
+                card.classList.add('tilt-card');
+
+                card.addEventListener('mousemove', (e) => {
+                    const rect   = card.getBoundingClientRect();
+                    const cX     = rect.left + rect.width  / 2;
+                    const cY     = rect.top  + rect.height / 2;
+                    const dx     = (e.clientX - cX) / (rect.width  / 2);
+                    const dy     = (e.clientY - cY) / (rect.height / 2);
+                    const tiltX  = dy * -8;   // max 8deg
+                    const tiltY  = dx *  8;
+                    card.style.transform = `perspective(800px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`;
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+                });
+            });
+        }
+
+    })();
+    </script>
 </body>
 </html>
