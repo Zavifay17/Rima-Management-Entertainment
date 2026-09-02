@@ -43,7 +43,7 @@
     
     <!-- Stylesheet -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}?v={{ time() }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css?v=' . time()) }}">
     
     <!-- Flatpickr CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -1876,19 +1876,25 @@
 
         window.addEventListener('scroll', () => {
             // Scroll Progress
-            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollTop = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
             const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrollPercentage = (scrollTop / scrollHeight) * 100;
+            const scrollPercentage = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+            
             if(scrollBar) {
                 scrollBar.style.width = scrollPercentage + '%';
             }
 
             // Back to Top Button Visibility
             if(backToTopBtn) {
-                if (scrollTop > 500) {
+                if (scrollTop > 400) {
                     backToTopBtn.classList.add('visible');
+                    // Force styling just in case CSS misses it
+                    backToTopBtn.style.opacity = '1';
+                    backToTopBtn.style.pointerEvents = 'auto';
                 } else {
                     backToTopBtn.classList.remove('visible');
+                    backToTopBtn.style.opacity = '0';
+                    backToTopBtn.style.pointerEvents = 'none';
                 }
             }
         });
