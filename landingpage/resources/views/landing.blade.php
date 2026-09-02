@@ -1888,6 +1888,9 @@
             }
         });
 
+        // =====================================================
+        // 5. Back to Top Click Action
+        // =====================================================
         if(backToTopBtn) {
             backToTopBtn.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -1897,6 +1900,44 @@
                 });
             });
         }
+
+        // =====================================================
+        // 6. Click Shockwave (Phase 6)
+        // =====================================================
+        document.addEventListener('click', function(e) {
+            const ripple = document.createElement('div');
+            ripple.className = 'click-shockwave';
+            ripple.style.left = e.clientX + 'px';
+            ripple.style.top = e.clientY + 'px';
+            document.body.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 1000);
+        });
+
+        // =====================================================
+        // 7. Hero Mouse Parallax (Phase 6)
+        // =====================================================
+        if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+            const parallaxOrbs = document.querySelectorAll('.orb');
+            const heroVisual = document.querySelector('.hero-visual');
+            
+            window.addEventListener('mousemove', e => {
+                const x = (e.clientX - window.innerWidth / 2) / 50;
+                const y = (e.clientY - window.innerHeight / 2) / 50;
+                
+                parallaxOrbs.forEach((orb, index) => {
+                    const speed = (index === 0) ? 2 : -3;
+                    orb.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+                });
+                
+                if(heroVisual) {
+                    heroVisual.style.transform = `translate(${x * -0.5}px, ${y * -0.5}px)`;
+                }
+            });
+        }
+
     })();
     </script>
 </body>

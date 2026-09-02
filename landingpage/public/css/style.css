@@ -2687,47 +2687,78 @@ body.dark-mode ::-moz-selection {
     transition: width 0.1s ease-out;
 }
 
-/* --- Back to Top Button --- */
+/* --- Back to Top Button Polish (Phase 6) --- */
 .back-to-top {
     position: fixed;
-    bottom: -60px;
+    bottom: -80px;
     right: 30px;
-    width: 50px;
-    height: 50px;
-    background: rgba(255,255,255,0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.2);
+    width: 55px;
+    height: 55px;
+    background: rgba(var(--color-primary-rgb), 0.9);
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255,255,255,0.2);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-primary);
-    z-index: 998;
+    color: white;
+    z-index: 999;
     cursor: pointer;
-    transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.3s ease, background 0.3s ease;
-    text-decoration: none;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 25px rgba(var(--color-primary-rgb), 0.5);
+}
+.back-to-top i {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease;
 }
 .back-to-top.visible {
-    bottom: 30px;
+    bottom: 40px;
 }
 .back-to-top:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px) scale(1.1);
     background: var(--color-primary);
-    color: white;
+    box-shadow: 0 15px 35px rgba(var(--color-primary-rgb), 0.7);
+}
+.back-to-top:hover i {
+    transform: translateY(-3px);
 }
 body.dark-mode .back-to-top {
-    color: white;
-    border-color: rgba(255,255,255,0.1);
+    background: rgba(225, 29, 72, 0.9); /* Accent red */
+    box-shadow: 0 10px 25px rgba(225, 29, 72, 0.4);
 }
 body.dark-mode .back-to-top:hover {
     background: var(--color-accent);
+    box-shadow: 0 15px 35px rgba(225, 29, 72, 0.7);
 }
-/* Ensure it doesn't conflict with WhatsApp on mobile */
 @media (max-width: 768px) {
     .back-to-top.visible {
         bottom: 90px;
+        right: 20px;
+        width: 48px;
+        height: 48px;
     }
+}
+
+/* --- Click Shockwave (Phase 6) --- */
+.click-shockwave {
+    position: fixed;
+    border-radius: 50%;
+    border: 2px solid var(--color-primary);
+    width: 20px;
+    height: 20px;
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+    pointer-events: none;
+    z-index: 99999;
+    animation: shockwaveAnim 0.7s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+}
+body.dark-mode .click-shockwave {
+    border-color: var(--color-accent);
+}
+@keyframes shockwaveAnim {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; border-width: 4px; }
+    100% { transform: translate(-50%, -50%) scale(12); opacity: 0; border-width: 0px; }
 }
 
 /* --- Film Noise Texture (Subtle) --- */
