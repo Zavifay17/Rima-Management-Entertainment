@@ -1834,11 +1834,11 @@
                     const centerX = rect.width / 2;
                     const centerY = rect.height / 2;
                     
-                    const rotateX = ((y - centerY) / centerY) * -10; // Max rotation 10deg
-                    const rotateY = ((x - centerX) / centerX) * 10;
+                    const rotateX = ((y - centerY) / centerY) * -4; // Softer max rotation 4deg
+                    const rotateY = ((x - centerX) / centerX) * 4;
                     
                     const isHighlighted = card.classList.contains('highlighted');
-                    const scale = isHighlighted ? 1.08 : 1.02;
+                    const scale = isHighlighted ? 1.06 : 1.01;
                     
                     card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(${scale}, ${scale}, ${scale})`;
                 });
