@@ -1821,27 +1821,36 @@
         }
 
         // =====================================================
-        // 4. 3D TILT EFFECT on Cards (Desktop)
+        // 4. 3D Tilt Effect for Cards
         // =====================================================
         if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-            document.querySelectorAll('.catalog-item, .pop-card, .category-card').forEach(card => {
-                card.classList.add('tilt-card');
-
-                card.addEventListener('mousemove', (e) => {
-                    const rect   = card.getBoundingClientRect();
-                    const cX     = rect.left + rect.width  / 2;
-                    const cY     = rect.top  + rect.height / 2;
-                    const dx     = (e.clientX - cX) / (rect.width  / 2);
-                    const dy     = (e.clientY - cY) / (rect.height / 2);
-                    const tiltX  = dy * -8;   // max 8deg
-                    const tiltY  = dx *  8;
-                    card.style.transform = `perspective(800px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`;
+            const tiltCards = document.querySelectorAll('.tilt-card');
+            tiltCards.forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateX = ((y - centerY) / centerY) * -10; // Max rotation 10deg
+                    const rotateY = ((x - centerX) / centerX) * 10;
+                    
+                    const isHighlighted = card.classList.contains('highlighted');
+                    const scale = isHighlighted ? 1.08 : 1.02;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(${scale}, ${scale}, ${scale})`;
                 });
-
+                
                 card.addEventListener('mouseleave', () => {
-                    card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+                    const isHighlighted = card.classList.contains('highlighted');
+                    const scale = isHighlighted ? 1.05 : 1;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(${scale}, ${scale}, ${scale})`;
                     card.style.transition = 'transform 0.5s ease';
                 });
+                
                 card.addEventListener('mouseenter', () => {
                     card.style.transition = 'none'; // Remove transition for smooth tracking
                 });

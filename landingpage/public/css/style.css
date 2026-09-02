@@ -2651,13 +2651,9 @@ body.dark-mode ::-moz-selection {
 
 /* --- 3D Tilt Container Base --- */
 .tilt-card {
-    transform-style: preserve-3d;
-    transform: perspective(1000px);
     will-change: transform;
 }
-.tilt-card > * {
-    transform: translateZ(30px); /* Makes content pop out */
-}
+/* Removed preserve-3d to fix overflow: hidden clipping issues with Phase 5 Gradient Mesh */
 
 /* --- Micro-interactions (Icons) --- */
 .category-card:hover .category-icon-wrapper i,
