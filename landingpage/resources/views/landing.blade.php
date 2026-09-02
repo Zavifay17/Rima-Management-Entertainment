@@ -163,7 +163,7 @@
                     </div>
                 </div>
                 
-                <div class="hero-visual" style="display: flex; flex-direction: column; align-items: stretch; max-height: 600px; overflow-y: auto; padding: 15px 15px 15px 5px; scrollbar-width: none; -ms-overflow-style: none;">
+                <div class="hero-visual" style="display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; max-height: 600px; overflow-y: auto; padding: 15px 15px 15px 5px; scrollbar-width: none; -ms-overflow-style: none;">
                     <style>
                         .hero-visual::-webkit-scrollbar { display: none; }
                         .pop-card { margin-bottom: 1.5rem; position: relative; border-radius: 20px; padding: 1.5rem; background: #ffffff; border: 1px solid #e2e8f0; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s ease; }
