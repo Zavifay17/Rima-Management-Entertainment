@@ -73,7 +73,19 @@ body.dark-mode {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
+    gap: 15px;
+}
+
+.preloader-logo-img img {
+    width: 280px;
+    height: auto;
+    animation: preloader-pulse 1.5s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+    .preloader-logo-img img {
+        width: 200px;
+    }
 }
 .preloader-logo {
     font-family: var(--font-heading);
@@ -175,7 +187,7 @@ body.cursor-hover #cursor-ring {
     position: fixed;
     inset: 0;
     pointer-events: none;
-    z-index: 0;
+    z-index: -1; /* Placed behind all content */
     opacity: 1; /* Fully visible in light mode - colors control visibility */
     transition: opacity 0.5s ease;
 }

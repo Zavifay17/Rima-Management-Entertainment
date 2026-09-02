@@ -105,7 +105,7 @@
     <div id="rme-preloader">
         <div class="preloader-inner">
             <div class="preloader-logo-img">
-                <img src="{{ asset('logo.png') }}" alt="RME Entertainment" style="width: 220px; height: auto; animation: preloader-pulse 1.5s ease-in-out infinite;">
+                <img src="{{ asset('logo.png') }}" alt="RME Entertainment">
             </div>
             <div class="preloader-subtext">ENTERTAINMENT</div>
             <div class="preloader-bar"><div class="preloader-fill"></div></div>
