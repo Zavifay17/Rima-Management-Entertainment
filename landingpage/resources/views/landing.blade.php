@@ -1598,10 +1598,16 @@
 
             // Hide default cursor
             document.documentElement.style.cursor = 'none';
+            let isCursorVisible = false;
 
-            document.addEventListener('mousemove', (e) => {
-                dotX  = e.clientX;
-                dotY  = e.clientY;
+            document.addEventListener('mousemove', e => {
+                if (!isCursorVisible) {
+                    cursorDot.style.opacity = '1';
+                    cursorRing.style.opacity = '1';
+                    isCursorVisible = true;
+                }
+                dotX = e.clientX;
+                dotY = e.clientY;
 
                 // Dot follows instantly via JS
                 cursorDot.style.left  = dotX + 'px';
