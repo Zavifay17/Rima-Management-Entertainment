@@ -84,7 +84,10 @@
         }
     </style>
 </head>
-<body>
+<body data-spy="scroll" data-target=".nav-menu" data-offset="100">
+
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress"></div>
 
     <!-- Space Glow Elements -->
     <div class="glow-orb orb-1"></div>
@@ -144,7 +147,7 @@
                         </a>
                     </div>
                     <span class="badge" data-aos="fade-up" data-aos-delay="300">PRO EVENT EQUIPMENT RENTAL</span>
-                    <h1 class="hero-title" data-aos="fade-up" data-aos-delay="400">Mewujudkan Event Spektakuler Anda Menjadi <span class="gradient-text">Nyata</span></h1>
+                    <h1 class="hero-title" data-aos="fade-up" data-aos-delay="400">Mewujudkan Event Spektakuler Anda Menjadi <span class="gradient-text"><span class="typewriter-text"></span><span class="cursor">|</span></span></h1>
                     <p class="hero-desc" data-aos="fade-up" data-aos-delay="500">Penyewaan sound system profesional, lighting panggung megah, dan rigging panggung modular berkelas premium untuk segala jenis event Anda.</p>
                     <div class="hero-actions" data-aos="fade-up" data-aos-delay="600">
                         <a href="#catalog" class="btn btn-primary btn-lg">Jelajahi Paket</a>
@@ -1343,9 +1346,19 @@
     });
     </script>
 
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" aria-label="Kembali ke atas">
+        <i data-lucide="chevron-up"></i>
+    </button>
+
     <!-- Floating WhatsApp -->
     <a href="https://wa.me/6287885675868?text=Halo%20RME%20Entertainment,%20saya%20tertarik%20dengan%20layanan%20event%20Anda." target="_blank" class="floating-whatsapp" aria-label="Chat WhatsApp">
         <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- Sticky Mobile CTA -->
+    <a href="#booking-section" class="mobile-sticky-cta d-md-none" onclick="document.getElementById('bookingForm').scrollIntoView({behavior: 'smooth'})">
+        <i class="fa-solid fa-bolt"></i> Sewa Sekarang
     </a>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -1356,6 +1369,74 @@
                 once: true,
                 offset: 100
             });
+
+            // Typewriter Effect
+            const words = ["Nyata", "Luar Biasa", "Megah", "Tak Terlupakan"];
+            let i = 0;
+            let timer;
+            
+            function typingEffect() {
+                let word = words[i].split("");
+                var loopTyping = function() {
+                    if (word.length > 0) {
+                        document.querySelector('.typewriter-text').innerHTML += word.shift();
+                    } else {
+                        setTimeout(deletingEffect, 2000);
+                        return false;
+                    }
+                    timer = setTimeout(loopTyping, 150);
+                };
+                loopTyping();
+            }
+
+            function deletingEffect() {
+                let word = words[i].split("");
+                var loopDeleting = function() {
+                    if (word.length > 0) {
+                        word.pop();
+                        document.querySelector('.typewriter-text').innerHTML = word.join("");
+                    } else {
+                        if (words.length > (i + 1)) {
+                            i++;
+                        } else {
+                            i = 0;
+                        }
+                        setTimeout(typingEffect, 500);
+                        return false;
+                    }
+                    timer = setTimeout(loopDeleting, 100);
+                };
+                loopDeleting();
+            }
+            
+            if(document.querySelector('.typewriter-text')){
+                typingEffect();
+            }
+
+            // Scroll Progress & Back to Top
+            const scrollProgress = document.getElementById('scroll-progress');
+            const backToTopBtn = document.getElementById('back-to-top');
+            
+            window.addEventListener('scroll', () => {
+                const scrollPx = document.documentElement.scrollTop;
+                const winHeightPx = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = `${scrollPx / winHeightPx * 100}%`;
+                if(scrollProgress) scrollProgress.style.width = scrolled;
+
+                if (backToTopBtn) {
+                    if (scrollPx > 300) {
+                        backToTopBtn.classList.add('show');
+                    } else {
+                        backToTopBtn.classList.remove('show');
+                    }
+                }
+            });
+
+            if(backToTopBtn){
+                backToTopBtn.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
         });
     </script>
     <script src="{{ asset('js/app.js') }}"></script>
