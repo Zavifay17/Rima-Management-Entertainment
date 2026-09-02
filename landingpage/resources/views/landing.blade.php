@@ -1647,27 +1647,49 @@
             resizeCanvas();
             window.addEventListener('resize', resizeCanvas);
 
-            const PARTICLE_COUNT = window.innerWidth < 768 ? 30 : 60;
+            const PARTICLE_COUNT = window.innerWidth < 768 ? 50 : 90;
 
             function getParticleColor() {
                 const isDark = document.body.classList.contains('dark-mode');
                 if (isDark) {
-                    const colors = ['rgba(56,189,248,', 'rgba(99,102,241,', 'rgba(248,113,113,', 'rgba(255,255,255,'];
+                    // Vivid neon colors for dark mode
+                    const colors = [
+                        'rgba(56,189,248,',   // sky blue
+                        'rgba(99,102,241,',   // indigo
+                        'rgba(248,113,113,',  // red/pink
+                        'rgba(167,139,250,',  // purple
+                        'rgba(255,255,255,'   // white
+                    ];
                     return colors[Math.floor(Math.random() * colors.length)];
                 } else {
-                    const colors = ['rgba(0,0,128,', 'rgba(59,130,246,', 'rgba(255,0,0,', 'rgba(0,0,0,'];
+                    // Bold brand colors for light mode (visible on white bg)
+                    const colors = [
+                        'rgba(0,0,128,',      // RME navy blue
+                        'rgba(37,99,235,',    // bright blue
+                        'rgba(220,38,38,',    // RME red
+                        'rgba(124,58,237,',   // purple
+                        'rgba(5,150,105,'     // emerald accent
+                    ];
                     return colors[Math.floor(Math.random() * colors.length)];
                 }
+            }
+
+            function getParticleAlpha() {
+                const isDark = document.body.classList.contains('dark-mode');
+                // In light mode use higher alpha so particles are clearly visible
+                return isDark
+                    ? (Math.random() * 0.45 + 0.15)
+                    : (Math.random() * 0.35 + 0.25);
             }
 
             function createParticle() {
                 return {
                     x: Math.random() * W,
                     y: Math.random() * H,
-                    r: Math.random() * 2 + 0.5,
-                    dx: (Math.random() - 0.5) * 0.4,
-                    dy: (Math.random() - 0.5) * 0.4,
-                    alpha: Math.random() * 0.4 + 0.1,
+                    r: Math.random() * 2.5 + 1,   // larger: 1–3.5px
+                    dx: (Math.random() - 0.5) * 0.5,
+                    dy: (Math.random() - 0.5) * 0.5,
+                    alpha: getParticleAlpha(),
                     color: getParticleColor()
                 };
             }
@@ -1696,11 +1718,17 @@
             }
             drawParticles();
 
-            // Update particle colours when theme toggles
+            // Update particle colours AND alpha when theme toggles
             const themeToggleBtn = document.getElementById('themeToggle');
             if (themeToggleBtn) {
                 themeToggleBtn.addEventListener('click', () => {
-                    particles.forEach(p => { p.color = getParticleColor(); });
+                    // Small delay to let dark-mode class get applied first
+                    setTimeout(() => {
+                        particles.forEach(p => {
+                            p.color = getParticleColor();
+                            p.alpha = getParticleAlpha();
+                        });
+                    }, 50);
                 });
             }
         }
