@@ -326,6 +326,24 @@
             </div>
         </section>
 
+        <!-- Infinite Marquee (Phase 5) -->
+        <div class="marquee-container">
+            <div class="marquee-content">
+                <!-- First set -->
+                <span>PROFESSIONAL SOUND SYSTEM <i class="fa-solid fa-star"></i></span>
+                <span>STAGE RIGGING & STRUCTURE <i class="fa-solid fa-star"></i></span>
+                <span>CONCERT LIGHTING <i class="fa-solid fa-star"></i></span>
+                <span>PREMIUM EVENT EQUIPMENT <i class="fa-solid fa-star"></i></span>
+                <span>RIMA MANAGEMENT ENTERTAINMENT <i class="fa-solid fa-star"></i></span>
+                <!-- Second set for seamless looping -->
+                <span>PROFESSIONAL SOUND SYSTEM <i class="fa-solid fa-star"></i></span>
+                <span>STAGE RIGGING & STRUCTURE <i class="fa-solid fa-star"></i></span>
+                <span>CONCERT LIGHTING <i class="fa-solid fa-star"></i></span>
+                <span>PREMIUM EVENT EQUIPMENT <i class="fa-solid fa-star"></i></span>
+                <span>RIMA MANAGEMENT ENTERTAINMENT <i class="fa-solid fa-star"></i></span>
+            </div>
+        </div>
+
         <!-- Kategori Layanan -->
         <section id="categories" class="categories-section" data-aos="fade-up">
             <div class="container">
