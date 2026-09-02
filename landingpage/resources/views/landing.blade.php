@@ -1662,7 +1662,7 @@
             resizeCanvas();
             window.addEventListener('resize', resizeCanvas);
 
-            const PARTICLE_COUNT = window.innerWidth < 768 ? 70 : 150; // Increased for denser luxury feel
+            const PARTICLE_COUNT = window.innerWidth < 768 ? 35 : 60; // Standard, elegant, not too crowded
 
             function getParticleColor() {
                 const isDark = document.body.classList.contains('dark-mode');
@@ -1732,8 +1732,8 @@
 
                         if (distance < connectDistance) {
                             ctx.beginPath();
-                            ctx.strokeStyle = `rgba(${lineColor}, ${0.35 - (distance / connectDistance) * 0.35})`; // Increased line opacity
-                            ctx.lineWidth = 1.0;
+                            ctx.strokeStyle = `rgba(${lineColor}, ${0.30 - (distance / connectDistance) * 0.30})`; // Slightly softer lines
+                            ctx.lineWidth = 0.8;
                             ctx.moveTo(particles[i].x, particles[i].y);
                             ctx.lineTo(particles[j].x, particles[j].y);
                             ctx.stroke();
