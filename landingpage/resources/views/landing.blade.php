@@ -1344,7 +1344,7 @@
     </script>
 
     <!-- Floating WhatsApp -->
-    <a href="https://wa.me/6288908866762?text=Halo%20RME%20Entertainment,%20saya%20tertarik%20dengan%20layanan%20event%20Anda." target="_blank" class="floating-whatsapp" aria-label="Chat WhatsApp">
+    <a href="https://wa.me/6287885675868?text=Halo%20RME%20Entertainment,%20saya%20tertarik%20dengan%20layanan%20event%20Anda." target="_blank" class="floating-whatsapp" aria-label="Chat WhatsApp">
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
