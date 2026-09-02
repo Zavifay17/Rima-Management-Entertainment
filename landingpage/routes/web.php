@@ -17,7 +17,50 @@ Route::get('/', function () {
             $bookedDates[] = date('Y-m-d', $i);
         }
     }
-    return view('landing', ['bookedDates' => array_unique($bookedDates)]);
+    
+    $ulasan = DB::table('reviews')
+        ->join('orders', 'reviews.id_order', '=', 'orders.id_order')
+        ->where('reviews.is_published', 1)
+        ->orderByDesc('reviews.created_at')
+        ->limit(10)
+        ->get(['reviews.*', 'orders.nama_pelanggan', 'orders.email_pelanggan', 'orders.tgl_mulai', 'orders.tgl_selesai', 'orders.lokasi_alamat']);
+
+    return view('landing', [
+        'bookedDates' => array_unique($bookedDates),
+        'ulasan' => $ulasan
+    ]);
 });
 
 Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
+
+Route::get('/ulasan/{id}', function ($id) {
+    $order = DB::table('orders')->where('id_order', $id)->first();
+    if (!$order || $order->status_sewa != 'Selesai') {
+        return redirect('/')->with('error', 'Pesanan tidak ditemukan atau belum berstatus Selesai.');
+    }
+    
+    $existing = DB::table('reviews')->where('id_order', $id)->first();
+    if ($existing) {
+        return redirect('/')->with('error', 'Ulasan untuk pesanan ini sudah pernah dikirimkan. Terima kasih!');
+    }
+
+    return view('ulasan_form', ['order' => $order]);
+});
+
+Route::post('/ulasan/{id}', function (Illuminate\Http\Request $request, $id) {
+    $order = DB::table('orders')->where('id_order', $id)->first();
+    if (!$order || $order->status_sewa != 'Selesai') {
+        return redirect('/')->with('error', 'Pesanan tidak valid.');
+    }
+    
+    DB::table('reviews')->insert([
+        'id_order' => $id,
+        'rating' => $request->input('rating', 5),
+        'comment' => $request->input('comment', ''),
+        'is_published' => 1,
+        'created_at' => now(),
+        'updated_at' => now(),
+    ]);
+
+    return redirect('/#testimonials')->with('success', 'Ulasan berhasil dikirimkan. Terima kasih atas kepercayaan Anda!');
+});

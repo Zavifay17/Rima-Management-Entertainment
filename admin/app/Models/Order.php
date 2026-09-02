@@ -77,4 +77,9 @@ class Order extends Model
     {
         return $this->hasMany(Pengiriman::class, 'id_order', 'id_order');
     }
+
+    public function review()
+    {
+        return $this->hasOne(Review::class, 'id_order', 'id_order');
+    }
 }

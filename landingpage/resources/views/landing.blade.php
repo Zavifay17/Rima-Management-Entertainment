@@ -715,68 +715,34 @@
                 </div>
                 
                 <div class="testimonials-slider">
+                    @forelse($ulasan ?? [] as $u)
                     <div class="testimonial-card glassmorphism">
                         <div class="testimonial-header">
                             <div class="stars">
-                                <i data-lucide="star" class="star-icon active"></i>
-                                <i data-lucide="star" class="star-icon active"></i>
-                                <i data-lucide="star" class="star-icon active"></i>
-                                <i data-lucide="star" class="star-icon active"></i>
-                                <i data-lucide="star" class="star-icon active"></i>
+                                @for($i=1; $i<=5; $i++)
+                                    <i data-lucide="star" class="star-icon {{ $i <= $u->rating ? 'active' : '' }}" style="{{ $i <= $u->rating ? 'color: #fbbf24; fill: #fbbf24;' : 'color: #4b5563;' }}"></i>
+                                @endfor
                             </div>
                             <span class="quote-mark">“</span>
                         </div>
-                        <p class="testimonial-text">"Sewa sound dan lighting konser sekolah di Rima Entertainment hasilnya luar biasa megah. Suaranya bersih, lighting-nya sinkron banget sama lagu. Kru stand-by dan sangat ramah membantu!"</p>
+                        <p class="testimonial-text">"{{ $u->comment }}"</p>
                         <div class="testimonial-user">
-                            <div class="user-avatar text-avatar">AN</div>
+                            @php
+                                $initials = collect(explode(' ', $u->nama_pelanggan))->map(function($s) { return strtoupper(substr($s, 0, 1)); })->take(2)->join('');
+                            @endphp
+                            <div class="user-avatar text-avatar" style="background: linear-gradient(135deg, #001f82, #e60012);">{{ $initials }}</div>
                             <div class="user-info">
-                                <h4>Amanda N.</h4>
-                                <span>Ketua Panitia Pentas Seni SMA</span>
+                                <h4>{{ $u->nama_pelanggan }}</h4>
+                                <span>{{ $u->email_pelanggan }}</span>
+                                <span style="display:block; font-size: 0.8rem; color: #a0aec0; margin-top: 4px;">{{ \Carbon\Carbon::parse($u->tgl_mulai)->format('d M') }} - {{ \Carbon\Carbon::parse($u->tgl_selesai)->format('d M Y') }} &bull; {{ $u->lokasi_alamat }}</span>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="testimonial-card glassmorphism">
-                        <div class="testimonial-header">
-                            <div class="stars">
-                                <i data-lucide="star" class="star-icon active"></i>
-                                <i data-lucide="star" class="star-icon active"></i>
-                                <i data-lucide="star" class="star-icon active"></i>
-                                <i data-lucide="star" class="star-icon active"></i>
-                                <i data-lucide="star" class="star-icon active"></i>
-                            </div>
-                            <span class="quote-mark">“</span>
-                        </div>
-                        <p class="testimonial-text">"Sangat profesional! Kami menyewa panggung modular, sound dan lighting untuk corporate gathering. Instalasinya cepat, panggungnya sangat kokoh, dan tidak ada kendala sama sekali."</p>
-                        <div class="testimonial-user">
-                            <div class="user-avatar text-avatar">BS</div>
-                            <div class="user-info">
-                                <h4>Budi Santoso</h4>
-                                <span>Project Manager PT Multi Global</span>
-                            </div>
-                        </div>
+                    @empty
+                    <div class="testimonial-card glassmorphism" style="text-align: center; width: 100%; max-width: 600px; margin: 0 auto;">
+                        <p class="testimonial-text" style="font-style: normal; color: #a0aec0; padding: 2rem;">Belum ada ulasan dari pelanggan kami saat ini. Jadilah yang pertama!</p>
                     </div>
-
-                    <div class="testimonial-card glassmorphism">
-                        <div class="testimonial-header">
-                            <div class="stars">
-                                <i data-lucide="star" class="star-icon active"></i>
-                                <i data-lucide="star" class="star-icon active"></i>
-                                <i data-lucide="star" class="star-icon active"></i>
-                                <i data-lucide="star" class="star-icon active"></i>
-                                <i data-lucide="star" class="star-icon active"></i>
-                            </div>
-                            <span class="quote-mark">“</span>
-                        </div>
-                        <p class="testimonial-text">"Terima kasih Rima Entertainment atas support sound system dan lighting ambient di hari resepsi pernikahan kami. Dekorasinya bertambah elegan berkat penataan lampu yang tepat. Sangat recommended!"</p>
-                        <div class="testimonial-user">
-                            <div class="user-avatar text-avatar">RL</div>
-                            <div class="user-info">
-                                <h4>Rian & Laras</h4>
-                                <span>Pasangan Pengantin</span>
-                            </div>
-                        </div>
-                    </div>
+                    @endforelse
                 </div>
             </div>
         </section>
