@@ -1824,8 +1824,10 @@
         // 4. 3D Tilt Effect for Cards
         // =====================================================
         if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-            const tiltCards = document.querySelectorAll('.tilt-card');
+            const tiltCards = document.querySelectorAll('.catalog-item, .pop-card, .category-card');
             tiltCards.forEach(card => {
+                card.classList.add('tilt-card');
+                
                 card.addEventListener('mousemove', e => {
                     const rect = card.getBoundingClientRect();
                     const x = e.clientX - rect.left;
