@@ -70,6 +70,6 @@ RUN echo 'server { \
 }' > /etc/nginx/sites-available/default
 
 # Start Nginx & PHP-FPM
-CMD service nginx start && php-fpm
+CMD php artisan migrate --force && service nginx start && php-fpm
 
 EXPOSE 8000
