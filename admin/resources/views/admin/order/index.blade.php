@@ -358,6 +358,11 @@
                             </td>
                             <td>
                                 <div class="btn-action-container">
+                                    @if($statusLower === 'selesai')
+                                    <button class="btn btn-sm" style="background: #3b82f6; color: white; border: none;" onclick="copyReviewLink('{{ $order->id_order }}')" title="Salin Link Ulasan">
+                                        <i class="fa-solid fa-link"></i> Link Ulasan
+                                    </button>
+                                    @endif
                                     <button class="btn btn-success btn-sm" onclick="openWhatsAppModal('{{ $order->id_order }}')">
                                         <i class="fa-brands fa-whatsapp"></i> Konfirmasi WA
                                     </button>
@@ -437,6 +442,15 @@
         const encodedMessage = encodeURIComponent(message);
         const link = `https://wa.me/${waPhone}?text=${encodedMessage}`;
         document.getElementById('wa_send_btn').href = link;
+    }
+
+    function copyReviewLink(id) {
+        const url = 'https://rima-management-entertainment.onrender.com/ulasan/' + id;
+        navigator.clipboard.writeText(url).then(() => {
+            alert('Link Ulasan berhasil disalin!\n' + url + '\nSilakan paste ke WhatsApp pelanggan.');
+        }).catch(err => {
+            alert('Gagal menyalin link.');
+        });
     }
 </script>
 @endsection

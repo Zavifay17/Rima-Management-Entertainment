@@ -309,6 +309,11 @@
                 <button class="btn btn-success" style="width: 100%; margin-top: 1rem;" onclick="openWhatsAppModal()">
                     <i class="fa-brands fa-whatsapp"></i> Konfirmasi via WA
                 </button>
+                @if(strtolower($order->status_sewa) === 'selesai')
+                <button class="btn btn-primary" style="width: 100%; margin-top: 0.5rem; background: #3b82f6; border-color: #3b82f6;" onclick="copyReviewLink('{{ $order->id_order }}')">
+                    <i class="fa-solid fa-link"></i> Salin Link Ulasan
+                </button>
+                @endif
             </div>
 
             @if($order->lokasi_alamat || ($order->lokasi_lat && $order->lokasi_lng))
@@ -528,6 +533,15 @@
         const encodedMessage = encodeURIComponent(message);
         const link = `https://wa.me/${waPhone}?text=${encodedMessage}`;
         document.getElementById('wa_send_btn').href = link;
+    }
+
+    function copyReviewLink(id) {
+        const url = 'https://rima-management-entertainment.onrender.com/ulasan/' + id;
+        navigator.clipboard.writeText(url).then(() => {
+            alert('Link Ulasan berhasil disalin!\n' + url + '\nSilakan paste ke WhatsApp pelanggan.');
+        }).catch(err => {
+            alert('Gagal menyalin link.');
+        });
     }
 </script>
 
