@@ -15,7 +15,7 @@
     <meta property="og:image" content="{{ asset('whatsapp-preview.png') }}">
     <meta property="og:type" content="website">
 
-    <link rel="icon" type="image/png" href="{{ asset('favicon.png?v=5') }}">
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png?v=6') }}">
     
     <!-- Google Fonts: Outfit (Heading) & Inter (Body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
