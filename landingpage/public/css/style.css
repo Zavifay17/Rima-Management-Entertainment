@@ -3095,3 +3095,45 @@ body.dark-mode .main-header.scrolled {
 .delay-1 { animation-delay: 0.1s; }
 .delay-2 { animation-delay: 0.2s; }
 .delay-3 { animation-delay: 0.3s; }
+
+/* =====================================================
+   AWWWARDS PREMIUM PHASE 3 UPGRADES
+   ===================================================== */
+
+/* 1. Custom Text Selection (Premium Touch) */
+::selection {
+    background-color: rgba(var(--color-primary-rgb), 0.3);
+    color: inherit;
+}
+body.dark-mode ::selection {
+    background-color: rgba(56, 189, 248, 0.4);
+    color: #ffffff;
+}
+
+/* 2. Liquid Animated Gradient Text */
+.gradient-text {
+    background-size: 200% auto;
+    animation: liquidGradient 4s linear infinite;
+}
+@keyframes liquidGradient {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+}
+
+/* 3. Neon Scroll Progress Bar Glow */
+.scroll-progress-bar {
+    box-shadow: 0 0 10px rgba(var(--color-primary-rgb), 0.5);
+    transition: width 0.1s ease-out;
+}
+body.dark-mode .scroll-progress-bar {
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.8), 0 0 5px rgba(248, 113, 113, 0.8);
+}
+
+/* 4. Smooth Image Zoom on Hover (Cards) */
+.category-card img, .visual-image img {
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.category-card:hover img, .tilt-card:hover .visual-image img {
+    transform: scale(1.08);
+}
+
