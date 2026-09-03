@@ -312,7 +312,7 @@ body {
 .text-center { text-align: center; }
 
 .gradient-text {
-    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    background: linear-gradient(to right, var(--color-primary), var(--color-accent), var(--color-primary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     display: inline-block;
@@ -452,7 +452,7 @@ p {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--color-primary), var(--color-accent), var(--color-primary));
+    background: linear-gradient(to right, var(--color-primary), var(--color-accent), var(--color-primary));
     color: white;
     box-shadow: 0 4px 20px rgba(99, 102, 241, 0.35);
     background-size: 200% auto;
@@ -3175,7 +3175,7 @@ body.dark-mode ::-webkit-scrollbar-thumb:hover {
     content: '';
     position: absolute;
     inset: -3px;
-    background: linear-gradient(45deg, var(--color-primary), var(--color-accent), var(--color-primary));
+    background: linear-gradient(to right, var(--color-primary), var(--color-accent), var(--color-primary));
     z-index: -1;
     border-radius: inherit;
     filter: blur(12px);
