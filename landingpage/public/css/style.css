@@ -3115,11 +3115,11 @@ body.dark-mode ::selection {
 /* 2. Liquid Animated Gradient Text */
 .gradient-text {
     background-size: 200% auto;
-    animation: liquidGradient 4s linear infinite;
+    animation: liquidGradient 4s ease-in-out infinite alternate;
 }
 @keyframes liquidGradient {
     0% { background-position: 0% center; }
-    100% { background-position: 200% center; }
+    100% { background-position: 100% center; }
 }
 
 /* 3. Neon Scroll Progress Bar Glow */
