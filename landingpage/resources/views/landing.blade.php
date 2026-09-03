@@ -1641,7 +1641,7 @@
             });
 
             // Magnetic Elements Logic
-            const magneticElements = document.querySelectorAll('.btn, .btn-primary, .btn-outline, .magnetic-btn');
+            const magneticElements = document.querySelectorAll('.btn, .btn-primary, .btn-outline, .magnetic-btn, .nav-link');
             magneticElements.forEach(el => {
                 el.addEventListener('mousemove', (e) => {
                     const rect = el.getBoundingClientRect();

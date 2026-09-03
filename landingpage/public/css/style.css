@@ -3029,3 +3029,69 @@ body.dark-mode .step-card p {
     color: var(--text-secondary) !important;
 }
 
+
+/* =====================================================
+   AWWWARDS PREMIUM PHASE 2 UPGRADES
+   ===================================================== */
+
+/* 1. Dynamic Noise Overlay */
+.noise-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.04; /* Very subtle */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+body.dark-mode .noise-overlay {
+    opacity: 0.06;
+}
+
+/* 2. Glassmorphism Navbar Upgrade */
+.main-header.scrolled {
+    background: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+body.dark-mode .main-header.scrolled {
+    background: rgba(5, 11, 20, 0.6) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* 3. Animated Link Underlines */
+.nav-link::after {
+    transform-origin: left center !important; 
+}
+.nav-link:not(:hover)::after {
+    transform-origin: right center !important; 
+}
+
+/* 4. Staggered Text Reveal Animation */
+.text-reveal-wrapper {
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: top;
+}
+.text-reveal {
+    display: inline-block;
+    transform: translateY(110%);
+    opacity: 0;
+    animation: revealUp 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+@keyframes revealUp {
+    0% {
+        transform: translateY(110%) rotate(2deg);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0) rotate(0);
+        opacity: 1;
+    }
+}
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
