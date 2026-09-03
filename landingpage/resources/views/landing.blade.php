@@ -282,9 +282,9 @@
                     </style>
 
                     <!-- Paling Populer Sound System -->
-                    <div class="pop-card-wrapper">
+                    <div class="pop-card-wrapper" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="300" data-aos-anchor=".hero-visual">
                         <div class="pop-badge">PALING POPULER</div>
-                        <div class="pop-card" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="300">
+                        <div class="pop-card">
                         <span class="pop-tag sound">Sound</span>
                         <h3 class="pop-title">Sound System Paket 10000W</h3>
                         <p class="pop-desc">Paket profesional untuk mini konser, festival musik sekolah, gathering besar, dan gathering outdoor skala menengah.</p>
@@ -302,9 +302,9 @@
                     </div>
 
                     <!-- Paling Populer Panggung -->
-                    <div class="pop-card-wrapper">
+                    <div class="pop-card-wrapper" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="450" data-aos-anchor=".hero-visual">
                         <div class="pop-badge">PALING POPULER</div>
-                        <div class="pop-card" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="450">
+                        <div class="pop-card">
                         <span class="pop-tag stage">Panggung</span>
                         <h3 class="pop-title">Panggung Modular 8x6m</h3>
                         <p class="pop-desc">Standar panggung sedang untuk pentas seni sekolah, pesta pernikahan, dan corporate gathering outdoor.</p>
@@ -321,9 +321,9 @@
                     </div>
 
                     <!-- Paling Populer Lighting -->
-                    <div class="pop-card-wrapper">
+                    <div class="pop-card-wrapper" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="600" data-aos-anchor=".hero-visual">
                         <div class="pop-badge">PALING POPULER</div>
-                        <div class="pop-card" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="600">
+                        <div class="pop-card">
                         <span class="pop-tag light">Lighting</span>
                         <h3 class="pop-title">Lighting Paket Menengah</h3>
                         <p class="pop-desc">Kombinasi optimal untuk panggung gathering megah, konser musik mini, dan dekorasi lampu dinamis.</p>
