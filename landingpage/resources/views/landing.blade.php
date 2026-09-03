@@ -264,7 +264,8 @@
                 <div class="hero-visual" style="display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; max-height: 600px; overflow-y: auto; padding: 15px 15px 15px 5px; scrollbar-width: none; -ms-overflow-style: none;">
                     <style>
                         .hero-visual::-webkit-scrollbar { display: none; }
-                        .pop-card { flex-shrink: 0; margin-bottom: 1.5rem; position: relative; border-radius: 20px; padding: 1.5rem; background: #ffffff; border: 1px solid #e2e8f0; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s ease; }
+                        .pop-card-wrapper { flex-shrink: 0; margin-bottom: 1.5rem; padding-top: 15px; }
+                        .pop-card { position: relative; border-radius: 20px; padding: 1.5rem; background: #ffffff; border: 1px solid #e2e8f0; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s ease; }
                         .pop-card:hover { transform: translateY(-5px); }
                         .pop-badge { position: absolute; top: -12px; right: 15px; background: #ef4444; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4); z-index: 2; }
                         .pop-tag { display: inline-block; padding: 4px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 600; margin-bottom: 12px; }
@@ -280,11 +281,9 @@
                         .pop-desc { font-size: 0.9rem; color: #64748b; line-height: 1.5; }
                     </style>
 
-                    <!-- Spacer for top badge clipping prevention -->
-                    <div style="min-height: 20px; flex-shrink: 0; width: 100%;"></div>
-
                     <!-- Paling Populer Sound System -->
-                    <div class="pop-card" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="300">
+                    <div class="pop-card-wrapper">
+                        <div class="pop-card" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="300">
                         <div class="pop-badge">PALING POPULER</div>
                         <span class="pop-tag sound">Sound</span>
                         <h3 class="pop-title">Sound System Paket 10000W</h3>
@@ -299,10 +298,12 @@
                         </ul>
                         <div class="pop-price">Rp 3.000.000 <small>/hari</small></div>
                         <button onclick="selectDirectPackage('sound-10000w')" class="btn btn-primary btn-block">Pilih Paket Ini</button>
+                        </div>
                     </div>
 
                     <!-- Paling Populer Panggung -->
-                    <div class="pop-card" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="450">
+                    <div class="pop-card-wrapper">
+                        <div class="pop-card" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="450">
                         <div class="pop-badge">PALING POPULER</div>
                         <span class="pop-tag stage">Panggung</span>
                         <h3 class="pop-title">Panggung Modular 8x6m</h3>
@@ -315,11 +316,13 @@
                             <li><i data-lucide="check" style="width:16px;height:16px;"></i> Termasuk Biaya Kirim & Setup Cepat</li>
                         </ul>
                         <div class="pop-price">Rp 4.500.000 <small>/hari</small></div>
-                        <button onclick="selectDirectPackage('stage-8x6')" class="btn btn-primary btn-block">Pilih Paket Ini</button>
+                        <button onclick="selectDirectPackage('panggung-8x6m')" class="btn btn-primary btn-block">Pilih Paket Ini</button>
+                        </div>
                     </div>
 
                     <!-- Paling Populer Lighting -->
-                    <div class="pop-card" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="600">
+                    <div class="pop-card-wrapper">
+                        <div class="pop-card" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="600">
                         <div class="pop-badge">PALING POPULER</div>
                         <span class="pop-tag light">Lighting</span>
                         <h3 class="pop-title">Lighting Paket Menengah</h3>
@@ -332,7 +335,8 @@
                             <li><i data-lucide="check" style="width:16px;height:16px;"></i> Operator & Kabel instalasi</li>
                         </ul>
                         <div class="pop-price">Rp 3.000.000 <small>/hari</small></div>
-                        <button onclick="selectDirectPackage('light-menengah')" class="btn btn-primary btn-block">Pilih Paket Ini</button>
+                        <button onclick="selectDirectPackage('lighting-menengah')" class="btn btn-primary btn-block">Pilih Paket Ini</button>
+                        </div>
                     </div>
 
                 </div>
