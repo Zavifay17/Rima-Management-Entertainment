@@ -38,6 +38,15 @@
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
+    <!-- Premium Animation Libraries (Awwwards-level) -->
+    <!-- Lenis for Smooth Scrolling -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
+    <!-- GSAP Core & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <!-- SplitType for Text Animation -->
+    <script src="https://unpkg.com/split-type"></script>
+
     <!-- FontAwesome CDN for Brand Icons (WhatsApp) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -1575,18 +1584,32 @@
 
             window.addEventListener('load', () => {
                 setTimeout(() => {
-                    preloader.classList.add('hide');
-                    // Remove from DOM after fade out
-                    setTimeout(() => { preloader.remove(); }, 700);
-                }, 1200);
+                    try {
+                        if (typeof gsap !== 'undefined') {
+                            gsap.to('.preloader-inner', { y: -50, opacity: 0, duration: 0.6, ease: 'power3.in' });
+                            gsap.to(preloader, { 
+                                yPercent: -100, 
+                                duration: 1, 
+                                ease: 'expo.inOut', 
+                                delay: 0.3, 
+                                onComplete: () => preloader.remove() 
+                            });
+                        } else {
+                            throw new Error('GSAP not loaded');
+                        }
+                    } catch (e) {
+                        preloader.classList.add('hide');
+                        setTimeout(() => { preloader.remove(); }, 700);
+                    }
+                }, 1000);
             });
-            // Fallback: remove after 3.5s even if load hasn't fired
+            // Fallback: remove after 4s even if load hasn't fired
             setTimeout(() => {
-                if (preloader && !preloader.classList.contains('hide')) {
+                if (preloader && document.body.contains(preloader)) {
                     preloader.classList.add('hide');
                     setTimeout(() => { preloader.remove(); }, 700);
                 }
-            }, 3500);
+            }, 4000);
         }
 
         // =====================================================
@@ -1639,22 +1662,38 @@
                 el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
             });
 
-            // Magnetic Elements Logic
+            // Magnetic Elements Logic (Awwwards Grade)
             const magneticElements = document.querySelectorAll('.btn, .btn-primary, .btn-outline, .magnetic-btn, .nav-link, .floating-whatsapp, .back-to-top');
             magneticElements.forEach(el => {
-                el.addEventListener('mousemove', (e) => {
-                    const rect = el.getBoundingClientRect();
-                    const x = e.clientX - rect.left - rect.width / 2;
-                    const y = e.clientY - rect.top - rect.height / 2;
-                    // Move the button slightly towards the cursor with immediate response
-                    el.style.transition = 'none';
-                    el.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
-                });
-                el.addEventListener('mouseleave', () => {
-                    // Spring back with elastic cubic-bezier
-                    el.style.transition = 'transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-                    el.style.transform = `translate(0px, 0px)`;
-                });
+                if(typeof gsap !== 'undefined') {
+                    const xTo = gsap.quickTo(el, "x", {duration: 0.4, ease: "power3"});
+                    const yTo = gsap.quickTo(el, "y", {duration: 0.4, ease: "power3"});
+                    
+                    el.addEventListener('mousemove', (e) => {
+                        const rect = el.getBoundingClientRect();
+                        const x = (e.clientX - rect.left - rect.width / 2) * 0.4;
+                        const y = (e.clientY - rect.top - rect.height / 2) * 0.4;
+                        xTo(x);
+                        yTo(y);
+                    });
+                    
+                    el.addEventListener('mouseleave', () => {
+                        xTo(0);
+                        yTo(0);
+                        gsap.to(el, { x: 0, y: 0, duration: 0.7, ease: "elastic.out(1, 0.3)" });
+                    });
+                } else {
+                    // Fallback
+                    el.addEventListener('mousemove', (e) => {
+                        const rect = el.getBoundingClientRect();
+                        const x = e.clientX - rect.left - rect.width / 2;
+                        const y = e.clientY - rect.top - rect.height / 2;
+                        el.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+                    });
+                    el.addEventListener('mouseleave', () => {
+                        el.style.transform = `translate(0px, 0px)`;
+                    });
+                }
             });
 
             // Hide cursor when leaving window
@@ -2010,6 +2049,76 @@
                 requestAnimationFrame(animateMagneticOrbs);
             }
             animateMagneticOrbs();
+        }
+
+        // =====================================================
+        // 7. AWWWARDS-LEVEL MICRO-INTERACTIONS
+        // =====================================================
+        try {
+            if (typeof Lenis !== 'undefined') {
+                const lenis = new Lenis({
+                    duration: 1.2,
+                    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+                    direction: 'vertical', 
+                    gestureDirection: 'vertical',
+                    smooth: true,
+                    mouseMultiplier: 1,
+                    smoothTouch: false,
+                    touchMultiplier: 2,
+                    infinite: false,
+                });
+
+                function raf(time) {
+                    lenis.raf(time);
+                    requestAnimationFrame(raf);
+                }
+                requestAnimationFrame(raf);
+
+                // Integrate Lenis with GSAP ScrollTrigger
+                if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                    lenis.on('scroll', ScrollTrigger.update);
+                    gsap.ticker.add((time)=>{
+                      lenis.raf(time * 1000);
+                    });
+                    gsap.ticker.lagSmoothing(0, 0);
+                    
+                    // --- Text Reveal Animation ---
+                    if (typeof SplitType !== 'undefined') {
+                        const splitTextElements = document.querySelectorAll('.hero-title, .section-title, .about-content h2, .cta-title');
+                        splitTextElements.forEach(el => {
+                            const text = new SplitType(el, { types: 'lines, words' });
+                            gsap.from(text.words, {
+                                scrollTrigger: {
+                                    trigger: el,
+                                    start: 'top 90%',
+                                },
+                                y: 30,
+                                opacity: 0,
+                                duration: 1,
+                                ease: 'power4.out',
+                                stagger: 0.05
+                            });
+                        });
+                    }
+
+                    // --- Parallax Image Effect ---
+                    const parallaxImages = document.querySelectorAll('.about-image-wrapper img');
+                    parallaxImages.forEach(img => {
+                        gsap.to(img, {
+                            yPercent: 20,
+                            ease: 'none',
+                            scrollTrigger: {
+                                trigger: img.parentElement,
+                                start: 'top bottom',
+                                end: 'bottom top',
+                                scrub: true
+                            }
+                        });
+                    });
+                }
+            }
+        } catch (e) {
+            console.log('Premium animations skipped: ', e);
         }
 
     })();
