@@ -1807,7 +1807,8 @@
                     if(spotlight) {
                         spotlight.style.opacity = '1';
                         const isDark = document.body.classList.contains('dark-mode');
-                        const color = isDark ? 'rgba(99, 102, 241, 0.08)' : 'rgba(255, 255, 255, 0.4)';
+                        // Reduced opacity in light mode to keep text readable
+                        const color = isDark ? 'rgba(99, 102, 241, 0.08)' : 'rgba(255, 255, 255, 0.15)';
                         spotlight.style.background = `radial-gradient(circle 600px at ${e.clientX}px ${e.clientY}px, ${color}, transparent 80%)`;
                     }
                 });
@@ -1831,20 +1832,20 @@
                 const isDark = document.body.classList.contains('dark-mode');
                 if (isDark) {
                     const colors = [
-                        'rgba(56,189,248,',   // sky blue
-                        'rgba(99,102,241,',   // indigo
-                        'rgba(167,139,250,',  // light purple
-                        'rgba(219,39,119,',   // magenta pink
-                        'rgba(244,63,94,'     // rose red
+                        'rgba(14,165,233,',   // Neon Blue
+                        'rgba(139,92,246,',   // Purple
+                        'rgba(239,68,68,',    // Magenta Red (Theme)
+                        'rgba(244,63,94,',    // Rose (Theme)
+                        'rgba(255,255,255,'   // White Sparkle
                     ];
                     return colors[Math.floor(Math.random() * colors.length)];
                 } else {
                     const colors = [
-                        'rgba(10,37,64,',     // dark slate
-                        'rgba(37,99,235,',    // primary blue
-                        'rgba(99,102,241,',   // indigo
-                        'rgba(190,24,93,',    // elegant dark magenta
-                        'rgba(225,29,72,'     // elegant red
+                        'rgba(239,68,68,',    // Magenta Red (Theme)
+                        'rgba(244,63,94,',    // Rose (Theme)
+                        'rgba(219,39,119,',   // Elegant Pink
+                        'rgba(14,165,233,',   // Blue accent
+                        'rgba(15,23,42,'      // Dark slate accent
                     ];
                     return colors[Math.floor(Math.random() * colors.length)];
                 }
@@ -2129,6 +2130,50 @@
                 requestAnimationFrame(animateMagneticOrbs);
             }
             animateMagneticOrbs();
+        } else {
+            // Mobile Gyroscope Parallax (Awwwards Level)
+            const parallaxOrbs = document.querySelectorAll('.orb');
+            const heroVisual = document.querySelector('.hero-visual');
+            
+            let currentX = window.innerWidth / 2;
+            let currentY = window.innerHeight / 2;
+            let targetX = window.innerWidth / 2;
+            let targetY = window.innerHeight / 2;
+
+            if (window.DeviceOrientationEvent) {
+                window.addEventListener('deviceorientation', (e) => {
+                    let tiltX = e.gamma || 0; 
+                    let tiltY = e.beta || 0;
+                    
+                    if (tiltX > 30) tiltX = 30;
+                    if (tiltX < -30) tiltX = -30;
+                    if (tiltY > 60) tiltY = 60;
+                    if (tiltY < 0) tiltY = 0;
+
+                    targetX = (window.innerWidth / 2) + (tiltX * 5);
+                    targetY = (window.innerHeight / 2) + ((tiltY - 30) * 5);
+                });
+                
+                function animateGyroOrbs() {
+                    currentX += (targetX - currentX) * 0.05; 
+                    currentY += (targetY - currentY) * 0.05;
+                    
+                    const offsetX = (currentX - window.innerWidth / 2);
+                    const offsetY = (currentY - window.innerHeight / 2);
+                    
+                    if(heroVisual) {
+                        heroVisual.style.transform = `translate(${offsetX * -0.2}px, ${offsetY * -0.2}px)`;
+                    }
+
+                    parallaxOrbs.forEach((orb, index) => {
+                        const pullStrength = (index === 0) ? 0.4 : -0.3; 
+                        orb.style.transform = `translate(${offsetX * pullStrength}px, ${offsetY * pullStrength}px)`;
+                    });
+                    
+                    requestAnimationFrame(animateGyroOrbs);
+                }
+                animateGyroOrbs();
+            }
         }
 
         // =====================================================
