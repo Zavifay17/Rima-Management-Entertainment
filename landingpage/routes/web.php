@@ -22,7 +22,7 @@ Route::get('/', function () {
     if (Illuminate\Support\Facades\Schema::hasTable('reviews')) {
         $ulasan = DB::table('reviews')
             ->join('orders', 'reviews.id_order', '=', 'orders.id_order')
-            ->where('reviews.is_published', true)
+            ->whereRaw('reviews.is_published = true')
             ->orderByDesc('reviews.created_at')
             ->limit(10)
             ->get(['reviews.*', 'orders.nama_pelanggan', 'orders.email_pelanggan', 'orders.tgl_mulai', 'orders.tgl_selesai', 'orders.lokasi_alamat']);
@@ -68,7 +68,7 @@ Route::post('/ulasan/{id}', function (Illuminate\Http\Request $request, $id) {
         'id_order' => $id,
         'rating' => $request->input('rating', 5),
         'comment' => $request->input('comment', ''),
-        'is_published' => true,
+        'is_published' => 'true',
         'created_at' => now(),
         'updated_at' => now(),
     ]);
