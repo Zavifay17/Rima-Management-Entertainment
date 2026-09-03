@@ -100,8 +100,8 @@
 <body data-spy="scroll" data-target=".nav-menu" data-offset="100">
 
     <!-- Ultra Premium Custom Cursor -->
-    <div class="custom-cursor" id="cursor-dot"></div>
-    <div class="custom-cursor-follower" id="cursor-ring"></div>
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
     <div class="ambient-blob" id="ambient-blob"></div>
 
     <!-- Dynamic Orb Glow (Phase 3) -->
@@ -132,8 +132,7 @@
     <!-- ==========================================
          CUSTOM CURSOR (Desktop only)
     ========================================== -->
-    <div id="cursor-dot"></div>
-    <div id="cursor-ring"></div>
+    <!-- Removed duplicate cursor elements -->
 
     <!-- ==========================================
          AMBIENT PARTICLE CANVAS
