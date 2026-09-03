@@ -326,7 +326,7 @@
                             <li><i data-lucide="check" style="width:16px;height:16px;"></i> Termasuk Biaya Kirim & Setup Cepat</li>
                         </ul>
                         <div class="pop-price">Rp 4.500.000 <small>/hari</small></div>
-                        <button onclick="selectDirectPackage('panggung-8x6m')" class="btn btn-primary btn-block">Pilih Paket Ini</button>
+                        <button onclick="selectDirectPackage('stage-8x6')" class="btn btn-primary btn-block">Pilih Paket Ini</button>
                         </div>
                     </div>
 
@@ -345,7 +345,7 @@
                             <li><i data-lucide="check" style="width:16px;height:16px;"></i> Operator & Kabel instalasi</li>
                         </ul>
                         <div class="pop-price">Rp 3.000.000 <small>/hari</small></div>
-                        <button onclick="selectDirectPackage('lighting-menengah')" class="btn btn-primary btn-block">Pilih Paket Ini</button>
+                        <button onclick="selectDirectPackage('light-menengah')" class="btn btn-primary btn-block">Pilih Paket Ini</button>
                         </div>
                     </div>
 
