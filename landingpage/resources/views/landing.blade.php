@@ -1024,6 +1024,31 @@
                                 <label>Pilih Paket Alat Event <span class="req">*</span></label>
                                 <span class="label-desc">Anda dapat memilih satu atau lebih paket sekaligus:</span>
                                 
+                                <style>
+                                    .form-popular-badge {
+                                        position: absolute;
+                                        top: -8px;
+                                        right: -8px;
+                                        background: linear-gradient(135deg, #ef4444, #f43f5e);
+                                        color: white;
+                                        font-size: 0.65rem;
+                                        font-weight: 700;
+                                        padding: 3px 10px;
+                                        border-radius: 20px;
+                                        box-shadow: 0 4px 10px rgba(239, 68, 68, 0.4);
+                                        border: 2px solid var(--bg-dark-card, #ffffff);
+                                        z-index: 5;
+                                        letter-spacing: 0.5px;
+                                        animation: formBadgePulse 2s infinite;
+                                    }
+                                    .dark-mode .form-popular-badge { border-color: #1e293b; }
+                                    @keyframes formBadgePulse {
+                                        0% { transform: scale(1); box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3); }
+                                        50% { transform: scale(1.05); box-shadow: 0 6px 15px rgba(239, 68, 68, 0.5); }
+                                        100% { transform: scale(1); box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3); }
+                                    }
+                                </style>
+                                
                                 <div class="packages-selection">
                                     <!-- Sound Section -->
                                     <label class="package-checkbox-card">
@@ -1036,6 +1061,7 @@
                                     </label>
 
                                     <label class="package-checkbox-card">
+                                        <div class="form-popular-badge">PALING POPULER</div>
                                         <input type="checkbox" name="selectedPackages[]" value="sound-10000w" data-price="3000000" id="pkg-sound-10000w">
                                         <div class="checkbox-custom"></div>
                                         <div class="package-checkbox-content">
@@ -1064,6 +1090,7 @@
                                     </label>
 
                                     <label class="package-checkbox-card">
+                                        <div class="form-popular-badge">PALING POPULER</div>
                                         <input type="checkbox" name="selectedPackages[]" value="light-menengah" data-price="3000000" id="pkg-light-menengah">
                                         <div class="checkbox-custom"></div>
                                         <div class="package-checkbox-content">
@@ -1101,6 +1128,7 @@
                                     </label>
 
                                     <label class="package-checkbox-card">
+                                        <div class="form-popular-badge">PALING POPULER</div>
                                         <input type="checkbox" name="selectedPackages[]" value="stage-8x6" data-price="4500000" id="pkg-stage-8x6">
                                         <div class="checkbox-custom"></div>
                                         <div class="package-checkbox-content">
