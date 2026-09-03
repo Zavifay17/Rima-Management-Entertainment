@@ -1933,13 +1933,11 @@
                     backToTopBtn.style.setProperty('opacity', '1', 'important');
                     backToTopBtn.style.setProperty('visibility', 'visible', 'important');
                     backToTopBtn.style.setProperty('pointer-events', 'auto', 'important');
-                    backToTopBtn.style.setProperty('bottom', '85px', 'important');
                 } else {
                     backToTopBtn.classList.remove('visible', 'show');
                     backToTopBtn.style.setProperty('opacity', '0', 'important');
                     backToTopBtn.style.setProperty('visibility', 'hidden', 'important');
                     backToTopBtn.style.setProperty('pointer-events', 'none', 'important');
-                    backToTopBtn.style.setProperty('bottom', '-80px', 'important');
                 }
             }
         });

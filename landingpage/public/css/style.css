@@ -3214,3 +3214,29 @@ body.dark-mode .ambient-blob {
     background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, transparent 60%);
 }
 
+
+/* --- Symmetrical Back To Top (Phase 7) --- */
+/* Desktop */
+.back-to-top {
+    right: 35px !important;
+    width: 50px !important;
+    height: 50px !important;
+    bottom: -100px !important;
+}
+.back-to-top.visible {
+    bottom: 110px !important;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .back-to-top {
+        right: 23px !important;
+        width: 44px !important;
+        height: 44px !important;
+        bottom: -100px !important;
+    }
+    .back-to-top.visible {
+        bottom: 85px !important;
+        right: 23px !important;
+    }
+}
