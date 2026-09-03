@@ -1680,21 +1680,7 @@
                                 yPercent: -100, 
                                 duration: 1.2, 
                                 ease: 'expo.inOut', 
-                            }, "-=0.2")
-                            // 3. Homepage content elegantly reveals itself (scale down & fade up)
-                            .from('.hero-content', {
-                                y: 60,
-                                opacity: 0,
-                                duration: 1.5,
-                                ease: 'expo.out'
-                            }, "-=0.8")
-                            .from('.hero-visual', {
-                                y: 60,
-                                scale: 1.05,
-                                opacity: 0,
-                                duration: 1.5,
-                                ease: 'expo.out'
-                            }, "-=1.3");
+                            }, "-=0.2");
                             
                         } else {
                             throw new Error('GSAP not loaded');
