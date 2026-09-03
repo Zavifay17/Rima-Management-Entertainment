@@ -2481,11 +2481,13 @@ body.dark-mode::after {
     background: var(--color-accent);
 }
 
-body.dark-mode .main-header,
-body.dark-mode .nav-menu {
+body.dark-mode .main-header {
     background: var(--bg-dark-nav) !important;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+}
+body.dark-mode .nav-menu {
+    background: transparent !important;
 }
 body.dark-mode .main-header {
     border-bottom: 1px solid rgba(255,255,255,0.05);
