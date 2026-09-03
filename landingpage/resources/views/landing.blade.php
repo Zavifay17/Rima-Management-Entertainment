@@ -1927,17 +1927,19 @@
 
             // Back to Top Button Visibility
             if(backToTopBtn) {
-                const categoriesSection = document.getElementById('categories');
-                const triggerPoint = categoriesSection ? categoriesSection.offsetTop - window.innerHeight / 2 : 400;
-                if (scrollTop > triggerPoint) {
-                    backToTopBtn.classList.add('visible');
+                if (scrollTop > 500) {
+                    backToTopBtn.classList.add('visible', 'show');
                     // Force styling just in case CSS misses it
-                    backToTopBtn.style.opacity = '1';
-                    backToTopBtn.style.pointerEvents = 'auto';
+                    backToTopBtn.style.setProperty('opacity', '1', 'important');
+                    backToTopBtn.style.setProperty('visibility', 'visible', 'important');
+                    backToTopBtn.style.setProperty('pointer-events', 'auto', 'important');
+                    backToTopBtn.style.setProperty('bottom', '85px', 'important');
                 } else {
-                    backToTopBtn.classList.remove('visible');
-                    backToTopBtn.style.opacity = '0';
-                    backToTopBtn.style.pointerEvents = 'none';
+                    backToTopBtn.classList.remove('visible', 'show');
+                    backToTopBtn.style.setProperty('opacity', '0', 'important');
+                    backToTopBtn.style.setProperty('visibility', 'hidden', 'important');
+                    backToTopBtn.style.setProperty('pointer-events', 'none', 'important');
+                    backToTopBtn.style.setProperty('bottom', '-80px', 'important');
                 }
             }
         });
