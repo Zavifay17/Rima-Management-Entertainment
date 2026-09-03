@@ -1654,31 +1654,69 @@
             }
 
             window.addEventListener('load', () => {
+                // Ensure scroll is locked during preloader
+                document.body.style.overflow = 'hidden';
+                
                 setTimeout(() => {
                     try {
                         if (typeof gsap !== 'undefined') {
-                            gsap.to('.preloader-inner', { y: -50, opacity: 0, duration: 0.6, ease: 'power3.in' });
-                            gsap.to(preloader, { 
-                                yPercent: -100, 
-                                duration: 1, 
-                                ease: 'expo.inOut', 
-                                delay: 0.3, 
-                                onComplete: () => preloader.remove() 
+                            const tl = gsap.timeline({
+                                onComplete: () => {
+                                    preloader.remove();
+                                    document.body.style.overflow = ''; // Restore scroll
+                                }
                             });
+                            
+                            // 1. Elegant exit of inner elements (logo, text, bar)
+                            tl.to('.preloader-inner > div', { 
+                                y: -30, 
+                                opacity: 0, 
+                                duration: 0.6, 
+                                stagger: 0.1, 
+                                ease: 'power3.in' 
+                            })
+                            // 2. Dramatic slide up of the entire preloader background
+                            .to(preloader, { 
+                                yPercent: -100, 
+                                duration: 1.2, 
+                                ease: 'expo.inOut', 
+                            }, "-=0.2")
+                            // 3. Homepage content elegantly reveals itself (scale down & fade up)
+                            .from('.hero-content', {
+                                y: 60,
+                                opacity: 0,
+                                duration: 1.5,
+                                ease: 'expo.out'
+                            }, "-=0.8")
+                            .from('.hero-visual', {
+                                y: 60,
+                                scale: 1.05,
+                                opacity: 0,
+                                duration: 1.5,
+                                ease: 'expo.out'
+                            }, "-=1.3");
+                            
                         } else {
                             throw new Error('GSAP not loaded');
                         }
                     } catch (e) {
                         preloader.classList.add('hide');
-                        setTimeout(() => { preloader.remove(); }, 700);
+                        setTimeout(() => { 
+                            preloader.remove(); 
+                            document.body.style.overflow = '';
+                        }, 700);
                     }
-                }, 1000);
+                }, 1000); // Wait 1 second before starting exit
             });
+            
             // Fallback: remove after 4s even if load hasn't fired
             setTimeout(() => {
                 if (preloader && document.body.contains(preloader)) {
                     preloader.classList.add('hide');
-                    setTimeout(() => { preloader.remove(); }, 700);
+                    setTimeout(() => { 
+                        preloader.remove(); 
+                        document.body.style.overflow = '';
+                    }, 700);
                 }
             }, 4000);
         }
