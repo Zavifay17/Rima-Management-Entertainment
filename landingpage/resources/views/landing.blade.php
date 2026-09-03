@@ -35,12 +35,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Lucide Icons CDN -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    
     <!-- Premium Animation Libraries (Awwwards-level) -->
-    <!-- Lenis for Smooth Scrolling -->
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
     <!-- GSAP Core & ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -263,9 +258,8 @@
                     </div>
                 </div>
                 
-                <div class="hero-visual" style="display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; max-height: 600px; overflow-y: auto; padding: 15px 15px 15px 5px; scrollbar-width: none; -ms-overflow-style: none;">
+                <div class="hero-visual" style="display: flex; flex-direction: column; justify-content: center; align-items: stretch; padding: 15px 15px 15px 5px; gap: 20px;">
                     <style>
-                        .hero-visual::-webkit-scrollbar { display: none; }
                         .pop-card { margin-bottom: 1.5rem; position: relative; border-radius: 20px; padding: 1.5rem; background: #ffffff; border: 1px solid #e2e8f0; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s ease; }
                         .pop-card:hover { transform: translateY(-5px); }
                         .pop-badge { position: absolute; top: 15px; right: 15px; background: #ff0000; color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4); z-index: 2; }
@@ -2064,66 +2058,42 @@
         // 7. AWWWARDS-LEVEL MICRO-INTERACTIONS
         // =====================================================
         try {
-            if (typeof Lenis !== 'undefined') {
-                const lenis = new Lenis({
-                    lerp: 0.1,
-                    direction: 'vertical', 
-                    gestureDirection: 'vertical',
-                    smoothWheel: true,
-                    mouseMultiplier: 1,
-                    smoothTouch: false,
-                    touchMultiplier: 2,
-                    infinite: false,
-                });
-
-                function raf(time) {
-                    lenis.raf(time);
-                    requestAnimationFrame(raf);
-                }
-                requestAnimationFrame(raf);
-
-                // Integrate Lenis with GSAP ScrollTrigger
-                if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-                    lenis.on('scroll', ScrollTrigger.update);
-                    gsap.ticker.add((time)=>{
-                      lenis.raf(time * 1000);
-                    });
-                    gsap.ticker.lagSmoothing(0, 0);
-                    
-                    // --- Text Reveal Animation ---
-                    if (typeof SplitType !== 'undefined') {
-                        const splitTextElements = document.querySelectorAll('.hero-title, .section-title, .about-content h2, .cta-title');
-                        splitTextElements.forEach(el => {
-                            const text = new SplitType(el, { types: 'lines, words' });
-                            gsap.from(text.words, {
-                                scrollTrigger: {
-                                    trigger: el,
-                                    start: 'top 90%',
-                                },
-                                y: 30,
-                                opacity: 0,
-                                duration: 1,
-                                ease: 'power4.out',
-                                stagger: 0.05
-                            });
-                        });
-                    }
-
-                    // --- Parallax Image Effect ---
-                    const parallaxImages = document.querySelectorAll('.about-image-wrapper img');
-                    parallaxImages.forEach(img => {
-                        gsap.to(img, {
-                            yPercent: 20,
-                            ease: 'none',
+            // Integrate GSAP ScrollTrigger
+            if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                
+                // --- Text Reveal Animation ---
+                if (typeof SplitType !== 'undefined') {
+                    const splitTextElements = document.querySelectorAll('.hero-title, .section-title, .about-content h2, .cta-title');
+                    splitTextElements.forEach(el => {
+                        const text = new SplitType(el, { types: 'lines, words' });
+                        gsap.from(text.words, {
                             scrollTrigger: {
-                                trigger: img.parentElement,
-                                start: 'top bottom',
-                                end: 'bottom top',
-                                scrub: true
-                            }
+                                trigger: el,
+                                start: 'top 90%',
+                            },
+                            y: 30,
+                            opacity: 0,
+                            duration: 1,
+                            ease: 'power4.out',
+                            stagger: 0.05
                         });
                     });
                 }
+
+                // --- Parallax Image Effect ---
+                const parallaxImages = document.querySelectorAll('.about-image-wrapper img');
+                parallaxImages.forEach(img => {
+                    gsap.to(img, {
+                        yPercent: 20,
+                        ease: 'none',
+                        scrollTrigger: {
+                            trigger: img.parentElement,
+                            start: 'top bottom',
+                            end: 'bottom top',
+                            scrub: true
+                        }
+                    });
+                });
             }
         } catch (e) {
             console.log('Premium animations skipped: ', e);
