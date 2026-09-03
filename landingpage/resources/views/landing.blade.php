@@ -1711,10 +1711,22 @@
             function getParticleColor() {
                 const isDark = document.body.classList.contains('dark-mode');
                 if (isDark) {
-                    const colors = ['rgba(56,189,248,', 'rgba(99,102,241,', 'rgba(167,139,250,'];
+                    const colors = [
+                        'rgba(56,189,248,',   // sky blue
+                        'rgba(99,102,241,',   // indigo
+                        'rgba(167,139,250,',  // light purple
+                        'rgba(219,39,119,',   // magenta pink
+                        'rgba(244,63,94,'     // rose red
+                    ];
                     return colors[Math.floor(Math.random() * colors.length)];
                 } else {
-                    const colors = ['rgba(10,37,64,', 'rgba(37,99,235,', 'rgba(99,102,241,'];
+                    const colors = [
+                        'rgba(10,37,64,',     // dark slate
+                        'rgba(37,99,235,',    // primary blue
+                        'rgba(99,102,241,',   // indigo
+                        'rgba(190,24,93,',    // elegant dark magenta
+                        'rgba(225,29,72,'     // elegant red
+                    ];
                     return colors[Math.floor(Math.random() * colors.length)];
                 }
             }
