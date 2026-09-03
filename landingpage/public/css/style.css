@@ -195,20 +195,61 @@ body.dark-mode #particle-canvas {
     opacity: 1; /* Fully visible in dark mode too */
 }
 
-/* ---- 4. 3D TILT CARD EFFECT ---- */
+/* ---- 4. 3D TILT CARD EFFECT & MOUSE SPOTLIGHT ---- */
 .tilt-card {
     transform-style: preserve-3d;
     will-change: transform;
-    transition: transform 0.1s ease, box-shadow 0.3s ease;
+    transition: transform 0.1s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    position: relative;
+    overflow: hidden; /* Ensure spotlight doesn't bleed */
 }
+/* The Spotlight Pseudo-element */
+.tilt-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    /* Soft white/blue glow for light mode */
+    background: radial-gradient(
+        600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(255, 255, 255, 0.8),
+        transparent 40%
+    );
+    mix-blend-mode: overlay;
+}
+body.dark-mode .tilt-card::before {
+    /* Neon glow for dark mode */
+    background: radial-gradient(
+        600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(59, 130, 246, 0.15),
+        transparent 40%
+    );
+    mix-blend-mode: screen;
+}
+.tilt-card:hover::before {
+    opacity: 1;
+}
+
 .tilt-card:hover {
     box-shadow: 0 30px 60px rgba(0, 0, 128, 0.12) !important;
+    border-color: rgba(var(--color-primary-rgb), 0.3);
 }
 body.dark-mode .tilt-card:hover {
     box-shadow: 0 30px 60px rgba(59, 130, 246, 0.18) !important;
+    border-color: rgba(59, 130, 246, 0.4);
 }
 @media (hover: none), (pointer: coarse) {
     .tilt-card { transform: none !important; }
+    .tilt-card::before { display: none !important; }
+}
+
+/* --- Magnetic Elements --- */
+.magnetic-btn {
+    transition: transform 0.1s ease, box-shadow 0.3s ease;
+    will-change: transform;
 }
 
 /* --- Base & Reset Rules --- */

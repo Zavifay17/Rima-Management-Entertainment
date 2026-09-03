@@ -1640,6 +1640,21 @@
                 el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
             });
 
+            // Magnetic Elements Logic
+            const magneticElements = document.querySelectorAll('.btn, .btn-primary, .btn-outline, .magnetic-btn');
+            magneticElements.forEach(el => {
+                el.addEventListener('mousemove', (e) => {
+                    const rect = el.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    // Move the button slightly towards the cursor
+                    el.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+                });
+                el.addEventListener('mouseleave', () => {
+                    el.style.transform = `translate(0px, 0px)`;
+                });
+            });
+
             // Hide cursor when leaving window
             document.addEventListener('mouseleave', () => {
                 cursorDot.style.opacity  = '0';
