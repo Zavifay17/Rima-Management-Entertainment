@@ -1519,7 +1519,6 @@
 
             // --- Theme Toggle Logic ---
             const themeToggleBtn = document.getElementById('themeToggle');
-            const themeIcon = document.getElementById('themeIcon');
             
             // Check for saved theme
             const savedTheme = localStorage.getItem('rme_theme');
@@ -1549,12 +1548,10 @@
             }
 
             function updateThemeIcon(isDark) {
-                if(isDark) {
-                    themeIcon.setAttribute('data-lucide', 'sun');
-                } else {
-                    themeIcon.setAttribute('data-lucide', 'moon');
+                if(themeToggleBtn) {
+                    themeToggleBtn.innerHTML = `<i data-lucide="${isDark ? 'sun' : 'moon'}" id="themeIcon"></i>`;
+                    lucide.createIcons();
                 }
-                lucide.createIcons();
             }
         });
     </script>
