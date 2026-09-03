@@ -279,10 +279,20 @@
                         .pop-price small { font-size: 0.85rem; font-weight: 400; color: #94a3b8; }
                         .pop-title { font-size: 1.25rem; font-weight: 700; color: #0f172a; margin-bottom: 10px; }
                         .pop-desc { font-size: 0.9rem; color: #64748b; line-height: 1.5; }
+                        
+                        .custom-animate-fade-up {
+                            opacity: 0;
+                            transform: translateY(40px);
+                            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+                        }
+                        .custom-animate-fade-up.is-visible {
+                            opacity: 1;
+                            transform: translateY(0);
+                        }
                     </style>
 
                     <!-- Paling Populer Sound System -->
-                    <div class="pop-card-wrapper" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200" data-aos-anchor=".hero-visual">
+                    <div class="pop-card-wrapper custom-animate-fade-up">
                         <div class="pop-badge">PALING POPULER</div>
                         <div class="pop-card">
                         <span class="pop-tag sound">Sound</span>
@@ -302,7 +312,7 @@
                     </div>
 
                     <!-- Paling Populer Panggung -->
-                    <div class="pop-card-wrapper" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400" data-aos-anchor=".hero-visual">
+                    <div class="pop-card-wrapper custom-animate-fade-up">
                         <div class="pop-badge">PALING POPULER</div>
                         <div class="pop-card">
                         <span class="pop-tag stage">Panggung</span>
@@ -321,7 +331,7 @@
                     </div>
 
                     <!-- Paling Populer Lighting -->
-                    <div class="pop-card-wrapper" data-aos="fade-up" data-aos-duration="800" data-aos-delay="600" data-aos-anchor=".hero-visual">
+                    <div class="pop-card-wrapper custom-animate-fade-up">
                         <div class="pop-badge">PALING POPULER</div>
                         <div class="pop-card">
                         <span class="pop-tag light">Lighting</span>
@@ -340,6 +350,34 @@
                     </div>
 
                 </div>
+                
+                <!-- Custom Script for Inner Scroll Animation -->
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const heroVisual = document.querySelector('.hero-visual');
+                        const cards = document.querySelectorAll('.custom-animate-fade-up');
+                        
+                        if (heroVisual && cards.length > 0) {
+                            const observer = new IntersectionObserver((entries) => {
+                                entries.forEach((entry) => {
+                                    if (entry.isIntersecting) {
+                                        const index = Array.from(cards).indexOf(entry.target);
+                                        setTimeout(() => {
+                                            entry.target.classList.add('is-visible');
+                                        }, index * 200);
+                                        observer.unobserve(entry.target);
+                                    }
+                                });
+                            }, {
+                                root: heroVisual,
+                                rootMargin: '0px 0px -50px 0px',
+                                threshold: 0.1
+                            });
+
+                            cards.forEach(card => observer.observe(card));
+                        }
+                    });
+                </script>
             </div>
         </section>
 
