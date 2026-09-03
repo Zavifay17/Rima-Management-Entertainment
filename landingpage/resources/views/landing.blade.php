@@ -261,10 +261,10 @@
                     </div>
                 </div>
                 
-                <div class="hero-visual" style="display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; max-height: 600px; overflow-y: auto; padding: 25px 15px 15px 5px; scrollbar-width: none; -ms-overflow-style: none;">
+                <div class="hero-visual" style="display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; max-height: 600px; overflow-y: auto; padding: 15px 15px 15px 5px; scrollbar-width: none; -ms-overflow-style: none;">
                     <style>
                         .hero-visual::-webkit-scrollbar { display: none; }
-                        .pop-card { flex-shrink: 0; margin-bottom: 1.5rem; position: relative; border-radius: 20px; padding: 1.5rem; background: #ffffff; border: 1px solid #e2e8f0; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s ease; }
+                        .pop-card { margin-top: 15px; flex-shrink: 0; margin-bottom: 1.5rem; position: relative; border-radius: 20px; padding: 1.5rem; background: #ffffff; border: 1px solid #e2e8f0; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s ease; }
                         .pop-card:hover { transform: translateY(-5px); }
                         .pop-badge { position: absolute; top: -12px; right: 15px; background: #ef4444; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4); z-index: 2; }
                         .pop-tag { display: inline-block; padding: 4px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 600; margin-bottom: 12px; }
