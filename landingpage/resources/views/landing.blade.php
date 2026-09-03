@@ -268,7 +268,7 @@
                         .hero-visual::-webkit-scrollbar { display: none; }
                         .pop-card { margin-bottom: 1.5rem; position: relative; border-radius: 20px; padding: 1.5rem; background: #ffffff; border: 1px solid #e2e8f0; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s ease; }
                         .pop-card:hover { transform: translateY(-5px); }
-                        .pop-badge { position: absolute; top: -12px; right: 15px; background: #ef4444; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4); }
+                        .pop-badge { position: absolute; top: 15px; right: 15px; background: #ff0000; color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4); z-index: 2; }
                         .pop-tag { display: inline-block; padding: 4px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 600; margin-bottom: 12px; }
                         .pop-tag.sound { background: rgba(167, 139, 250, 0.15); color: #8b5cf6; }
                         .pop-tag.light { background: rgba(244, 114, 182, 0.15); color: #ec4899; }
@@ -284,7 +284,7 @@
 
                     <!-- Paling Populer Sound System -->
                     <div class="pop-card" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="300">
-                        <div class="pop-badge">PALING POPULER</div>
+                        <div class="pop-badge">PALING DIMINATI</div>
                         <span class="pop-tag sound">Sound</span>
                         <h3 class="pop-title">Sound System Paket 10000W</h3>
                         <p class="pop-desc">Paket profesional untuk mini konser, festival musik sekolah, gathering besar, dan gathering outdoor skala menengah.</p>
@@ -302,7 +302,7 @@
 
                     <!-- Paling Populer Panggung -->
                     <div class="pop-card" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="450">
-                        <div class="pop-badge">PALING POPULER</div>
+                        <div class="pop-badge">PALING DIMINATI</div>
                         <span class="pop-tag stage">Panggung</span>
                         <h3 class="pop-title">Panggung Modular 8x6m</h3>
                         <p class="pop-desc">Standar panggung sedang untuk pentas seni sekolah, pesta pernikahan, dan corporate gathering outdoor.</p>
@@ -319,7 +319,7 @@
 
                     <!-- Paling Populer Lighting -->
                     <div class="pop-card" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="600">
-                        <div class="pop-badge">PALING POPULER</div>
+                        <div class="pop-badge">PALING DIMINATI</div>
                         <span class="pop-tag light">Lighting</span>
                         <h3 class="pop-title">Lighting Paket Menengah</h3>
                         <p class="pop-desc">Kombinasi optimal untuk panggung gathering megah, konser musik mini, dan dekorasi lampu dinamis.</p>
@@ -1668,19 +1668,28 @@
                 if(typeof gsap !== 'undefined') {
                     const xTo = gsap.quickTo(el, "x", {duration: 0.4, ease: "power3"});
                     const yTo = gsap.quickTo(el, "y", {duration: 0.4, ease: "power3"});
+                    const rotXTo = gsap.quickTo(el, "rotateX", {duration: 0.4, ease: "power3"});
+                    const rotYTo = gsap.quickTo(el, "rotateY", {duration: 0.4, ease: "power3"});
+                    
+                    gsap.set(el, { transformPerspective: 500, transformStyle: "preserve-3d" });
                     
                     el.addEventListener('mousemove', (e) => {
                         const rect = el.getBoundingClientRect();
-                        const x = (e.clientX - rect.left - rect.width / 2) * 0.4;
-                        const y = (e.clientY - rect.top - rect.height / 2) * 0.4;
-                        xTo(x);
-                        yTo(y);
+                        const x = (e.clientX - rect.left - rect.width / 2);
+                        const y = (e.clientY - rect.top - rect.height / 2);
+                        
+                        xTo(x * 0.4);
+                        yTo(y * 0.4);
+                        rotXTo(y * -0.2); 
+                        rotYTo(x * 0.2);
                     });
                     
                     el.addEventListener('mouseleave', () => {
                         xTo(0);
                         yTo(0);
-                        gsap.to(el, { x: 0, y: 0, duration: 0.7, ease: "elastic.out(1, 0.3)" });
+                        rotXTo(0);
+                        rotYTo(0);
+                        gsap.to(el, { x: 0, y: 0, rotateX: 0, rotateY: 0, duration: 0.7, ease: "elastic.out(1, 0.3)" });
                     });
                 } else {
                     // Fallback
@@ -2057,11 +2066,10 @@
         try {
             if (typeof Lenis !== 'undefined') {
                 const lenis = new Lenis({
-                    duration: 1.2,
-                    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+                    lerp: 0.1,
                     direction: 'vertical', 
                     gestureDirection: 'vertical',
-                    smooth: true,
+                    smoothWheel: true,
                     mouseMultiplier: 1,
                     smoothTouch: false,
                     touchMultiplier: 2,

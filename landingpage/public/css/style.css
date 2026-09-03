@@ -3245,18 +3245,28 @@ body.dark-mode .ambient-blob {
    AWWWARDS-LEVEL UI/UX OVERRIDES (Phase 8)
 ========================================================= */
 
-/* --- 1. Custom Cursor Exclusion Blend --- */
+/* --- 1. Custom Cursor Color Theme --- */
 #cursor-dot {
-    background: #ffffff !important;
-    mix-blend-mode: exclusion !important;
+    background: #e11d48 !important; /* Rose/Magenta for light mode */
+    mix-blend-mode: normal !important;
 }
 #cursor-ring {
-    border-color: rgba(255, 255, 255, 0.5) !important;
-    mix-blend-mode: exclusion !important;
+    border-color: rgba(225, 29, 72, 0.5) !important;
+    mix-blend-mode: normal !important;
 }
 body.cursor-hover #cursor-dot {
-    background: #ffffff !important;
+    background: #e11d48 !important;
     transform: translate(-50%, -50%) scale(1.5) !important;
+}
+
+body.dark-mode #cursor-dot {
+    background: #3b82f6 !important; /* Elegant Blue for dark mode */
+}
+body.dark-mode #cursor-ring {
+    border-color: rgba(59, 130, 246, 0.5) !important;
+}
+body.dark-mode.cursor-hover #cursor-dot {
+    background: #3b82f6 !important;
 }
 
 /* --- 2. Dynamic Glow / Flashlight Borders on Cards --- */
