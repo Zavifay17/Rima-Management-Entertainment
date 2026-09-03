@@ -264,10 +264,10 @@
                 <div class="hero-visual" style="display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; max-height: 600px; overflow-y: auto; padding: 15px 15px 15px 5px; scrollbar-width: none; -ms-overflow-style: none;">
                     <style>
                         .hero-visual::-webkit-scrollbar { display: none; }
-                        .pop-card-wrapper { flex-shrink: 0; margin-bottom: 1.5rem; padding-top: 15px; }
+                        .pop-card-wrapper { position: relative; flex-shrink: 0; margin-bottom: 1.5rem; padding-top: 15px; }
                         .pop-card { position: relative; border-radius: 20px; padding: 1.5rem; background: #ffffff; border: 1px solid #e2e8f0; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s ease; }
                         .pop-card:hover { transform: translateY(-5px); }
-                        .pop-badge { position: absolute; top: -12px; right: 15px; background: #ef4444; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4); z-index: 2; }
+                        .pop-badge { position: absolute; top: 3px; right: 15px; background: #ef4444; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4); z-index: 2; }
                         .pop-tag { display: inline-block; padding: 4px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 600; margin-bottom: 12px; }
                         .pop-tag.sound { background: rgba(167, 139, 250, 0.15); color: #8b5cf6; }
                         .pop-tag.light { background: rgba(244, 114, 182, 0.15); color: #ec4899; }
@@ -283,8 +283,8 @@
 
                     <!-- Paling Populer Sound System -->
                     <div class="pop-card-wrapper">
-                        <div class="pop-card" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="300">
                         <div class="pop-badge">PALING POPULER</div>
+                        <div class="pop-card" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="300">
                         <span class="pop-tag sound">Sound</span>
                         <h3 class="pop-title">Sound System Paket 10000W</h3>
                         <p class="pop-desc">Paket profesional untuk mini konser, festival musik sekolah, gathering besar, dan gathering outdoor skala menengah.</p>
@@ -303,8 +303,8 @@
 
                     <!-- Paling Populer Panggung -->
                     <div class="pop-card-wrapper">
-                        <div class="pop-card" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="450">
                         <div class="pop-badge">PALING POPULER</div>
+                        <div class="pop-card" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="450">
                         <span class="pop-tag stage">Panggung</span>
                         <h3 class="pop-title">Panggung Modular 8x6m</h3>
                         <p class="pop-desc">Standar panggung sedang untuk pentas seni sekolah, pesta pernikahan, dan corporate gathering outdoor.</p>
@@ -322,8 +322,8 @@
 
                     <!-- Paling Populer Lighting -->
                     <div class="pop-card-wrapper">
-                        <div class="pop-card" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="600">
                         <div class="pop-badge">PALING POPULER</div>
+                        <div class="pop-card" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="600">
                         <span class="pop-tag light">Lighting</span>
                         <h3 class="pop-title">Lighting Paket Menengah</h3>
                         <p class="pop-desc">Kombinasi optimal untuk panggung gathering megah, konser musik mini, dan dekorasi lampu dinamis.</p>
