@@ -282,7 +282,7 @@
                     </style>
 
                     <!-- Paling Populer Sound System -->
-                    <div class="pop-card-wrapper" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="300" data-aos-anchor=".hero-visual">
+                    <div class="pop-card-wrapper" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200" data-aos-anchor=".hero-visual">
                         <div class="pop-badge">PALING POPULER</div>
                         <div class="pop-card">
                         <span class="pop-tag sound">Sound</span>
@@ -302,7 +302,7 @@
                     </div>
 
                     <!-- Paling Populer Panggung -->
-                    <div class="pop-card-wrapper" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="450" data-aos-anchor=".hero-visual">
+                    <div class="pop-card-wrapper" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400" data-aos-anchor=".hero-visual">
                         <div class="pop-badge">PALING POPULER</div>
                         <div class="pop-card">
                         <span class="pop-tag stage">Panggung</span>
@@ -321,7 +321,7 @@
                     </div>
 
                     <!-- Paling Populer Lighting -->
-                    <div class="pop-card-wrapper" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="600" data-aos-anchor=".hero-visual">
+                    <div class="pop-card-wrapper" data-aos="fade-up" data-aos-duration="800" data-aos-delay="600" data-aos-anchor=".hero-visual">
                         <div class="pop-badge">PALING POPULER</div>
                         <div class="pop-card">
                         <span class="pop-tag light">Lighting</span>
