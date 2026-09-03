@@ -139,6 +139,9 @@
     ========================================== -->
     <canvas id="particle-canvas"></canvas>
 
+    <!-- Ultra Premium Spotlight Overlay (Phase 8) -->
+    <div id="spotlight-overlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9998; transition: opacity 0.5s ease; opacity: 0;"></div>
+
     <!-- Scroll Progress Bar -->
     <div id="scroll-progress"></div>
 
@@ -1285,11 +1288,6 @@
         </div>
     </div>
 
-    <!-- Back to Top Button -->
-    <a href="#" class="back-to-top magnetic-btn" id="backToTop" title="Kembali ke atas">
-        <i data-lucide="arrow-up"></i>
-    </a>
-
     <!-- Flatpickr Script -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://npmcdn.com/flatpickr/dist/l10n/id.js"></script>
@@ -1631,10 +1629,6 @@
                     cursorRing.style.left = ringX + 'px';
                     cursorRing.style.top  = ringY + 'px';
                 }
-                if(ambientBlob) {
-                    ambientBlob.style.left = ringX + 'px';
-                    ambientBlob.style.top = ringY + 'px';
-                }
                 rafId = requestAnimationFrame(animateRing);
             }
             animateRing();
@@ -1646,16 +1640,19 @@
             });
 
             // Magnetic Elements Logic
-            const magneticElements = document.querySelectorAll('.btn, .btn-primary, .btn-outline, .magnetic-btn, .nav-link');
+            const magneticElements = document.querySelectorAll('.btn, .btn-primary, .btn-outline, .magnetic-btn, .nav-link, .floating-whatsapp, .back-to-top');
             magneticElements.forEach(el => {
                 el.addEventListener('mousemove', (e) => {
                     const rect = el.getBoundingClientRect();
                     const x = e.clientX - rect.left - rect.width / 2;
                     const y = e.clientY - rect.top - rect.height / 2;
-                    // Move the button slightly towards the cursor
-                    el.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+                    // Move the button slightly towards the cursor with immediate response
+                    el.style.transition = 'none';
+                    el.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
                 });
                 el.addEventListener('mouseleave', () => {
+                    // Spring back with elastic cubic-bezier
+                    el.style.transition = 'transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
                     el.style.transform = `translate(0px, 0px)`;
                 });
             });
@@ -1669,29 +1666,35 @@
                 cursorDot.style.opacity  = '1';
                 cursorRing.style.opacity = '1';
             });
-        }
-
-        // =====================================================
-        // 3. AMBIENT FLOATING PARTICLES — with Mouse Repel
+            // =====================================================
+        // 3. AMBIENT FLOATING PARTICLES - ADVANCED CONSTELLATION
         // =====================================================
         const canvas = document.getElementById('particle-canvas');
         if (canvas) {
             const ctx = canvas.getContext('2d');
             let particles = [];
             let W, H;
-            // Track mouse position (only on desktop)
-            let mouseX = -9999, mouseY = -9999;
-            const REPEL_RADIUS  = 120;  // px distance to start repelling
-            const REPEL_FORCE   = 3.5;  // push strength
+            let mouse = { x: -9999, y: -9999, radius: 150 };
             const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
             if (isDesktop) {
                 window.addEventListener('mousemove', (e) => {
-                    mouseX = e.clientX;
-                    mouseY = e.clientY;
+                    mouse.x = e.clientX;
+                    mouse.y = e.clientY;
+                    
+                    // Spotlight Overlay Logic
+                    const spotlight = document.getElementById('spotlight-overlay');
+                    if(spotlight) {
+                        spotlight.style.opacity = '1';
+                        const isDark = document.body.classList.contains('dark-mode');
+                        const color = isDark ? 'rgba(99, 102, 241, 0.08)' : 'rgba(255, 255, 255, 0.4)';
+                        spotlight.style.background = `radial-gradient(circle 600px at ${e.clientX}px ${e.clientY}px, ${color}, transparent 80%)`;
+                    }
                 });
                 window.addEventListener('mouseleave', () => {
-                    mouseX = -9999; mouseY = -9999;
+                    mouse.x = -9999; mouse.y = -9999;
+                    const spotlight = document.getElementById('spotlight-overlay');
+                    if(spotlight) spotlight.style.opacity = '0';
                 });
             }
 
@@ -1702,144 +1705,149 @@
             resizeCanvas();
             window.addEventListener('resize', resizeCanvas);
 
-            const PARTICLE_COUNT = window.innerWidth < 768 ? 35 : 60; // Standard, elegant, not too crowded
+            const PARTICLE_COUNT = window.innerWidth < 768 ? 40 : 80;
 
             function getParticleColor() {
                 const isDark = document.body.classList.contains('dark-mode');
                 if (isDark) {
-                    const colors = [
-                        'rgba(56,189,248,',   // sky blue
-                        'rgba(99,102,241,',   // indigo
-                        'rgba(248,113,113,',  // red/pink
-                        'rgba(167,139,250,',  // purple
-                        'rgba(255,255,255,'   // white
-                    ];
+                    const colors = ['rgba(56,189,248,', 'rgba(99,102,241,', 'rgba(167,139,250,'];
                     return colors[Math.floor(Math.random() * colors.length)];
                 } else {
-                    const colors = [
-                        'rgba(10,37,64,',     // Dark slate
-                        'rgba(37,99,235,',    // bright blue
-                        'rgba(220,38,38,',    // RME red
-                        'rgba(99,102,241,',   // indigo
-                        'rgba(15,23,42,'      // Slate 900
-                    ];
+                    const colors = ['rgba(10,37,64,', 'rgba(37,99,235,', 'rgba(99,102,241,'];
                     return colors[Math.floor(Math.random() * colors.length)];
                 }
             }
 
-            function getParticleAlpha() {
-                const isDark = document.body.classList.contains('dark-mode');
-                return isDark
-                    ? (Math.random() * 0.5 + 0.3) // Brighter for dark mode
-                    : (Math.random() * 0.6 + 0.4); // Much brighter for light mode
-            }
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * W;
+                    this.y = Math.random() * H;
+                    this.baseX = this.x;
+                    this.baseY = this.y;
+                    this.size = (Math.random() * 2) + 0.5;
+                    this.baseSize = this.size;
+                    this.density = (Math.random() * 30) + 1;
+                    this.color = getParticleColor();
+                    this.alpha = Math.random() * 0.5 + 0.2;
+                    this.vx = (Math.random() - 0.5) * 0.5;
+                    this.vy = (Math.random() - 0.5) * 0.5;
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color + this.alpha + ')';
+                    ctx.fill();
+                    
+                    // Glow
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size * 3, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color + (this.alpha * 0.2) + ')';
+                    ctx.fill();
+                }
+                update() {
+                    // Drift
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    
+                    if (this.x < 0 || this.x > W) this.vx = -this.vx;
+                    if (this.y < 0 || this.y > H) this.vy = -this.vy;
 
-            function createParticle() {
-                const isMobile = window.innerWidth < 768;
-                return {
-                    x:    Math.random() * W,
-                    y:    Math.random() * H,
-                    r:    (Math.random() * 2.5 + 1.2) * (isMobile ? 0.8 : 1.2), // Slightly larger/smaller based on screen
-                    dx:   (Math.random() - 0.5) * 0.4, // Gentle horizontal wobble
-                    dy:   -(Math.random() * 0.6 + 0.2), // Slow upward drift (champagne/ember effect)
-                    origDx: 0, origDy: 0,
-                    alpha: getParticleAlpha(),
-                    color: getParticleColor(),
-                    pulsePhase: Math.random() * Math.PI * 2,
-                    pulseSpeed: Math.random() * 0.03 + 0.01
-                };
+                    // Mouse Interaction (Spring Physics)
+                    if (isDesktop) {
+                        let dx = mouse.x - this.x;
+                        let dy = mouse.y - this.y;
+                        let distance = Math.sqrt(dx * dx + dy * dy);
+                        let forceDirectionX = dx / distance;
+                        let forceDirectionY = dy / distance;
+                        let maxDistance = mouse.radius;
+                        let force = (maxDistance - distance) / maxDistance;
+                        let directionX = forceDirectionX * force * this.density;
+                        let directionY = forceDirectionY * force * this.density;
+
+                        if (distance < mouse.radius) {
+                            this.x -= directionX;
+                            this.y -= directionY;
+                            this.size = this.baseSize * 2;
+                        } else {
+                            if (this.x !== this.baseX) {
+                                let dx = this.x - this.baseX;
+                                this.x -= dx/10;
+                            }
+                            if (this.y !== this.baseY) {
+                                let dy = this.y - this.baseY;
+                                this.y -= dy/10;
+                            }
+                            this.size = this.baseSize;
+                        }
+                    }
+                    
+                    // Mobile Touch Burst
+                    if (!isDesktop && mouse.x !== -9999) {
+                        let dx = mouse.x - this.x;
+                        let dy = mouse.y - this.y;
+                        let distance = Math.sqrt(dx * dx + dy * dy);
+                        if(distance < 100) {
+                            this.vx = -dx * 0.05;
+                            this.vy = -dy * 0.05;
+                        }
+                    }
+                    
+                    this.baseX += this.vx;
+                    this.baseY += this.vy;
+                }
             }
 
             for (let i = 0; i < PARTICLE_COUNT; i++) {
-                const p = createParticle();
-                p.origDx = p.dx;
-                p.origDy = p.dy;
-                particles.push(p);
+                particles.push(new Particle());
             }
 
-            function drawParticles() {
-                ctx.clearRect(0, 0, W, H);
+            // Mobile Touch Interaction
+            if (!isDesktop) {
+                window.addEventListener('touchstart', (e) => {
+                    mouse.x = e.touches[0].clientX;
+                    mouse.y = e.touches[0].clientY;
+                    setTimeout(() => { mouse.x = -9999; mouse.y = -9999; }, 200);
+                });
+            }
 
+            function connect() {
                 const isDark = document.body.classList.contains('dark-mode');
                 const lineColor = isDark ? '255, 255, 255' : '10, 37, 64';
-                const connectDistance = window.innerWidth < 768 ? 90 : 150;
-
-                for (let i = 0; i < particles.length; i++) {
-                    for (let j = i + 1; j < particles.length; j++) {
-                        const dx = particles[i].x - particles[j].x;
-                        const dy = particles[i].y - particles[j].y;
-                        const distance = Math.sqrt(dx * dx + dy * dy);
-
-                        if (distance < connectDistance) {
+                let opacityValue = 1;
+                for (let a = 0; a < particles.length; a++) {
+                    for (let b = a; b < particles.length; b++) {
+                        let distance = ((particles[a].x - particles[b].x) * (particles[a].x - particles[b].x))
+                                     + ((particles[a].y - particles[b].y) * (particles[a].y - particles[b].y));
+                        if (distance < (W/10) * (H/10)) {
+                            opacityValue = 1 - (distance / 15000);
+                            ctx.strokeStyle = `rgba(${lineColor}, ${opacityValue * 0.2})`;
+                            ctx.lineWidth = 1;
                             ctx.beginPath();
-                            ctx.strokeStyle = `rgba(${lineColor}, ${0.30 - (distance / connectDistance) * 0.30})`; // Slightly softer lines
-                            ctx.lineWidth = 0.8;
-                            ctx.moveTo(particles[i].x, particles[i].y);
-                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.moveTo(particles[a].x, particles[a].y);
+                            ctx.lineTo(particles[b].x, particles[b].y);
                             ctx.stroke();
                         }
                     }
                 }
-
-                particles.forEach(p => {
-                    // --- Mouse Repel Physics ---
-                    if (isDesktop) {
-                        const distX = p.x - mouseX;
-                        const distY = p.y - mouseY;
-                        const dist  = Math.sqrt(distX * distX + distY * distY);
-
-                        if (dist < REPEL_RADIUS && dist > 0) {
-                            // Force inversely proportional to distance (stronger when closer)
-                            const force    = (REPEL_RADIUS - dist) / REPEL_RADIUS;
-                            const pushX    = (distX / dist) * force * REPEL_FORCE;
-                            const pushY    = (distY / dist) * force * REPEL_FORCE;
-                            p.dx += (pushX - p.dx) * 0.15;
-                            p.dy += (pushY - p.dy) * 0.15;
-                        } else {
-                            // Gently restore to original drift velocity
-                            p.dx += (p.origDx - p.dx) * 0.03;
-                            p.dy += (p.origDy - p.dy) * 0.03;
-                        }
-                    }
-
-                    // Pulse logic for luxurious glow
-                    p.pulsePhase += p.pulseSpeed;
-                    const currentRadius = p.r + Math.sin(p.pulsePhase) * (p.r * 0.3); // pulse 30% of size
-
-                    // Draw glowing particle (double-layered for elegance)
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, currentRadius * 3.5, 0, Math.PI * 2);
-                    ctx.fillStyle = p.color + (p.alpha * 0.15) + ')';
-                    ctx.fill();
-
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, currentRadius, 0, Math.PI * 2);
-                    ctx.fillStyle = p.color + p.alpha + ')';
-                    ctx.fill();
-
-                    // Move
-                    p.x += p.dx;
-                    p.y += p.dy;
-
-                    // Wrap edges
-                    if (p.x < 0)  p.x = W;
-                    if (p.x > W)  p.x = 0;
-                    if (p.y < 0)  { p.y = H; p.x = Math.random() * W; } // Reset to bottom at random X
-                    if (p.y > H)  p.y = 0;
-                });
-                requestAnimationFrame(drawParticles);
             }
-            drawParticles();
 
-            // Update colours AND alpha when theme toggles
+            function animate() {
+                requestAnimationFrame(animate);
+                ctx.clearRect(0, 0, W, H);
+                for (let i = 0; i < particles.length; i++) {
+                    particles[i].draw();
+                    particles[i].update();
+                }
+                connect();
+            }
+            animate();
+
+            // Theme toggle listener
             const themeToggleBtn = document.getElementById('themeToggle');
             if (themeToggleBtn) {
                 themeToggleBtn.addEventListener('click', () => {
                     setTimeout(() => {
-                        particles.forEach(p => {
-                            p.color = getParticleColor();
-                            p.alpha = getParticleAlpha();
-                        });
+                        particles.forEach(p => p.color = getParticleColor());
                     }, 50);
                 });
             }
@@ -1847,7 +1855,7 @@
 
         // =====================================================
         // 4. 3D Tilt Effect for Cards
-        // =====================================================
+        // ==============================================================
         if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
             const tiltCards = document.querySelectorAll('.catalog-item, .pop-card, .category-card');
             tiltCards.forEach(card => {
@@ -1906,7 +1914,9 @@
 
             // Back to Top Button Visibility
             if(backToTopBtn) {
-                if (scrollTop > 400) {
+                const categoriesSection = document.getElementById('categories');
+                const triggerPoint = categoriesSection ? categoriesSection.offsetTop - window.innerHeight / 2 : 400;
+                if (scrollTop > triggerPoint) {
                     backToTopBtn.classList.add('visible');
                     // Force styling just in case CSS misses it
                     backToTopBtn.style.opacity = '1';
