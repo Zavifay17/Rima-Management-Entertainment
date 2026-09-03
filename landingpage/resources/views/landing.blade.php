@@ -1666,6 +1666,7 @@
                 cursorDot.style.opacity  = '1';
                 cursorRing.style.opacity = '1';
             });
+        }
             // =====================================================
         // 3. AMBIENT FLOATING PARTICLES - ADVANCED CONSTELLATION
         // =====================================================
