@@ -100,8 +100,9 @@
 <body data-spy="scroll" data-target=".nav-menu" data-offset="100">
 
     <!-- Ultra Premium Custom Cursor -->
-    <div class="custom-cursor"></div>
-    <div class="custom-cursor-follower"></div>
+    <div class="custom-cursor" id="cursor-dot"></div>
+    <div class="custom-cursor-follower" id="cursor-ring"></div>
+    <div class="ambient-blob" id="ambient-blob"></div>
 
     <!-- Dynamic Orb Glow (Phase 3) -->
     <div class="orb-container">
@@ -1624,12 +1625,20 @@
                 cursorDot.style.top   = dotY  + 'px';
             });
 
+            const ambientBlob = document.getElementById('ambient-blob');
+
             // Ring uses smooth lerp
             function animateRing() {
                 ringX += (dotX - ringX) * 0.12;
                 ringY += (dotY - ringY) * 0.12;
-                cursorRing.style.left = ringX + 'px';
-                cursorRing.style.top  = ringY + 'px';
+                if(cursorRing) {
+                    cursorRing.style.left = ringX + 'px';
+                    cursorRing.style.top  = ringY + 'px';
+                }
+                if(ambientBlob) {
+                    ambientBlob.style.left = ringX + 'px';
+                    ambientBlob.style.top = ringY + 'px';
+                }
                 rafId = requestAnimationFrame(animateRing);
             }
             animateRing();

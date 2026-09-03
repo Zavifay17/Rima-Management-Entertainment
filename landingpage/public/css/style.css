@@ -3139,3 +3139,75 @@ body.dark-mode .scroll-progress-bar {
     transform: scale(1.08);
 }
 
+/* =====================================================
+   AWWWARDS PREMIUM PHASE 4 UPGRADES
+   ===================================================== */
+
+/* 1. Custom Webkit Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-dark-base);
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(var(--color-primary-rgb), 0.5);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary);
+}
+body.dark-mode ::-webkit-scrollbar-thumb {
+    background: rgba(56, 189, 248, 0.5);
+}
+body.dark-mode ::-webkit-scrollbar-thumb:hover {
+    background: rgba(56, 189, 248, 0.8);
+}
+
+/* 2. Primary Button Ambient Glow */
+.btn-primary {
+    position: relative;
+    z-index: 1;
+}
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    background: linear-gradient(45deg, var(--color-primary), var(--color-accent), var(--color-primary));
+    z-index: -1;
+    border-radius: inherit;
+    filter: blur(12px);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+.btn-primary:hover::before {
+    opacity: 0.6;
+}
+body.dark-mode .btn-primary::before {
+    background: linear-gradient(45deg, #38bdf8, #f87171, #38bdf8);
+}
+
+/* 3. Immersive Floating Blob Background */
+body {
+    position: relative;
+}
+.ambient-blob {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 60vw;
+    height: 60vw;
+    max-width: 800px;
+    max-height: 800px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(var(--color-primary-rgb), 0.08) 0%, transparent 60%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: -2;
+    filter: blur(80px);
+    transition: left 0.5s ease-out, top 0.5s ease-out; /* Smooth follow */
+}
+body.dark-mode .ambient-blob {
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, transparent 60%);
+}
+
