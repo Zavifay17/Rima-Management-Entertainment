@@ -2226,9 +2226,14 @@ body.dark-mode .form-control:focus {
     color: white;
 }
 
-/* --- Mobile Sticky CTA Default (Hidden on Desktop) --- */
-.mobile-sticky-cta {
+/* --- Mobile Sticky Bottom Bar (Awwwards Style) --- */
+.mobile-bottom-bar {
     display: none !important;
+}
+
+/* --- Particle Canvas Warp Transition --- */
+#particle-canvas {
+    transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1);
 }
 
 /* --- Mobile Responsive Fixes --- */
@@ -2329,30 +2334,71 @@ body.dark-mode .form-control:focus {
         height: 40px;
     }
     
-    /* Mobile Sticky CTA */
-    .mobile-sticky-cta.d-md-none {
+    /* Mobile Sticky Bottom Action Bar (Awwwards Style) */
+    .mobile-bottom-bar.d-md-none {
         display: flex !important;
         position: fixed;
         bottom: 20px;
-        left: 20px;
-        right: 80px; /* Leave room for WA button */
-        background: linear-gradient(135deg, var(--color-primary), #3b82f6);
-        color: white;
-        padding: 12px;
-        border-radius: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        max-width: 400px;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-radius: 100px;
+        padding: 8px;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), inset 0 2px 5px rgba(255,255,255,0.8);
+        z-index: 9999;
+        gap: 10px;
+    }
+    
+    body.dark-mode .mobile-bottom-bar.d-md-none {
+        background: rgba(15, 23, 42, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 2px 5px rgba(255,255,255,0.05);
+    }
+
+    .bottom-bar-btn {
+        display: flex;
         align-items: center;
         justify-content: center;
+        height: 48px;
+        border-radius: 100px;
         font-weight: 700;
         text-decoration: none;
-        box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5);
-        z-index: 9999;
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
-    .mobile-sticky-cta i {
-        margin-right: 8px;
+
+    .bottom-bar-btn.whatsapp {
+        width: 48px;
+        background: #25D366;
+        color: white;
+        font-size: 20px;
+        flex-shrink: 0;
     }
-    .mobile-sticky-cta:active {
-        transform: scale(0.95);
+
+    .bottom-bar-btn.primary {
+        flex-grow: 1;
+        background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+        color: white;
+        font-size: 1rem;
+        gap: 8px;
+    }
+
+    .bottom-bar-btn:active {
+        transform: scale(0.92);
+    }
+
+    /* Hide standard floating elements on mobile to prevent clutter */
+    .floating-whatsapp {
+        display: none !important;
+    }
+    .back-to-top {
+        bottom: 90px;
     }
 }
 
@@ -3297,12 +3343,40 @@ body.dark-mode.cursor-hover #cursor-dot {
 
 body.dark-mode .category-card::before, 
 body.dark-mode .catalog-item::before, 
+/* Ultra-Premium Spotlight with X-Ray Glassmorphism Noise (Awwwards Style) */
+body.dark-mode .tilt-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transform: none;
+    background: 
+        radial-gradient(
+            600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+            rgba(255, 255, 255, 0.08),
+            transparent 40%
+        ),
+        url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.05"/%3E%3C/svg%3E');
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 10;
+    mix-blend-mode: overlay;
+}
+body.dark-mode .tilt-card:hover::before, 
+body.dark-mode .tilt-card.mobile-spotlight::before {
+    opacity: 1;
+}
+
 body.dark-mode .pop-card::before {
-    background: radial-gradient(
-        800px circle at var(--mouse-x, 0) var(--mouse-y, 0), 
-        rgba(99,102,241,0.15),
-        transparent 40%
-    );
+    background: 
+        radial-gradient(
+            800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+            rgba(225,29,72,0.15),
+            transparent 40%
+        ),
+        url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.04"/%3E%3C/svg%3E');
 }
 
 /* --- 3. SplitType Text Reveal Enhancements --- */
@@ -3313,11 +3387,14 @@ body.dark-mode .pop-card::before {
     transform-origin: bottom left;
 }
 
-/* --- 4. Magnetic Button Spring Polish --- */
+/* --- 4. Fluid/Magnetic Pull 2.0 (High Elasticity) --- */
 .magnetic-btn {
-    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s, color 0.3s !important;
+    transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s, color 0.3s, box-shadow 0.3s !important;
 }
 .magnetic-btn.is-magnetic {
-    transition: transform 0.1s linear !important;
+    transition: transform 0.1s cubic-bezier(0.2, 0, 0, 1) !important;
+}
+.magnetic-btn:hover {
+    box-shadow: 0 10px 30px rgba(225,29,72, 0.3);
 }
 

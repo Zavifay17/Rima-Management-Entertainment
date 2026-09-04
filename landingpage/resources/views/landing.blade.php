@@ -44,6 +44,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <!-- SplitType for Text Animation -->
     <script src="https://unpkg.com/split-type"></script>
+    
+    <!-- Lenis for Smooth Scrolling -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
 
     <!-- FontAwesome CDN for Brand Icons (WhatsApp) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -1538,10 +1541,15 @@
         <i data-lucide="arrow-up"></i>
     </a>
 
-    <!-- Mobile Sticky CTA -->
-    <a href="#rent-form-section" class="mobile-sticky-cta d-md-none" onclick="document.getElementById('bookingForm').scrollIntoView({behavior: 'smooth'})">
-        <i class="fa-solid fa-bolt"></i> Sewa Sekarang
-    </a>
+    <!-- Mobile Sticky Bottom Action Bar (Premium Awwwards Style) -->
+    <div class="mobile-bottom-bar d-md-none">
+        <a href="https://wa.me/6287885675868" target="_blank" class="bottom-bar-btn whatsapp" onclick="triggerHaptic()" aria-label="Chat WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="#rent-form-section" class="bottom-bar-btn primary" onclick="triggerHaptic(); document.getElementById('bookingForm').scrollIntoView({behavior: 'smooth'})">
+            <i class="fa-solid fa-bolt"></i> Sewa Sekarang
+        </a>
+    </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
@@ -1867,9 +1875,9 @@
                     const colors = [
                         'rgba(239,68,68,',    // Magenta Red (Theme)
                         'rgba(244,63,94,',    // Rose (Theme)
-                        'rgba(219,39,119,',   // Elegant Pink
-                        'rgba(14,165,233,',   // Blue accent
-                        'rgba(15,23,42,'      // Dark slate accent
+                        'rgba(192,192,192,',  // Premium Silver/Metallic
+                        'rgba(100,116,139,',  // Slate Gray/Corporate
+                        'rgba(226,232,240,'   // Platinum/Light Silver
                     ];
                     return colors[Math.floor(Math.random() * colors.length)];
                 }
@@ -2193,6 +2201,22 @@
                         const pullStrength = (index === 0) ? 0.4 : -0.3; 
                         orb.style.transform = `translate(${offsetX * pullStrength}px, ${offsetY * pullStrength}px)`;
                     });
+
+                    // Mobile Gyro Tilt for Cards (Awwwards Level)
+                    const tiltCards = document.querySelectorAll('.catalog-item, .pop-card, .category-card');
+                    tiltCards.forEach(card => {
+                        if(!card.classList.contains('tilt-card')) card.classList.add('tilt-card');
+                        const rotateX = (offsetY / window.innerHeight) * 15; // Max 15deg
+                        const rotateY = (offsetX / window.innerWidth) * -15; 
+                        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                        
+                        // Add mobile spotlight class to override hover requirement
+                        if(!card.classList.contains('mobile-spotlight')) card.classList.add('mobile-spotlight');
+                        
+                        // Dynamic shimmer based on tilt
+                        card.style.setProperty('--mouse-x', `${(offsetX / window.innerWidth) * 100 + 50}%`);
+                        card.style.setProperty('--mouse-y', `${(offsetY / window.innerHeight) * 100 + 50}%`);
+                    });
                     
                     requestAnimationFrame(animateGyroOrbs);
                 }
@@ -2243,6 +2267,78 @@
             }
         } catch (e) {
             console.log('Premium animations skipped: ', e);
+        }
+
+        // --- 8. Haptic Touch Feedback ---
+        window.triggerHaptic = function() {
+            if (navigator.vibrate) {
+                navigator.vibrate(30); // Subtle 30ms vibration
+            }
+        };
+        document.querySelectorAll('.btn, .tab-btn, .quick-link-item, .gallery-item').forEach(el => {
+            el.addEventListener('click', window.triggerHaptic);
+        });
+
+        // --- 9. Lenis Smooth Scrolling ---
+        if (typeof Lenis !== 'undefined') {
+            const lenis = new Lenis({
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+                direction: 'vertical',
+                gestureDirection: 'vertical',
+                smooth: true,
+                mouseMultiplier: 1,
+                smoothTouch: false,
+                touchMultiplier: 2,
+                infinite: false,
+            });
+
+            // Warp effect on fast scroll
+            lenis.on('scroll', (e) => {
+                // Scroll Progress (Overrides previous scroll progress logic)
+                const scrollBar = document.getElementById('scrollBar');
+                if (scrollBar) {
+                    scrollBar.style.width = (e.progress * 100) + '%';
+                }
+                
+                // Back to Top visibility
+                const backToTopBtn = document.getElementById('backToTop');
+                if (backToTopBtn) {
+                    if (e.scroll > 500) {
+                        backToTopBtn.classList.add('visible', 'show');
+                        backToTopBtn.style.setProperty('opacity', '1', 'important');
+                        backToTopBtn.style.setProperty('visibility', 'visible', 'important');
+                        backToTopBtn.style.setProperty('pointer-events', 'auto', 'important');
+                    } else {
+                        backToTopBtn.classList.remove('visible', 'show');
+                        backToTopBtn.style.setProperty('opacity', '0', 'important');
+                        backToTopBtn.style.setProperty('visibility', 'hidden', 'important');
+                        backToTopBtn.style.setProperty('pointer-events', 'none', 'important');
+                    }
+                }
+
+                // Particle Warp Speed
+                if (e.velocity > 15 || e.velocity < -15) {
+                    document.getElementById('particle-canvas').style.transform = `scale(${1 + Math.abs(e.velocity)*0.01})`;
+                } else {
+                    document.getElementById('particle-canvas').style.transform = 'scale(1)';
+                }
+            });
+
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+            requestAnimationFrame(raf);
+
+            // Connect GSAP ScrollTrigger to Lenis
+            if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                lenis.on('scroll', ScrollTrigger.update);
+                gsap.ticker.add((time) => {
+                    lenis.raf(time * 1000);
+                });
+                gsap.ticker.lagSmoothing(0, 0);
+            }
         }
 
     })();
