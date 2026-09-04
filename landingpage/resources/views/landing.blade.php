@@ -44,9 +44,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <!-- SplitType for Text Animation -->
     <script src="https://unpkg.com/split-type"></script>
-    
-    <!-- Lenis for Smooth Scrolling -->
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
 
     <!-- FontAwesome CDN for Brand Icons (WhatsApp) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -1875,8 +1872,9 @@
                     const colors = [
                         'rgba(239,68,68,',    // Magenta Red (Theme)
                         'rgba(244,63,94,',    // Rose (Theme)
+                        'rgba(56,189,248,',   // Theme Blue (Light Blue/Cyan)
+                        'rgba(59,130,246,',   // Theme Blue (Blue 500)
                         'rgba(192,192,192,',  // Premium Silver/Metallic
-                        'rgba(100,116,139,',  // Slate Gray/Corporate
                         'rgba(226,232,240,'   // Platinum/Light Silver
                     ];
                     return colors[Math.floor(Math.random() * colors.length)];
@@ -2279,67 +2277,32 @@
             el.addEventListener('click', window.triggerHaptic);
         });
 
-        // --- 9. Lenis Smooth Scrolling ---
-        if (typeof Lenis !== 'undefined') {
-            const lenis = new Lenis({
-                duration: 1.2,
-                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
-                direction: 'vertical',
-                gestureDirection: 'vertical',
-                smooth: true,
-                mouseMultiplier: 1,
-                smoothTouch: false,
-                touchMultiplier: 2,
-                infinite: false,
-            });
+        // --- 9. Standard Scroll Progress & Back-to-Top ---
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercentage = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+            
+            const scrollBar = document.getElementById('scrollBar');
+            if(scrollBar) {
+                scrollBar.style.width = scrollPercentage + '%';
+            }
 
-            // Warp effect on fast scroll
-            lenis.on('scroll', (e) => {
-                // Scroll Progress (Overrides previous scroll progress logic)
-                const scrollBar = document.getElementById('scrollBar');
-                if (scrollBar) {
-                    scrollBar.style.width = (e.progress * 100) + '%';
-                }
-                
-                // Back to Top visibility
-                const backToTopBtn = document.getElementById('backToTop');
-                if (backToTopBtn) {
-                    if (e.scroll > 500) {
-                        backToTopBtn.classList.add('visible', 'show');
-                        backToTopBtn.style.setProperty('opacity', '1', 'important');
-                        backToTopBtn.style.setProperty('visibility', 'visible', 'important');
-                        backToTopBtn.style.setProperty('pointer-events', 'auto', 'important');
-                    } else {
-                        backToTopBtn.classList.remove('visible', 'show');
-                        backToTopBtn.style.setProperty('opacity', '0', 'important');
-                        backToTopBtn.style.setProperty('visibility', 'hidden', 'important');
-                        backToTopBtn.style.setProperty('pointer-events', 'none', 'important');
-                    }
-                }
-
-                // Particle Warp Speed
-                if (e.velocity > 15 || e.velocity < -15) {
-                    document.getElementById('particle-canvas').style.transform = `scale(${1 + Math.abs(e.velocity)*0.01})`;
+            const backToTopBtn = document.getElementById('backToTop');
+            if(backToTopBtn) {
+                if (scrollTop > 500) {
+                    backToTopBtn.classList.add('visible', 'show');
+                    backToTopBtn.style.setProperty('opacity', '1', 'important');
+                    backToTopBtn.style.setProperty('visibility', 'visible', 'important');
+                    backToTopBtn.style.setProperty('pointer-events', 'auto', 'important');
                 } else {
-                    document.getElementById('particle-canvas').style.transform = 'scale(1)';
+                    backToTopBtn.classList.remove('visible', 'show');
+                    backToTopBtn.style.setProperty('opacity', '0', 'important');
+                    backToTopBtn.style.setProperty('visibility', 'hidden', 'important');
+                    backToTopBtn.style.setProperty('pointer-events', 'none', 'important');
                 }
-            });
-
-            function raf(time) {
-                lenis.raf(time);
-                requestAnimationFrame(raf);
             }
-            requestAnimationFrame(raf);
-
-            // Connect GSAP ScrollTrigger to Lenis
-            if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-                lenis.on('scroll', ScrollTrigger.update);
-                gsap.ticker.add((time) => {
-                    lenis.raf(time * 1000);
-                });
-                gsap.ticker.lagSmoothing(0, 0);
-            }
-        }
+        });
 
     })();
     </script>
