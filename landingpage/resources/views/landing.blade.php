@@ -216,8 +216,8 @@
         <!-- Hero Section -->
         <section id="hero" class="hero-section">
             <div class="container hero-container">
-                <div class="hero-content" data-aos="fade-right" data-aos-duration="1000">
-                    <div class="hero-quick-links" style="display: flex; gap: 1.5rem; margin-bottom: 1.5rem; flex-wrap: wrap;" data-aos="fade-down" data-aos-delay="200">
+                <div class="hero-content">
+                    <div class="hero-quick-links hero-gsap-animate" style="display: flex; gap: 1.5rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
                         <a href="#catalog" class="quick-link-item" onclick="setTimeout(() => document.querySelector('.tab-btn[data-tab=\'stage\']').click(), 100)" style="display: flex; flex-direction: column; align-items: center; text-decoration: none;">
                             <div style="background: rgba(56, 189, 248, 0.1); padding: 12px; border-radius: 50%; border: 1px solid rgba(56, 189, 248, 0.2); backdrop-filter: blur(5px); display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; transition: all 0.3s ease;">
                                 <i data-lucide="layers" style="width: 24px; height: 24px; color: #38bdf8;"></i>
@@ -237,15 +237,15 @@
                             <span class="quick-link-text" style="font-size: 0.8rem; margin-top: 8px; font-weight: 500;">Lighting</span>
                         </a>
                     </div>
-                    <span class="badge" data-aos="fade-up" data-aos-delay="300">PRO EVENT EQUIPMENT RENTAL</span>
-                    <h1 class="hero-title" data-aos="fade-up" data-aos-delay="400">Mewujudkan Event Spektakuler Anda Menjadi <span class="gradient-text"><span class="typewriter-text"></span><span class="cursor">|</span></span></h1>
-                    <p class="hero-desc" data-aos="fade-up" data-aos-delay="500">Penyewaan sound system profesional, lighting panggung megah, dan rigging panggung modular berkelas premium untuk segala jenis event Anda.</p>
-                    <div class="hero-actions" data-aos="fade-up" data-aos-delay="600">
+                    <span class="badge hero-gsap-animate">PRO EVENT EQUIPMENT RENTAL</span>
+                    <h1 class="hero-title hero-gsap-animate">Mewujudkan Event Spektakuler Anda Menjadi <span class="gradient-text"><span class="typewriter-text"></span><span class="cursor">|</span></span></h1>
+                    <p class="hero-desc hero-gsap-animate">Penyewaan sound system profesional, lighting panggung megah, dan rigging panggung modular berkelas premium untuk segala jenis event Anda.</p>
+                    <div class="hero-actions hero-gsap-animate">
                         <a href="#catalog" class="btn btn-primary btn-lg magnetic-btn">Jelajahi Paket</a>
                         <a href="#rent-form-section" class="btn btn-outline btn-lg magnetic-btn">Sewa Alat Sekarang</a>
                     </div>
                     
-                    <div class="hero-stats" data-aos="fade-up" data-aos-delay="700">
+                    <div class="hero-stats hero-gsap-animate">
                         <div class="stat-item">
                             <span class="stat-num">500+</span>
                             <span class="stat-label">Event Sukses</span>
@@ -292,7 +292,7 @@
                     </style>
 
                     <!-- Paling Populer Sound System -->
-                    <div class="pop-card-wrapper custom-animate-fade-up">
+                    <div class="pop-card-wrapper hero-gsap-animate">
                         <div class="pop-badge">PALING POPULER</div>
                         <div class="pop-card">
                         <span class="pop-tag sound">Sound</span>
@@ -312,7 +312,7 @@
                     </div>
 
                     <!-- Paling Populer Panggung -->
-                    <div class="pop-card-wrapper custom-animate-fade-up">
+                    <div class="pop-card-wrapper hero-gsap-animate">
                         <div class="pop-badge">PALING POPULER</div>
                         <div class="pop-card">
                         <span class="pop-tag stage">Panggung</span>
@@ -331,7 +331,7 @@
                     </div>
 
                     <!-- Paling Populer Lighting -->
-                    <div class="pop-card-wrapper custom-animate-fade-up">
+                    <div class="pop-card-wrapper hero-gsap-animate">
                         <div class="pop-badge">PALING POPULER</div>
                         <div class="pop-card">
                         <span class="pop-tag light">Lighting</span>
@@ -1680,7 +1680,27 @@
                                 yPercent: -100, 
                                 duration: 1.2, 
                                 ease: 'expo.inOut', 
-                            }, "-=0.2");
+                            }, "-=0.2")
+                            // 3. Elegant Entrance for Hero Elements
+                            .from('.hero-gsap-animate', {
+                                y: 50,
+                                opacity: 0,
+                                duration: 1.2,
+                                stagger: 0.1,
+                                ease: 'power3.out',
+                                immediateRender: true,
+                                clearProps: 'all'
+                            }, "-=0.6")
+                            // 4. Floating WhatsApp
+                            .from('.floating-whatsapp', {
+                                scale: 0,
+                                opacity: 0,
+                                rotation: -45,
+                                duration: 1.2,
+                                ease: 'back.out(1.5)',
+                                immediateRender: true,
+                                clearProps: 'all'
+                            }, "-=1.0");
                             
                         } else {
                             throw new Error('GSAP not loaded');
@@ -2209,7 +2229,7 @@
                 
                 // --- Text Reveal Animation ---
                 if (typeof SplitType !== 'undefined') {
-                    const splitTextElements = document.querySelectorAll('.hero-title, .section-title, .about-content h2, .cta-title');
+                    const splitTextElements = document.querySelectorAll('.section-title, .about-content h2, .cta-title');
                     splitTextElements.forEach(el => {
                         const text = new SplitType(el, { types: 'lines, words' });
                         gsap.from(text.words, {
