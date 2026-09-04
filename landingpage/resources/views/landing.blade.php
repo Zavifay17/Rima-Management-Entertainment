@@ -1529,7 +1529,7 @@
     </script>
 
     <!-- Floating WhatsApp -->
-    <a href="https://wa.me/6287885675868?text=Halo%20CS%20RME%20Entertainment,%20Saya%20tertarik%20untuk%20menyewa%20alat%20event%20(Sound%20System/Lighting/Panggung).%20Mohon%20informasi%20lebih%20lanjut%20mengenai%20ketersediaan%20dan%20harganya.%20Terima%20kasih." target="_blank" class="floating-whatsapp magnetic-btn" aria-label="Chat WhatsApp">
+    <a href="https://wa.me/6287885675868?text=Halo%20Tim%20Rima%20Entertainment.%20Saya%20tertarik%20untuk%20berdiskusi%20lebih%20lanjut%20mengenai%20penyewaan%20peralatan%20event%20profesional%20(Sound%20System%20/%20Lighting%20/%20Rigging%20Panggung)%20untuk%20kebutuhan%20acara%20kami.%20Mohon%20kesediaannya%20untuk%20memberikan%20informasi%20terkait%20katalog%20lengkap%2C%20ketersediaan%2C%20dan%20estimasi%20biaya.%20Terima%20kasih." target="_blank" class="floating-whatsapp magnetic-btn" aria-label="Chat WhatsApp">
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
@@ -1540,7 +1540,7 @@
 
     <!-- Mobile Sticky Bottom Action Bar (Premium Awwwards Style) -->
     <div class="mobile-bottom-bar d-md-none">
-        <a href="https://wa.me/6287885675868" target="_blank" class="bottom-bar-btn whatsapp" onclick="triggerHaptic()" aria-label="Chat WhatsApp">
+        <a href="https://wa.me/6287885675868?text=Halo%20Tim%20Rima%20Entertainment.%20Saya%20tertarik%20untuk%20berdiskusi%20lebih%20lanjut%20mengenai%20penyewaan%20peralatan%20event%20profesional%20(Sound%20System%20/%20Lighting%20/%20Rigging%20Panggung)%20untuk%20kebutuhan%20acara%20kami.%20Mohon%20kesediaannya%20untuk%20memberikan%20informasi%20terkait%20katalog%20lengkap%2C%20ketersediaan%2C%20dan%20estimasi%20biaya.%20Terima%20kasih." target="_blank" class="bottom-bar-btn whatsapp" onclick="triggerHaptic()" aria-label="Chat WhatsApp">
             <i class="fa-brands fa-whatsapp"></i>
         </a>
         <a href="#rent-form-section" class="bottom-bar-btn primary" onclick="triggerHaptic(); document.getElementById('bookingForm').scrollIntoView({behavior: 'smooth'})">
